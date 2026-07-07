@@ -1,0 +1,121 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://igsl.dev/icsl/schemas/0.1-freeze/ICSLCommon.schema.json",
+  "title": "ICSLCommon",
+  "$defs": {
+    "ConformanceClass": {
+      "type": "string",
+      "enum": ["Core-L1", "Core-L2", "Core-L3", "Extended-L2", "Corpus-L3"]
+    },
+    "BindingForce": {
+      "oneOf": [
+        {
+          "type": "string",
+          "enum": [
+            "substantive_binding",
+            "procedural_binding",
+            "evidentiary_binding",
+            "recommendatory",
+            "advisory_nonbinding"
+          ]
+        },
+        {
+          "type": "object",
+          "properties": {
+            "type": { "const": "mixed" },
+            "components": {
+              "type": "array",
+              "minItems": 2,
+              "items": {
+                "type": "string",
+                "enum": [
+                  "substantive_binding",
+                  "procedural_binding",
+                  "evidentiary_binding",
+                  "recommendatory",
+                  "advisory_nonbinding"
+                ]
+              },
+              "uniqueItems": true
+            }
+          },
+          "required": ["type", "components"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "RecourseState": {
+      "type": "string",
+      "enum": [
+        "available",
+        "external_only",
+        "not_applicable",
+        "unknown_unpublished",
+        "legally_unavailable"
+      ]
+    },
+    "BindingEffectBasis": {
+      "type": "object",
+      "properties": {
+        "classification": { "type": "string" },
+        "effect_type": { "type": "string" },
+        "relied_on_by": {
+          "type": "array",
+          "items": { "type": "string" }
+        },
+        "downstream_consequence": { "type": "string" },
+        "adverse_outcome_possible": { "type": "boolean" },
+        "shadow_binding_analysis": { "type": "string" },
+        "source": { "type": "string" },
+        "source_confidence": {
+          "type": "string",
+          "enum": ["high", "medium", "low", "unknown"]
+        },
+        "procedural_outcome": { "type": "string" }
+      },
+      "minProperties": 1,
+      "additionalProperties": true
+    },
+    "AuthorityGate": {
+      "type": "object",
+      "properties": {
+        "legal_authority_holder": { "type": "string" },
+        "authority_selection_rule": { "type": "string" },
+        "delegated_authority": { "type": "string" },
+        "task_owner": { "type": "string" },
+        "fallback_owner": { "type": "string" }
+      },
+      "additionalProperties": true
+    },
+    "RecourseGate": {
+      "type": "object",
+      "properties": {
+        "recourse_state": { "$ref": "#/$defs/RecourseState" },
+        "channel": { "type": "string" },
+        "forum": { "type": "string" },
+        "body": { "type": "string" },
+        "deadline": { "type": "string" },
+        "remedy_type": { "type": "string" },
+        "suspensive_effect": { "type": "boolean" },
+        "source": { "type": "string" },
+        "accessibility_note": { "type": "string" }
+      },
+      "required": ["recourse_state"],
+      "additionalProperties": true
+    },
+    "Diagnostic": {
+      "type": "object",
+      "properties": {
+        "rule_id": { "type": "string" },
+        "severity": {
+          "type": "string",
+          "enum": ["error", "warning", "info"]
+        },
+        "path": { "type": "string" },
+        "message": { "type": "string" }
+      },
+      "required": ["rule_id", "severity", "path", "message"],
+      "additionalProperties": true
+    }
+  }
+}

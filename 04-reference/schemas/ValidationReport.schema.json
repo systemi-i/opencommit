@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://igsl.dev/icsl/schemas/0.1-freeze/ValidationReport.schema.json",
+  "title": "ValidationReport",
+  "type": "object",
+  "properties": {
+    "artifact_kind": { "type": "string" },
+    "harness_version": { "type": "string" },
+    "valid": { "type": "boolean" },
+    "diagnostics": {
+      "type": "array",
+      "items": { "$ref": "ICSLCommon.schema.json#/$defs/Diagnostic" }
+    }
+  },
+  "required": ["artifact_kind", "valid", "diagnostics"],
+  "additionalProperties": true
+}

@@ -1,0 +1,16 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://igsl.dev/icsl/schemas/0.1-freeze/GateConfig.schema.json",
+  "title": "GateConfig",
+  "type": "object",
+  "properties": {
+    "authority": { "$ref": "ICSLCommon.schema.json#/$defs/AuthorityGate" },
+    "evidence": { "type": "object", "additionalProperties": true },
+    "reasoning": { "type": "object", "additionalProperties": true },
+    "dependency": { "type": "object", "additionalProperties": true },
+    "version": { "type": "object", "additionalProperties": true },
+    "recourse": { "$ref": "ICSLCommon.schema.json#/$defs/RecourseGate" }
+  },
+  "required": ["authority", "evidence", "reasoning", "dependency", "version", "recourse"],
+  "additionalProperties": false
+}

@@ -1,0 +1,39 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://igsl.dev/icsl/schemas/0.1-freeze/PackageManifest.schema.json",
+  "title": "PackageManifest",
+  "type": "object",
+  "properties": {
+    "kind": { "const": "PackageManifest" },
+    "package_id": { "type": "string" },
+    "icsl_version": { "type": "string" },
+    "profile": { "$ref": "ICSLCommon.schema.json#/$defs/ConformanceClass" },
+    "files": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "properties": {
+          "path": { "type": "string" },
+          "role": {
+            "type": "string",
+            "enum": [
+              "manifest",
+              "protocol-version",
+              "conformance-declaration",
+              "hash-vector",
+              "reference",
+              "receipt",
+              "rendering",
+              "extension",
+              "execution-binding"
+            ]
+          }
+        },
+        "required": ["path", "role"]
+      }
+    }
+  },
+  "required": ["kind", "package_id", "icsl_version", "profile", "files"],
+  "additionalProperties": true
+}

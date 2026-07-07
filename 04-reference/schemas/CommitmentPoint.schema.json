@@ -1,0 +1,20 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://igsl.dev/icsl/schemas/0.1-freeze/CommitmentPoint.schema.json",
+  "title": "CommitmentPoint",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "name": { "type": "string" },
+    "description": { "type": "string" },
+    "binding_effect_basis": { "$ref": "ICSLCommon.schema.json#/$defs/BindingEffectBasis" },
+    "binding_force": { "$ref": "ICSLCommon.schema.json#/$defs/BindingForce" },
+    "gates": { "$ref": "GateConfig.schema.json" },
+    "allowed_outcomes": {
+      "type": "array",
+      "items": { "type": "string" }
+    }
+  },
+  "required": ["id", "name", "binding_effect_basis", "binding_force", "gates"],
+  "additionalProperties": true
+}

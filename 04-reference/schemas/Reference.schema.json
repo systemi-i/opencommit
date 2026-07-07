@@ -1,0 +1,17 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://igsl.dev/icsl/schemas/0.1-freeze/Reference.schema.json",
+  "title": "Reference",
+  "type": "object",
+  "properties": {
+    "id": { "type": "string" },
+    "label": { "type": "string" },
+    "source_type": { "type": "string" },
+    "version": { "type": "string" },
+    "date": { "type": "string" },
+    "locator": { "type": "string" },
+    "hash": { "type": "string" }
+  },
+  "required": ["id", "label", "source_type"],
+  "additionalProperties": true
+}

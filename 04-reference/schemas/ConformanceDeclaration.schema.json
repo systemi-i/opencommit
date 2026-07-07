@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://igsl.dev/icsl/schemas/0.1-freeze/ConformanceDeclaration.schema.json",
+  "title": "ConformanceDeclaration",
+  "type": "object",
+  "properties": {
+    "kind": { "const": "ConformanceDeclaration" },
+    "claim_subject": { "type": "string" },
+    "conformance_class": { "$ref": "ICSLCommon.schema.json#/$defs/ConformanceClass" },
+    "icsl_version": { "type": "string" },
+    "test_suite_version": { "type": "string" },
+    "result": {
+      "type": "string",
+      "enum": ["pass", "fail", "not_run", "partial"]
+    }
+  },
+  "required": ["kind", "claim_subject", "conformance_class", "icsl_version", "test_suite_version", "result"],
+  "additionalProperties": true
+}

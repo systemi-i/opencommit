@@ -1,0 +1,186 @@
+{
+  "catalog_id": "icsl.rules.seed.2026-07-07",
+  "icsl_version": "0.1-freeze",
+  "rules": [
+    {
+      "id": "PROTOCOL_COMMITMENT_POINTS_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "A ProtocolVersion must expose commitment_points."
+    },
+    {
+      "id": "CP_ALL_GATES_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "Each CommitmentPoint must include Authority, Evidence, Reasoning, Dependency, Version, and Recourse gates."
+    },
+    {
+      "id": "CP_BINDING_EFFECT_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "Each CommitmentPoint must state the basis for its binding or non-binding effect."
+    },
+    {
+      "id": "ADVISORY_CP_REQUIRES_SHADOW_BINDING",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Advisory-looking commitment points require analysis showing whether they indirectly bind downstream action."
+    },
+    {
+      "id": "ADVERSE_OUTCOME_RECOURSE_STATE_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "A commitment point that can produce an adverse outcome must declare a recourse_state."
+    },
+    {
+      "id": "CANONICAL_NO_DEPLOYMENT_BINDINGS",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "Canonical protocol data cannot contain runtime connector, credential, worker, endpoint, retry, timeout, or UI bindings."
+    },
+    {
+      "id": "TASK_OWNER_NOT_AUTHORITY",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Task ownership is not legal authority unless delegation or authority holder is declared."
+    },
+    {
+      "id": "DURABLE_FACTS_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Evidence gates must not rely only on derived runtime state."
+    },
+    {
+      "id": "AI_NOT_GATE_AUTHORITY",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "AI or probabilistic model output cannot be deterministic gate authority."
+    },
+    {
+      "id": "CURRENT_TIME_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Temporal evaluation requires explicit current_time."
+    },
+    {
+      "id": "DEPENDENCY_REFERENCE_UNRESOLVED",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "CommitmentPoint dependencies must resolve to known commitment points or declared external references."
+    },
+    {
+      "id": "VERSION_PIN_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "Version gates that require protocol version pinning must declare protocol_version_id."
+    },
+    {
+      "id": "CONFORMANCE_DECLARATION_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "Conformance claims must identify subject, class, ICSL version, test-suite version, and result."
+    },
+    {
+      "id": "CONFORMANCE_CLASS_INVALID",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "Conformance class must be one of the candidate ICSL conformance classes."
+    },
+    {
+      "id": "CONFORMANCE_RESULT_INVALID",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "Conformance result must be one of pass, fail, not_run, or partial."
+    },
+    {
+      "id": "RECEIPT_HASH_CHAIN_VALID",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Receipts must form a valid previous_hash chain and any declared content_hash must match canonical content."
+    },
+    {
+      "id": "UNKNOWN_RECOURSE_BLOCKS_L3_CORPUS",
+      "severity": "error",
+      "scope": "Corpus-L3",
+      "summary": "A Corpus-L3 package cannot leave recourse as unknown_unpublished where adverse outcomes exist."
+    },
+    {
+      "id": "BINDING_FORCE_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Binding force and procedural outcome semantics must be explicit where a protocol claims execution effect."
+    },
+    {
+      "id": "BINDING_FORCE_MIXED_REQUIRES_COMPONENTS",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Mixed binding force must enumerate its binding-force components."
+    },
+    {
+      "id": "RECOURSE_STATE_INVALID",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Recourse state must be one of the ICSL candidate recourse-state enum values."
+    },
+    {
+      "id": "GOVERNANCE_ADDENDUM_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L3",
+      "summary": "High-fidelity or public-impact adverse commitments must include governance addendum fields."
+    },
+    {
+      "id": "GOVERNANCE_ADDENDUM_INCOMPLETE",
+      "severity": "error",
+      "scope": "Core-L3",
+      "summary": "Governance addendum must include notice, participation, discretion, remedy, oversight, and reason-giving fields."
+    },
+    {
+      "id": "NON_EXECUTING_FIELDS_DO_NOT_AFFECT_GATES",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Labels, explanations, and UI text cannot alter gate evaluation unless mapped into canonical semantics."
+    },
+    {
+      "id": "REFERENCE_VERSION_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Normative references must declare version, date, or stable retrieval basis."
+    },
+    {
+      "id": "RENDERING_NO_NEW_SEMANTICS",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "Human renderings cannot introduce semantics absent from canonical protocol data."
+    },
+    {
+      "id": "UNSUPPORTED_EXTENDED_FEATURE_MUST_BLOCK_OR_WARN_BY_CLASS",
+      "severity": "error",
+      "scope": "Extended-L2",
+      "summary": "Unsupported extended features must be rejected or downgraded according to declared conformance class."
+    },
+    {
+      "id": "PACKAGE_MANIFEST_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "An ICSL package must include a package manifest."
+    },
+    {
+      "id": "PACKAGE_HASH_VECTOR_VALID",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Package hash vectors must match declared package files."
+    },
+    {
+      "id": "PACKAGE_MANIFEST_FILE_EXISTS",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "Every file declared in the package manifest must exist in the package."
+    },
+    {
+      "id": "PACKAGE_HASH_VECTOR_COMPLETE",
+      "severity": "error",
+      "scope": "Core-L2",
+      "summary": "Hash vectors must cover every non-hash-vector file declared by the package manifest."
+    }
+  ]
+}
