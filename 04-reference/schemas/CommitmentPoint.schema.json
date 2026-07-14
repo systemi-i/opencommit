@@ -4,17 +4,202 @@
   "title": "CommitmentPoint",
   "type": "object",
   "properties": {
-    "id": { "type": "string" },
-    "name": { "type": "string" },
-    "description": { "type": "string" },
-    "binding_effect_basis": { "$ref": "ICSLCommon.schema.json#/$defs/BindingEffectBasis" },
-    "binding_force": { "$ref": "ICSLCommon.schema.json#/$defs/BindingForce" },
-    "gates": { "$ref": "GateConfig.schema.json" },
+    "id": {
+      "type": "string"
+    },
+    "name": {
+      "type": "string"
+    },
+    "description": {
+      "type": "string"
+    },
+    "commitment_type": {
+      "description": "Classification of the institutional act (restored from IGSL v1/v1.1 in the 2026-07 repair sprint — see 07-decisions/ADR-008). One of the eight core types, or EXTENSION (Extended-L2 only), in which case commitment_type_extension is required. Classificatory only: creates no institutional effect by itself.",
+      "oneOf": [
+        { "$ref": "ICSLCommon.schema.json#/$defs/CoreCommitmentType" },
+        { "const": "EXTENSION" }
+      ]
+    },
+    "commitment_type_extension": {
+      "$ref": "ICSLCommon.schema.json#/$defs/CommitmentTypeExtension",
+      "description": "Extension type declaration; required if and only if commitment_type is EXTENSION, and prohibited on core-typed CommitmentPoints (bidirectional conditional added in the 2026-07 repair sprint — see 07-decisions/)."
+    },
+    "commitment_subtype": {
+      "type": "string",
+      "pattern": "^urn:",
+      "description": "Optional namespaced refinement of a core commitment type; prohibited when commitment_type is EXTENSION (extension detail belongs in commitment_type_extension). Comparability hook for domain profiles, no semantics beyond format validation in v0.1 (added in the 2026-07 repair sprint — see 07-decisions/)."
+    },
+    "binding_effect_basis": {
+      "$ref": "ICSLCommon.schema.json#/$defs/BindingEffectBasis"
+    },
+    "binding_force": {
+      "$ref": "ICSLCommon.schema.json#/$defs/BindingForce"
+    },
+    "gates": {
+      "$ref": "GateConfig.schema.json"
+    },
     "allowed_outcomes": {
       "type": "array",
-      "items": { "type": "string" }
+      "minItems": 1,
+      "items": {
+        "$ref": "ICSLCommon.schema.json#/$defs/Outcome"
+      }
+    },
+    "trigger": {
+      "type": "string",
+      "enum": [
+        "institutional_act",
+        "temporal_lapse",
+        "external_event"
+      ],
+      "default": "institutional_act"
+    },
+    "trigger_condition": {
+      "$ref": "ICSLCommon.schema.json#/$defs/TriggerCondition"
+    },
+    "acts_on_allowed": {
+      "$ref": "ICSLCommon.schema.json#/$defs/ActsOnAllowed"
+    },
+    "evolves": {
+      "$ref": "ICSLCommon.schema.json#/$defs/Evolves",
+      "description": "Target protocol/version of an EVOLVE commitment; required when commitment_type is EVOLVE (added in the 2026-07 repair sprint — see 07-decisions/)."
+    },
+    "delegation": {
+      "$ref": "ICSLCommon.schema.json#/$defs/Delegation",
+      "description": "Recipient and scope of a DELEGATE commitment; required when commitment_type is DELEGATE (added in the 2026-07 repair sprint — see 07-decisions/)."
     }
   },
-  "required": ["id", "name", "binding_effect_basis", "binding_force", "gates"],
+  "required": [
+    "id",
+    "name",
+    "commitment_type",
+    "binding_effect_basis",
+    "binding_force",
+    "gates",
+    "allowed_outcomes"
+  ],
+  "allOf": [
+    {
+      "if": {
+        "properties": {
+          "trigger": {
+            "const": "temporal_lapse"
+          }
+        },
+        "required": [
+          "trigger"
+        ]
+      },
+      "then": {
+        "required": [
+          "trigger_condition"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "commitment_type": {
+            "const": "EXTENSION"
+          }
+        },
+        "required": [
+          "commitment_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "commitment_type_extension"
+        ],
+        "not": {
+          "required": [
+            "commitment_subtype"
+          ]
+        }
+      },
+      "else": {
+        "not": {
+          "required": [
+            "commitment_type_extension"
+          ]
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "commitment_type": {
+            "enum": ["APPEAL", "OVERRIDE", "REMEDY"]
+          }
+        },
+        "required": [
+          "commitment_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "acts_on_allowed"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "commitment_type": {
+            "const": "OVERRIDE"
+          }
+        },
+        "required": [
+          "commitment_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "acts_on_allowed"
+        ],
+        "properties": {
+          "acts_on_allowed": {
+            "required": [
+              "basis_reference"
+            ]
+          }
+        }
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "commitment_type": {
+            "const": "EVOLVE"
+          }
+        },
+        "required": [
+          "commitment_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "evolves"
+        ]
+      }
+    },
+    {
+      "if": {
+        "properties": {
+          "commitment_type": {
+            "const": "DELEGATE"
+          }
+        },
+        "required": [
+          "commitment_type"
+        ]
+      },
+      "then": {
+        "required": [
+          "delegation"
+        ]
+      }
+    }
+  ],
   "additionalProperties": true
 }

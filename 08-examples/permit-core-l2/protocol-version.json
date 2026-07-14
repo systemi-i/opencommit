@@ -1,0 +1,978 @@
+{
+  "kind": "ProtocolVersion",
+  "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+  "icsl_version": "0.1-freeze",
+  "encoding_depth": "L2",
+  "conformance_class": "Core-L2",
+  "institution": {
+    "id": "org.example-city.building-authority",
+    "name": "Example City Building Authority",
+    "jurisdiction": "Example City, Republic of Exampleland (fictional)",
+    "reference": "ref-building-act"
+  },
+  "governed_context": {
+    "description": "A single construction-permit application file opened by the Example City Building Authority under the (fictional) Building Act, from intake to final disposition, including deemed approval by operation of law, administrative appeal with suspensive effect, and revocation for fraud. This embedded object is a purely descriptive GovernedContextDescriptor and carries no runtime members; runtime GovernedContext instances are separate artifacts that pin this ProtocolVersion by id and canonical hash and carry an explicit current_time for any lapse evaluation.",
+    "subject_class": "construction-permit applicants and objectors before the Example City Building Authority",
+    "scope": "one permit application case (subject matter: building permits; territory: Example City)",
+    "jurisdiction_note": "Example City, Republic of Exampleland (fictional)"
+  },
+  "encoding_provenance": {
+    "drafting_method": "ai_assisted",
+    "drafting_tool": "ICSL encoding assistant (large language model), 2026-07 repair sprint",
+    "approved_by": "Rita Kalvane, Director, Example City Building Authority (fictional officeholder)",
+    "approval_basis": "Director approval minute 2026/11 (fictional)",
+    "sources_consulted": ["ref-building-act", "ref-zoning-plan"]
+  },
+  "references": [
+    {
+      "id": "ref-building-act",
+      "label": "Building Act of the Republic of Exampleland (fictional), consolidated version",
+      "source_type": "statute",
+      "version": "2025-01-01",
+      "date": "2025-01-01",
+      "locator": "https://laws.example/exampleland/building-act/2025-01-01"
+    },
+    {
+      "id": "ref-zoning-plan",
+      "label": "Example City municipal zoning plan (fictional)",
+      "source_type": "bylaw",
+      "version": "2025-06",
+      "date": "2025-06-15",
+      "locator": "https://example-city.example/zoning/2025-06"
+    }
+  ],
+  "commitment_points": [
+    {
+      "id": "cp-01-intake",
+      "name": "Application intake and filing-date certification",
+      "commitment_type": "ATTEST",
+      "description": "The authority registers the application and certifies the official filing date, which starts all statutory clocks (including the deemed-approval deadline in cp-08). Intake tooling may extract candidate metadata from submitted documents with AI assistance; extracted values are not durable facts until accepted at cp-02 (fact acceptance is itself an institutional act; spec section 8).",
+      "trigger": "institutional_act",
+      "binding_force": "procedural_binding",
+      "binding_effect_basis": {
+        "effect_type": "filing_date_certification",
+        "relied_on_by": ["applicant", "deemed-approval deadline computation (cp-08)", "objection window (cp-04)"],
+        "downstream_consequence": "The certified filing date anchors the statutory decision deadline and the public-notice sequence.",
+        "adverse_outcome_possible": false,
+        "source": "Building Act s.38 (fictional)",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        { "token": "registered", "effect_class": "procedural" }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Example City Building Authority, registry office",
+          "authority_selection_rule": "Territorial competence for the parcel under Building Act s.12",
+          "task_owner": "intake clerk",
+          "actor_type": "institutional_role"
+        },
+        "evidence": {
+          "required": [
+            "signed application form",
+            "proof of title or right to build",
+            "site plan",
+            "fee payment record"
+          ],
+          "notes": "AI-extracted document metadata is candidate data only; it becomes durable evidence solely through acceptance at cp-02-fact-acceptance. Personal-data payloads are held as detachable content referenced by salted content hash, not embedded in canonical receipt content."
+        },
+        "reasoning": {
+          "mode": "deterministic_rule",
+          "rule": "Ministerial: register any application addressed to the authority and record the date of receipt as the filing date.",
+          "reference": "ref-building-act"
+        },
+        "dependency": {
+          "requires": []
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act"]
+        },
+        "recourse": {
+          "recourse_state": "available",
+          "channel": "internal",
+          "body": "Head of registry office",
+          "deadline": "P15D",
+          "remedy_type": "correction of the recorded filing date",
+          "suspensive_effect": false,
+          "source": "Building Act s.38(4)"
+        }
+      }
+    },
+    {
+      "id": "cp-02-fact-acceptance",
+      "name": "Acceptance of extracted application facts into the case file",
+      "commitment_type": "ATTEST",
+      "description": "Acceptance of externally derived facts (including AI-extracted field values) into deterministic gate evaluation is itself an institutional act. This CommitmentPoint records the case officer's acceptance of machine-extracted application facts as durable evidence for downstream gates (spec section 8; catalog rule FACT_ACCEPTANCE_GOVERNED). Rejection reverts the affected fields to the manual verification path; it does not foreclose the application.",
+      "trigger": "institutional_act",
+      "binding_force": "evidentiary_binding",
+      "binding_effect_basis": {
+        "effect_type": "durable_fact_acceptance",
+        "relied_on_by": ["completeness determination (cp-03)", "technical review (cp-06)"],
+        "downstream_consequence": "Accepted facts may be consumed by deterministic gate evaluation; unaccepted extractions may not.",
+        "adverse_outcome_possible": false,
+        "shadow_binding_analysis": "Acceptance gates what downstream deterministic evaluation may consume, but refusal leaves the manual verification path open and forecloses nothing, so no adverse outcome arises at this point.",
+        "source": "Building Act s.37a (fictional, records management)",
+        "source_confidence": "medium"
+      },
+      "allowed_outcomes": [
+        { "token": "facts_accepted", "effect_class": "procedural" },
+        { "token": "extraction_rejected_manual_path", "effect_class": "procedural" }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Case officer designated by the Building Authority director",
+          "delegated_authority": "Director delegation decree 2026/03 (fictional)",
+          "authority_selection_rule": "Assignment order under the internal delegation register",
+          "actor_type": "hybrid_human_ai"
+        },
+        "evidence": {
+          "required": [
+            "source documents registered at cp-01-intake",
+            "machine-extraction output with field-level confidence report",
+            "case officer verification record"
+          ],
+          "notes": "The AI extraction system proposes; it holds no authority. The case officer verifies each proposed field against the source documents before acceptance."
+        },
+        "reasoning": {
+          "mode": "ai_assisted",
+          "rule": "AI-assisted extraction proposes field values; the case officer verifies each proposed field against the source documents and accepts or rejects it. Unverified fields are rejected to the manual path. AI output does not become deterministic gate truth except through this acceptance (spec section 8).",
+          "reference": "ref-building-act"
+        },
+        "dependency": {
+          "requires": [
+            { "commitment_point": "cp-01-intake", "outcome": "registered" }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act"]
+        },
+        "recourse": {
+          "recourse_state": "available",
+          "channel": "internal",
+          "body": "Head of registry office",
+          "deadline": "P15D",
+          "remedy_type": "correction of an accepted fact on documented extraction or verification error",
+          "suspensive_effect": false,
+          "source": "Building Act s.37a(3)"
+        }
+      }
+    },
+    {
+      "id": "cp-03-completeness",
+      "name": "Completeness determination",
+      "commitment_type": "DECIDE",
+      "description": "The authority determines whether the application is complete. An incompleteness finding opens a 30-day cure window and suspends the statutory decision clock; a completeness finding anchors the deemed-approval clock (cp-08). Rejection as incomplete is only available after the cure window has lapsed without cure.",
+      "trigger": "institutional_act",
+      "binding_force": "procedural_binding",
+      "binding_effect_basis": {
+        "effect_type": "completeness_determination",
+        "relied_on_by": ["applicant", "public notice (cp-04)", "deemed-approval clock (cp-08)"],
+        "downstream_consequence": "Incompleteness suspends the statutory decision deadline until cured; completeness triggers public notice and starts the deemed-approval clock.",
+        "adverse_outcome_possible": true,
+        "shadow_binding_analysis": "Although labelled procedural, an incompleteness finding suspends the deemed-approval clock and, if not cured, ends the procedure; it binds in practice.",
+        "source": "Building Act s.39",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        { "token": "complete", "effect_class": "procedural" },
+        {
+          "token": "incomplete_cure_window_opened",
+          "effect_class": "mixed",
+          "recourse": {
+            "recourse_state": "available",
+            "channel": "internal",
+            "body": "Building Authority director",
+            "deadline": "P15D",
+            "remedy_type": "review of the incompleteness finding; 30-day cure window preserved",
+            "suspensive_effect": true,
+            "source": "Building Act s.39(5)"
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.39(4): an incompleteness finding must identify each missing item"
+          }
+        },
+        {
+          "token": "rejected_as_incomplete",
+          "effect_class": "adverse",
+          "recourse": {
+            "recourse_state": "available",
+            "channel": "internal_then_external",
+            "body": "Building Authority director; then Administrative Court",
+            "deadline": "P15D",
+            "remedy_type": "review of the rejection; reinstatement of the application",
+            "suspensive_effect": true,
+            "source": "Building Act s.39(6)"
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.39(6): a rejection must state the uncured deficiencies"
+          },
+          "dependencies": [
+            {
+              "all_of": [
+                { "commitment_point": "cp-03-completeness", "outcome": "incomplete_cure_window_opened" },
+                {
+                  "temporal": {
+                    "anchor": { "commitment_point_id": "cp-03-completeness", "event": "receipt_created" },
+                    "operator": "elapsed",
+                    "duration": "P30D"
+                  }
+                }
+              ]
+            }
+          ]
+        }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Case officer designated by the Building Authority director",
+          "delegated_authority": "Director delegation decree 2026/03 (fictional)",
+          "authority_selection_rule": "Assignment order under the internal delegation register",
+          "actor_type": "institutional_role"
+        },
+        "evidence": {
+          "required": [
+            "intake receipt (cp-01-intake)",
+            "statutory document checklist under Building Act s.39(2)"
+          ],
+          "notes": "Extracted field values may be consumed only if accepted at cp-02-fact-acceptance; otherwise the officer verifies the source documents directly."
+        },
+        "reasoning": {
+          "mode": "deterministic_rule",
+          "rule": "Checklist comparison against Building Act s.39(2); no discretion.",
+          "reference": "ref-building-act"
+        },
+        "dependency": {
+          "requires": [
+            { "commitment_point": "cp-01-intake", "outcome": "registered" }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act"]
+        },
+        "recourse": {
+          "recourse_state": "available",
+          "channel": "internal",
+          "body": "Building Authority director",
+          "deadline": "P15D",
+          "remedy_type": "review of the completeness determination",
+          "suspensive_effect": true,
+          "source": "Building Act s.39(5)"
+        }
+      }
+    },
+    {
+      "id": "cp-04-public-notice",
+      "name": "Public notice and opening of the objection window",
+      "commitment_type": "ATTEST",
+      "description": "The authority publishes notice of the application and opens a 30-day window during which any person with standing may file an objection (registered at cp-05). Defective notice is an appeal ground against the final decision.",
+      "trigger": "institutional_act",
+      "binding_force": "procedural_binding",
+      "binding_effect_basis": {
+        "effect_type": "participation_window_opened",
+        "relied_on_by": ["neighbours and other persons with standing", "decision validity (defective notice is an annulment ground)"],
+        "downstream_consequence": "The decision (cp-07) may not lawfully issue before the window closes; the technical review (cp-06) waits for the window to close so that registered objections can be addressed.",
+        "adverse_outcome_possible": false,
+        "source": "Building Act s.40",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        { "token": "notice_published_window_open", "effect_class": "procedural" }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Example City Building Authority",
+          "authority_selection_rule": "Same case officer as cp-03",
+          "actor_type": "institutional_role"
+        },
+        "evidence": {
+          "required": [
+            "completeness receipt (cp-03-completeness, outcome complete)",
+            "publication proof (municipal gazette entry and site placard record)"
+          ]
+        },
+        "reasoning": {
+          "mode": "deterministic_rule",
+          "rule": "Mandatory publication upon completeness; window length fixed at 30 days by Building Act s.40(2).",
+          "reference": "ref-building-act"
+        },
+        "dependency": {
+          "requires": [
+            { "commitment_point": "cp-03-completeness", "outcome": "complete" }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act"]
+        },
+        "recourse": {
+          "recourse_state": "available",
+          "channel": "external",
+          "forum": "Administrative Court (defective-notice ground raised against the final decision)",
+          "deadline": "raised within the appeal window against the final decision",
+          "remedy_type": "annulment of a decision issued on defective notice",
+          "suspensive_effect": false,
+          "source": "Building Act s.40(6)"
+        }
+      }
+    },
+    {
+      "id": "cp-05-objection-registration",
+      "name": "Registration of third-party objection",
+      "commitment_type": "DECIDE",
+      "description": "A person with standing files an objection within the window opened at cp-04; the authority registers it, creating party status and a duty to address the objection in the decision reasons. The initiating actor is a private person; ICSL encodes the institution's act of registration. Automated triage of incoming objections, where used, operates on behalf of the institution and is subject to shadow-binding analysis: because refusal to register forecloses party status and appeal standing, registration and refusal are commitment-bearing and are encoded here rather than left as routing. The initiating filing is a private act; the commitment arises from the institution's act of registration, so the trigger is institutional_act.",
+      "trigger": "institutional_act",
+      "binding_force": {
+        "type": "mixed",
+        "components": ["procedural_binding", "evidentiary_binding"]
+      },
+      "binding_effect_basis": {
+        "effect_type": "party_status_and_duty_to_respond",
+        "relied_on_by": ["objector", "decision reasoning duty (cp-07)", "appeal standing (cp-09-appeal-admissibility)"],
+        "downstream_consequence": "Registered objections must be addressed in the decision reasons; the objector gains appeal standing.",
+        "adverse_outcome_possible": true,
+        "shadow_binding_analysis": "Refusal to register (late filing or no standing) extinguishes the objector's party status and appeal rights; refusal is adverse to the objector even though the stage looks administrative.",
+        "source": "Building Act s.41",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        { "token": "objection_registered", "effect_class": "procedural" },
+        {
+          "token": "objection_refused_late",
+          "effect_class": "adverse",
+          "recourse": {
+            "recourse_state": "available",
+            "channel": "internal_then_external",
+            "body": "Building Authority director; then Administrative Court",
+            "deadline": "P15D",
+            "remedy_type": "review of the refusal to register the objection",
+            "suspensive_effect": false,
+            "source": "Building Act s.41(4)"
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.41(4): a refusal must state the date of receipt and the window computation"
+          }
+        },
+        {
+          "token": "objection_refused_no_standing",
+          "effect_class": "adverse",
+          "recourse": {
+            "recourse_state": "available",
+            "channel": "internal_then_external",
+            "body": "Building Authority director; then Administrative Court",
+            "deadline": "P15D",
+            "remedy_type": "review of the refusal to register the objection",
+            "suspensive_effect": false,
+            "source": "Building Act s.41(4)"
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.41(4): a refusal must state why the asserted interest does not confer standing"
+          }
+        }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Example City Building Authority, registry office",
+          "authority_selection_rule": "Any objection received within the window must be examined; the objector initiates but holds no institutional authority.",
+          "actor_type": "institutional_role"
+        },
+        "evidence": {
+          "required": [
+            "written objection",
+            "proof of standing (for example, adjacent-parcel title)",
+            "filing timestamp within the 30-day window opened by cp-04-public-notice"
+          ]
+        },
+        "reasoning": {
+          "mode": "mixed",
+          "rule": "Timeliness: received within 30 days of the cp-04 publication (deterministic date comparison). Standing: a person whose legal interest may be affected, Building Act s.41(1) (guided assessment).",
+          "reference": "ref-building-act",
+          "notes": "Standing assessment holder: head of registry office. Factors under s.41(1): proximity of the objector's parcel, nature of the asserted legal interest, plausibility of effect on that interest."
+        },
+        "dependency": {
+          "requires": [
+            { "commitment_point": "cp-04-public-notice", "outcome": "notice_published_window_open" }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act"]
+        },
+        "recourse": {
+          "recourse_state": "available",
+          "channel": "internal_then_external",
+          "body": "Building Authority director; then Administrative Court",
+          "deadline": "P15D",
+          "remedy_type": "review of a refusal to register an objection",
+          "suspensive_effect": false,
+          "source": "Building Act s.41(4)"
+        }
+      }
+    },
+    {
+      "id": "cp-06-technical-review",
+      "name": "Technical review finding",
+      "commitment_type": "ATTEST",
+      "description": "Technical services issue a review finding on zoning, structural, and fire-safety conformity, addressing registered objections. The finding is formally advisory to the decision-maker, but the decision-maker may not depart from it without written justification (s.42(2)); it therefore shadow-binds the decision and is encoded as a CommitmentPoint (catalog rule ADVISORY_CP_REQUIRES_SHADOW_BINDING). The recourse-exclusion assertion on the non-conforming outcome is an encoder claim about the law, is rebuttable, and does not extinguish recourse that exists in law.",
+      "trigger": "institutional_act",
+      "binding_force": "advisory_nonbinding",
+      "binding_effect_basis": {
+        "effect_type": "technical_conformity_finding",
+        "relied_on_by": ["decision-maker (cp-07)"],
+        "downstream_consequence": "An adverse finding forecloses approval in practice: departure requires written justification under s.42(2).",
+        "adverse_outcome_possible": true,
+        "shadow_binding_analysis": "Formally an internal advisory opinion, but the decision-maker may not depart from it without written justification (s.42(2)); the finding therefore shadow-binds the outcome and is treated as commitment-bearing.",
+        "source": "Building Act s.42",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        { "token": "conforming", "effect_class": "procedural" },
+        { "token": "conforming_with_conditions", "effect_class": "procedural" },
+        {
+          "token": "non_conforming",
+          "effect_class": "adverse",
+          "recourse": {
+            "recourse_state": "not_applicable",
+            "legal_basis": "Building Act s.42(3): the technical finding is not separately challengeable; it is contestable only through recourse against the final decision under s.47",
+            "source": "Building Act s.42(3)"
+          },
+          "notice_state": "notified_with_decision",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.42(2): the finding must state the conformity assessment for each applicable standard and address each registered objection"
+          }
+        }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Chief municipal engineer",
+          "delegated_authority": "Technical review delegation decree 2026/07 (fictional)",
+          "task_owner": "assigned reviewing engineer",
+          "actor_type": "hybrid_human_ai"
+        },
+        "evidence": {
+          "required": [
+            "complete application file",
+            "zoning plan extract (ref-zoning-plan)",
+            "registered objections (cp-05-objection-registration, all instances)"
+          ],
+          "notes": "Facts consumed by automated conformity screening must have been accepted at cp-02-fact-acceptance or verified by the reviewing engineer against source documents."
+        },
+        "reasoning": {
+          "mode": "ai_assisted",
+          "rule": "Automated conformity screening against the digitized zoning plan and building code proposes findings; the reviewing engineer independently assesses each proposed finding and the chief municipal engineer certifies the result. AI output enters the finding only as certified by the engineer (spec section 8).",
+          "reference": "ref-zoning-plan",
+          "notes": "Each registered objection must be individually addressed in the certified finding."
+        },
+        "dependency": {
+          "requires": [
+            { "commitment_point": "cp-04-public-notice", "outcome": "notice_published_window_open" },
+            {
+              "temporal": {
+                "anchor": { "commitment_point_id": "cp-04-public-notice", "event": "receipt_created" },
+                "operator": "elapsed",
+                "duration": "P30D"
+              }
+            },
+            { "external": "ref-zoning-plan" }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act", "ref-zoning-plan"]
+        },
+        "recourse": {
+          "recourse_state": "not_applicable",
+          "legal_basis": "Building Act s.42(3): the technical finding is not separately challengeable; it is contestable only through recourse against the final decision under s.47",
+          "source": "Building Act s.42(3)"
+        }
+      }
+    },
+    {
+      "id": "cp-07-decision",
+      "name": "Permit decision",
+      "commitment_type": "DECIDE",
+      "description": "The authority approves, conditionally approves, or denies the permit. The Building Act confers discretion on the director to weigh registered objections and to attach proportionate conditions; the Reasoning gate is therefore encoded as guided_discretion and is not converted into a deterministic rule (anti-fettering).",
+      "trigger": "institutional_act",
+      "binding_force": "substantive_binding",
+      "binding_effect_basis": {
+        "effect_type": "permit_grant_or_denial",
+        "relied_on_by": ["applicant", "objectors", "utility connections", "financing bank", "enforcement"],
+        "downstream_consequence": "Grant authorizes construction subject to any conditions; denial extinguishes the right to build under this application.",
+        "adverse_outcome_possible": true,
+        "source": "Building Act s.44",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        { "token": "approved", "effect_class": "favorable" },
+        {
+          "token": "conditionally_approved",
+          "effect_class": "mixed",
+          "recourse": {
+            "recourse_state": "available",
+            "channel": "external",
+            "forum": "Administrative Court",
+            "deadline": "P30D",
+            "remedy_type": "annulment or variation; individual conditions are severable and separately challengeable",
+            "suspensive_effect": true,
+            "source": "Building Act s.47 and s.44(6)",
+            "accessibility_note": "Appeal forms are available in accessible formats and minority languages."
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.44(5): each condition must be individually reasoned and each registered objection addressed"
+          },
+          "dependencies": [
+            { "commitment_point": "cp-06-technical-review", "outcome": "conforming_with_conditions" }
+          ]
+        },
+        {
+          "token": "denied",
+          "effect_class": "adverse",
+          "recourse": {
+            "recourse_state": "available",
+            "channel": "external",
+            "forum": "Administrative Court",
+            "deadline": "P30D",
+            "remedy_type": "annulment, variation, or remand",
+            "suspensive_effect": true,
+            "source": "Building Act s.47",
+            "accessibility_note": "Appeal forms are available in accessible formats and minority languages."
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.44(5): a denial must state reasons addressing each registered objection"
+          }
+        }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Building Authority director",
+          "authority_selection_rule": "Non-delegable for structures above 2000 m2 gross floor area; otherwise delegable to the deputy director",
+          "delegated_authority": "Deputy director under decree 2026/02 (fictional) for structures below the threshold",
+          "fallback_owner": "City secretary if the director is recused",
+          "actor_type": "human_officeholder"
+        },
+        "evidence": {
+          "required": [
+            "technical review finding (cp-06-technical-review)",
+            "registered objections and responses (cp-05-objection-registration)",
+            "proof that the objection window has closed (cp-04 receipt plus 30 days)"
+          ]
+        },
+        "reasoning": {
+          "mode": "guided_discretion",
+          "rule": "Grant if the works conform to the zoning plan and building code; Building Act s.44(2) confers discretion to weigh registered objections and to attach proportionate conditions. Departure from the cp-06 finding requires written justification (s.42(2)).",
+          "reference": "ref-building-act",
+          "notes": "Discretion holder: Building Authority director. Statutory factors: zoning and code conformity, the certified technical finding, each registered objection, proportionality and permit-relatedness of any condition. The discretion conferred by s.44(2) is encoded as guided_discretion and must not be converted into a deterministic rule (anti-fettering)."
+        },
+        "dependency": {
+          "requires": [
+            { "commitment_point": "cp-06-technical-review" },
+            {
+              "temporal": {
+                "anchor": { "commitment_point_id": "cp-04-public-notice", "event": "receipt_created" },
+                "operator": "elapsed",
+                "duration": "P30D"
+              }
+            },
+            { "absent": { "commitment_point": "cp-08-deemed-approval" } }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act", "ref-zoning-plan"]
+        },
+        "recourse": {
+          "recourse_state": "available",
+          "channel": "external",
+          "forum": "Administrative Court",
+          "deadline": "P30D",
+          "remedy_type": "annulment, variation, or remand",
+          "suspensive_effect": true,
+          "source": "Building Act s.47",
+          "accessibility_note": "Appeal forms are available in accessible formats and minority languages."
+        }
+      }
+    },
+    {
+      "id": "cp-08-deemed-approval",
+      "name": "Deemed approval on statutory-deadline lapse",
+      "commitment_type": "DECIDE",
+      "description": "If no decision (cp-07) issues within 90 days of the completeness receipt (cp-03, outcome complete), the permit is deemed granted by operation of law (silence-as-consent). The effect arises by temporal lapse, not by an institutional act; the runtime evaluating the GovernedContext mints the deemed receipt with deemed: true and an attested evaluation current_time (spec 5.4). The automated system that mints the receipt acts under the delegation rule of spec section 8: the legal basis is documented in a versioned Reference (ref-building-act, s.45), the actor_type is declared, and recourse to a human forum is available under s.45(3).",
+      "trigger": "temporal_lapse",
+      "trigger_condition": {
+        "anchor": { "commitment_point_id": "cp-03-completeness", "event": "receipt_created" },
+        "duration": "P90D",
+        "requires_absence": ["cp-07-decision"]
+      },
+      "binding_force": "substantive_binding",
+      "binding_effect_basis": {
+        "effect_type": "deemed_permit_grant_by_silence",
+        "relied_on_by": ["applicant", "financing bank", "utilities"],
+        "downstream_consequence": "Construction may lawfully begin as if approved without conditions; third parties retain challenge rights.",
+        "adverse_outcome_possible": true,
+        "shadow_binding_analysis": "Favorable to the applicant but adverse to objectors and to the public interest where substantive review never occurred; the single outcome is therefore classified mixed.",
+        "source": "Building Act s.45 (silence-as-consent)",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        {
+          "token": "deemed_approved",
+          "effect_class": "mixed",
+          "recourse": {
+            "recourse_state": "available",
+            "channel": "external",
+            "forum": "Administrative Court (third-party challenge)",
+            "deadline": "P60D from constructive knowledge",
+            "remedy_type": "annulment of the deemed permit",
+            "suspensive_effect": false,
+            "source": "Building Act s.45(3)"
+          },
+          "notice_state": "constructive_notice_by_operation_of_law",
+          "reason_giving": {
+            "expectation": "none_required_by_law",
+            "legal_basis": "Building Act s.45(2): a deemed grant arises from administrative silence; no statement of reasons exists or is required"
+          }
+        }
+      ],
+      "gates": {
+        "authority": {
+          "authority_basis": "operation_of_law",
+          "legal_source": "ref-building-act",
+          "authority_selection_rule": "No institutional actor performs this act; the effect arises automatically at deadline lapse and the runtime evaluating the GovernedContext mints the deemed receipt (spec 5.4).",
+          "actor_type": "automated_deterministic_system"
+        },
+        "evidence": {
+          "required": [
+            "completeness receipt (cp-03-completeness, outcome complete) with certified date",
+            "attested evaluation current_time (GovernedContext.current_time)"
+          ],
+          "attested_absence": [
+            { "commitment_point": "cp-07-decision" }
+          ],
+          "notes": "The attested absence of a cp-07 decision receipt is the explicit exception to the prohibition on derived runtime state serving as evidence (spec 3.10, 5.4)."
+        },
+        "reasoning": {
+          "mode": "calculation",
+          "rule": "Deterministic date arithmetic: deemed approval accrues when P90D has elapsed since the cp-03 completeness receipt and no cp-07 decision receipt exists in the GovernedContext; the clock is suspended during an open cure window (s.39(4)).",
+          "reference": "ref-building-act"
+        },
+        "dependency": {
+          "requires": [
+            { "commitment_point": "cp-03-completeness", "outcome": "complete" },
+            { "absent": { "commitment_point": "cp-07-decision" } },
+            {
+              "temporal": {
+                "anchor": { "commitment_point_id": "cp-03-completeness", "event": "receipt_created" },
+                "operator": "elapsed",
+                "duration": "P90D"
+              }
+            }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act"]
+        },
+        "recourse": {
+          "recourse_state": "available",
+          "channel": "external",
+          "forum": "Administrative Court (third-party challenge)",
+          "deadline": "P60D from constructive knowledge",
+          "remedy_type": "annulment of the deemed permit",
+          "suspensive_effect": false,
+          "source": "Building Act s.45(3)"
+        }
+      }
+    },
+    {
+      "id": "cp-09-appeal-admissibility",
+      "name": "Administrative appeal: admissibility determination",
+      "commitment_type": "DECIDE",
+      "description": "The Municipal Appeals Board determines whether an appeal by the applicant or a registered objector against the decision (cp-07-decision) or the deemed approval (cp-08-deemed-approval) is admissible on standing, timeliness, and form (Building Act s.47(1)). Admission suspends the appealed commitment (a receipt with acts_on effect suspend targeting the appealed receipt, per spec 3.11): suspensive effect attaches at admission, not at disposition, and admission and disposition are each separately challengeable, so each is independently reliance-worthy and encoded as its own CommitmentPoint (atomicity rule; the merits disposition is cp-10-appeal-disposition). Its commitment_type is DECIDE, not APPEAL: it is a procedural determination within the recourse process, not the disposition of the challenge (APPEAL-vs-DECIDE boundary test). The finality assertion on the inadmissibility outcome is an encoder claim about the law, is rebuttable, and does not extinguish recourse that exists in law. The appellant's petition is a private act; the commitment arises from the Board's act of admission or rejection, so the trigger is institutional_act. (Split from the former combined cp-09-appeal in the 2026-07 repair sprint — see 07-decisions/.)",
+      "trigger": "institutional_act",
+      "binding_force": "procedural_binding",
+      "acts_on_allowed": {
+        "allowed_effects": ["suspend"],
+        "targets": ["cp-07-decision", "cp-08-deemed-approval"]
+      },
+      "binding_effect_basis": {
+        "effect_type": "appeal_admission_and_suspension_of_appealed_commitment",
+        "relied_on_by": ["appellant", "permit holder (may not build during suspension)", "enforcement", "appeal disposition (cp-10-appeal-disposition)"],
+        "downstream_consequence": "Admission suspends the appealed permit or denial: it produces no effects while the appeal is pending, and construction started in the interim is unlawful. Inadmissibility ends the administrative recourse.",
+        "adverse_outcome_possible": true,
+        "source": "Building Act s.47(1)-(2)",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        {
+          "token": "admissible_effect_suspended",
+          "effect_class": "mixed",
+          "recourse": {
+            "recourse_state": "external_only",
+            "forum": "Administrative Court (application to lift suspensive effect)",
+            "deadline": "P15D",
+            "remedy_type": "lifting of the suspensive effect",
+            "suspensive_effect": false,
+            "source": "Building Act s.47(3)"
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.47(2): the admission must record the admissibility findings (standing, timeliness, form)"
+          }
+        },
+        {
+          "token": "inadmissible",
+          "effect_class": "adverse",
+          "recourse": {
+            "recourse_state": "legally_unavailable",
+            "legal_basis": "Building Act s.47(6): inadmissibility rulings of the Municipal Appeals Board are declared final and not subject to further administrative or judicial review",
+            "source": "Building Act s.47(6)"
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.47(6): the rejection must state which admissibility requirement failed and how"
+          }
+        }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Municipal Appeals Board",
+          "authority_selection_rule": "Admissibility is determined by the Board's presiding member; members involved in the original decision are excluded",
+          "actor_type": "institutional_role"
+        },
+        "evidence": {
+          "required": [
+            "appeal petition",
+            "standing proof (applicant, or registered objector per cp-05-objection-registration)",
+            "timeliness proof (within P30D of notification or constructive knowledge)",
+            "receipt of the appealed commitment (cp-07-decision or cp-08-deemed-approval)"
+          ]
+        },
+        "reasoning": {
+          "mode": "deterministic_rule",
+          "rule": "Standing, timeliness (P30D from notification or constructive knowledge), and form are deterministic tests under s.47(1); no discretion.",
+          "reference": "ref-building-act"
+        },
+        "dependency": {
+          "requires": [
+            {
+              "any_of": [
+                { "commitment_point": "cp-07-decision" },
+                { "commitment_point": "cp-08-deemed-approval" }
+              ]
+            }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act"]
+        },
+        "recourse": {
+          "recourse_state": "external_only",
+          "forum": "Administrative Court",
+          "deadline": "P15D",
+          "remedy_type": "lifting of the suspensive effect on application (s.47(3)); the inadmissibility ruling itself is asserted final under s.47(6) (rebuttable encoder claim)",
+          "suspensive_effect": false,
+          "source": "Building Act s.47(3), s.47(6)"
+        }
+      }
+    },
+    {
+      "id": "cp-10-appeal-disposition",
+      "name": "Administrative appeal: disposition on the merits",
+      "commitment_type": "APPEAL",
+      "description": "The Municipal Appeals Board disposes of an admitted appeal on the merits (Building Act s.48). Dismissal revives the appealed commitment (a receipt with acts_on effect revive targeting the appealed receipt, per spec 3.11); upholding the appeal quashes it (acts_on effect quash). Its commitment_type is APPEAL: the disposition of the challenge is the APPEAL act — the relation to the challenged commitment dominates — while the procedural admissibility determination within the recourse process is DECIDE (cp-09-appeal-admissibility; APPEAL-vs-DECIDE boundary test). (Split from the former combined cp-09-appeal in the 2026-07 repair sprint — see 07-decisions/.)",
+      "trigger": "institutional_act",
+      "binding_force": "procedural_binding",
+      "acts_on_allowed": {
+        "allowed_effects": ["revive", "quash"],
+        "targets": ["cp-07-decision", "cp-08-deemed-approval"]
+      },
+      "binding_effect_basis": {
+        "effect_type": "appeal_disposition_reviving_or_quashing_appealed_commitment",
+        "relied_on_by": ["appellant", "permit holder", "enforcement", "revocation for fraud (cp-11-revocation, where the permit survives)"],
+        "downstream_consequence": "Dismissal revives the appealed commitment with its original effects; upholding the appeal quashes it, extinguishing the appealed permit or denial.",
+        "adverse_outcome_possible": true,
+        "source": "Building Act s.48",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        {
+          "token": "appeal_dismissed_effect_revived",
+          "effect_class": "mixed",
+          "recourse": {
+            "recourse_state": "external_only",
+            "forum": "Administrative Court",
+            "deadline": "P30D",
+            "remedy_type": "annulment of the Board's dismissal and of the underlying decision",
+            "suspensive_effect": false,
+            "source": "Building Act s.48(4)"
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.48(3): the dismissal must address each ground of appeal"
+          }
+        },
+        {
+          "token": "appeal_upheld_commitment_quashed",
+          "effect_class": "mixed",
+          "recourse": {
+            "recourse_state": "external_only",
+            "forum": "Administrative Court",
+            "deadline": "P30D",
+            "remedy_type": "annulment of the Board's quashing decision",
+            "suspensive_effect": false,
+            "source": "Building Act s.48(4)"
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.48(3): the upholding decision must address each ground of appeal and state the basis for quashing"
+          }
+        }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Municipal Appeals Board",
+          "authority_selection_rule": "Three-member panel; members involved in the original decision are excluded",
+          "actor_type": "institutional_role"
+        },
+        "evidence": {
+          "required": [
+            "admissibility receipt (cp-09-appeal-admissibility, outcome admissible_effect_suspended)",
+            "the case file of the appealed decision",
+            "certified technical finding (cp-06-technical-review)",
+            "reasons of the appealed decision"
+          ]
+        },
+        "reasoning": {
+          "mode": "guided_discretion",
+          "rule": "The Board reviews the appealed decision on the grounds raised, Building Act s.48(2).",
+          "reference": "ref-building-act",
+          "notes": "Merits review holder: Municipal Appeals Board. Factors under s.48(2): the grounds raised, the case file, the certified technical finding, and the reasons of the appealed decision."
+        },
+        "dependency": {
+          "requires": [
+            { "commitment_point": "cp-09-appeal-admissibility", "outcome": "admissible_effect_suspended" }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act"]
+        },
+        "recourse": {
+          "recourse_state": "external_only",
+          "forum": "Administrative Court",
+          "deadline": "P30D",
+          "remedy_type": "review of the Board's disposition",
+          "suspensive_effect": false,
+          "source": "Building Act s.48(4)"
+        }
+      }
+    },
+    {
+      "id": "cp-11-revocation",
+      "name": "Revocation of permit for fraud (ex tunc)",
+      "commitment_type": "REMEDY",
+      "description": "The authority revokes a previously granted (cp-07) or deemed (cp-08) permit after an established finding that it was obtained by fraudulent evidence. The revocation receipt carries acts_on with effect revoke_ex_tunc targeting the receipt of the revoked commitment (spec 3.11): the permit is void from the start. Its commitment_type is REMEDY under the REMEDY-vs-OVERRIDE justification test: the act's justification is a defect in the prior commitment's procurement (fraud), so the act cures a defect ex tunc; it does not displace a valid commitment for a superseding interest or by competing authority, which would be OVERRIDE. Acceptance of the external fraud finding (criminal judgment or authenticated forensic report) into gate evaluation is governed by this CommitmentPoint's Authority and Evidence gates (spec section 8).",
+      "trigger": "institutional_act",
+      "binding_force": "substantive_binding",
+      "acts_on_allowed": {
+        "allowed_effects": ["revoke_ex_tunc"],
+        "targets": ["cp-07-decision", "cp-08-deemed-approval"],
+        "basis_reference": "ref-building-act"
+      },
+      "binding_effect_basis": {
+        "effect_type": "revocation_of_prior_permit_commitment",
+        "relied_on_by": ["former permit holder", "enforcement", "land registry", "insurers"],
+        "downstream_consequence": "Permit effects cease ex tunc; construction becomes unlawful; demolition or regularization proceedings may follow.",
+        "adverse_outcome_possible": true,
+        "source": "Building Act s.49 (fraud ground, no time limit)",
+        "source_confidence": "high"
+      },
+      "allowed_outcomes": [
+        {
+          "token": "revoked_ex_tunc",
+          "effect_class": "adverse",
+          "recourse": {
+            "recourse_state": "available",
+            "channel": "external",
+            "forum": "Administrative Court",
+            "deadline": "P30D",
+            "remedy_type": "annulment of the revocation",
+            "suspensive_effect": false,
+            "source": "Building Act s.49(4)"
+          },
+          "notice_state": "individual_written_notice_required",
+          "reason_giving": {
+            "expectation": "reasons_required",
+            "legal_basis": "Building Act s.49(3): the revocation must identify the fraudulent evidence and the established finding relied on"
+          }
+        },
+        { "token": "revocation_refused", "effect_class": "procedural" }
+      ],
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Building Authority director",
+          "authority_selection_rule": "Non-delegable; conflict rules exclude officials involved in the original grant",
+          "actor_type": "human_officeholder"
+        },
+        "evidence": {
+          "required": [
+            "receipt of the revoked commitment (cp-07-decision outcome approved or conditionally_approved, or cp-08-deemed-approval outcome deemed_approved)",
+            "established fraud finding (criminal judgment or authenticated forensic report)",
+            "hearing record: permit holder heard before revocation"
+          ],
+          "notes": "The external fraud finding is externally derived; its acceptance into deterministic evaluation is governed by this gate (spec section 8)."
+        },
+        "reasoning": {
+          "mode": "mixed",
+          "rule": "The fraud finding is an external judgment accepted under the Evidence gate; given an established fraud finding, revocation follows deterministically: fraud vitiates the permit ab initio and no proportionality assessment is required (Building Act s.49(1)).",
+          "reference": "ref-building-act",
+          "notes": "External-judgment component: the criminal court's or authenticated forensic finding. Deterministic component: the s.49(1) consequence once the finding is established."
+        },
+        "dependency": {
+          "requires": [
+            {
+              "any_of": [
+                { "commitment_point": "cp-07-decision", "outcome": "approved" },
+                { "commitment_point": "cp-07-decision", "outcome": "conditionally_approved" },
+                { "commitment_point": "cp-08-deemed-approval", "outcome": "deemed_approved" }
+              ]
+            }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+          "references": ["ref-building-act"]
+        },
+        "recourse": {
+          "recourse_state": "available",
+          "channel": "external",
+          "forum": "Administrative Court",
+          "deadline": "P30D",
+          "remedy_type": "annulment of the revocation",
+          "suspensive_effect": false,
+          "source": "Building Act s.49(4)"
+        }
+      }
+    }
+  ]
+}

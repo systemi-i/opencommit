@@ -1,0 +1,48 @@
+{
+  "kind": "HashVector",
+  "algorithm": "sha256",
+  "entries": [
+    {
+      "path": "manifest.json",
+      "source_hash": "sha256:2f06e7b946764ee53517a2a46bd3793f8d0ff623d332e6002e1009fa6479f2b9",
+      "canonical_hash": "sha256:f9ea4526d2a10723bf2c51e0bd32061c17ba60e2993ec3c11197e9ba44c33baf"
+    },
+    {
+      "path": "protocol-version.json",
+      "source_hash": "sha256:85ecbbfbc2f3c9554fa2f81b67563397b3700a7a0b1a202aa5897b03e2286180",
+      "canonical_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726"
+    },
+    {
+      "path": "references/building-act.json",
+      "source_hash": "sha256:af09c5189ce0a009f4b83366f5254e9fec1c00b840d87b5668dcdbd6f053a19a",
+      "canonical_hash": "sha256:27e56a63b57d2ab1d78b89052a1a668a060ed37dd40e6bbac074656ede693590"
+    },
+    {
+      "path": "receipts/chain-01.json",
+      "source_hash": "sha256:88c97469d3d185c8bf10b6c90cc636d0e6aaba1d5f77c658a178423c51659b09",
+      "canonical_hash": "sha256:5cc77467fdfc11095ec91d0a151214bcb6cabf65b71997dee8cb52527eab7d8e"
+    },
+    {
+      "path": "receipts/deemed-example.json",
+      "source_hash": "sha256:479d894481b9ddf51bd54f2948442187493966848d0a295a2c7b5b773df3bb18",
+      "canonical_hash": "sha256:275e1558719c503fbafa4bd4cb5f0a3987200bdc2ba234c46f9ce715c896885e"
+    },
+    {
+      "path": "conformance.json",
+      "source_hash": "sha256:2afd6a14df0c45429d289b9aba158183e073185699aa9fd95445393db3bff126",
+      "canonical_hash": "sha256:dbc67248bd5ecec65f65d7bfd9d5ac819c9c4cd8ff74afe51fc5d876cd44edfb"
+    },
+    {
+      "path": "README.md",
+      "source_hash": "sha256:ae6fd37429b3754c07691db2d51546dc1fb8a91aa54e975c155d1cad2c02bda9"
+    },
+    {
+      "path": "verify.py",
+      "source_hash": "sha256:1701182707d3a1f7ff212f90b6f15809307597f2aea7cb182b1ca8d6b6b2bc1b"
+    },
+    {
+      "path": "attacks.py",
+      "source_hash": "sha256:b02b65003e4d185b3cc0b17ce335489817e6de9d51fa9576b695e5dcdd755179"
+    }
+  ]
+}

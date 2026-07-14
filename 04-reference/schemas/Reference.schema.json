@@ -10,7 +10,7 @@
     "version": { "type": "string" },
     "date": { "type": "string" },
     "locator": { "type": "string" },
-    "hash": { "type": "string" }
+    "hash": { "$ref": "ICSLCommon.schema.json#/$defs/TaggedHash" }
   },
   "required": ["id", "label", "source_type"],
   "additionalProperties": true

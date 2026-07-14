@@ -1,51 +1,44 @@
 # Reviewer Quickstart
 
-Date: 2026-07-07.
+This page is for reviewing the ICSL candidate itself. To assess whether a real institutional protocol or existing encoding aligns with ICSL, use the [Protocol Assessment Guide](../04-reference/protocol-assessment-guide.md) and [Agent Protocol-Alignment Brief](../04-reference/agent-protocol-alignment-brief.md).
 
-## Read First
+## Reading Path
 
-1. `11-v0.1-candidate-spec/README.md`
-2. `11-v0.1-candidate-spec/ICSL-v0.1-candidate-spec.md`
-3. `11-v0.1-candidate-spec/ICSL-conformance-profile.md`
-4. `10-standards-harness/README.md`
-5. `12-release-candidate/CLAIM-GUARDRAILS.md`
+1. Read the repository [README](../README.md) and [scope statement](v0.1-scope-contract.md).
+2. Read the [candidate specification](../03-specification/icsl-v0.1-candidate-spec.md), followed by the [conformance profile](../03-specification/conformance-profile.md).
+3. Inspect the [reference schemas](../04-reference/schemas/README.md) and [rule catalog](../04-reference/rule-catalog.md).
+4. Review the [worked permit package](../08-examples/permit-core-l2/README.md).
+5. Compare unresolved questions against [Open Issues](open-issues.md).
 
-## Run The Harness
+## Run the Published Checks
 
-From the review project root:
+From the repository root:
 
-```bash
-cd 10-standards-harness
-node bin/icsl-harness.mjs fixtures run fixtures
-node bin/icsl-harness.mjs package verify packages/minimal-core
-node bin/icsl-harness.mjs conformance report fixtures
+```sh
+python3 04-reference/mutations/run_mutations.py
+python3 08-examples/permit-core-l2/verify.py
+python3 08-examples/permit-core-l2/attacks.py
 ```
 
-Expected result:
+The mutation runner evaluates 26 declared expectations against known-valid protocol, receipt, and governed-context baselines. The package verifier checks the synthetic Core-L2 example's schemas, identities, relationships, receipt chain, and hash vector. The attack runner confirms that the control package passes and five specified adversarial changes fail for their intended reasons.
 
-- 40 fixtures pass
-- minimal package verifies
-- conformance report lists fixture summary
+These checks are deliberately narrower than the planned conformance suite. A green run establishes only the behavior stated by each harness.
 
-## Inspect The Fixtures
+## Reference Surface
 
-Useful starting fixtures:
+- `04-reference/schemas/` contains twelve Draft 2020-12 schemas.
+- `04-reference/rules/catalog.json` contains 72 diagnostic definitions.
+- `04-reference/mutations/` contains mutation baselines, expectations, and runner.
+- `08-examples/permit-core-l2/` contains the synthetic package, verifier, and attacks.
+- `conformance.json` in the worked package declares `not_run` because the full suite is not yet published.
 
-- `F01-minimal-valid-core`
-- `F04-advisory-false-positive`
-- `F12-runtime-binding-smuggling`
-- `F17-governance-addendum-required`
-- `F28-valid-extended-package`
-- `F33-valid-core-l3-governance`
-- `F36-ai-gate-authority-invalid`
-- `F43-canonical-array-order`
+## Questions for Technical Review
 
-## Review Questions
-
-- Can an independent implementer understand when a CommitmentPoint exists?
-- Are the six gates universal without being too blunt?
-- Are authority, task ownership, and delegation clearly separated?
-- Does the recourse model make adverse outcomes inspectable?
-- Is the canonical/runtime/package boundary implementable?
-- Are conformance claims specific enough to prevent overclaiming?
-- Are the open issues acceptable for release-candidate status?
+- Can the existence of a CommitmentPoint be determined consistently?
+- Are the eight act types and their boundary tests sufficient?
+- Can another implementation reproduce ProtocolVersion and receipt hashes?
+- Do target relationships prevent an appeal or remedy from acting on an unrelated receipt?
+- Can extensions be processed without silent semantic loss?
+- Are class and encoding-depth claims enforceable?
+- Are runtime and deployment details prevented from changing canonical truth?
+- Do diagnostics correspond clearly to normative requirements?

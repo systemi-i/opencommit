@@ -1,0 +1,32 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://igsl.dev/icsl/schemas/0.1-freeze/EvaluationRecord.schema.json",
+  "title": "EvaluationRecord",
+  "description": "Record of a blocked or rejected commitment attempt. A blocked or rejected attempt produces an EvaluationRecord, never a Receipt.",
+  "type": "object",
+  "properties": {
+    "kind": { "const": "EvaluationRecord" },
+    "evaluation_id": { "type": "string" },
+    "governed_context_id": { "type": "string" },
+    "commitment_point_id": { "type": "string" },
+    "result": {
+      "type": "string",
+      "enum": ["blocked", "rejected"]
+    },
+    "diagnostics": {
+      "type": "array",
+      "items": { "$ref": "ICSLCommon.schema.json#/$defs/Diagnostic" }
+    },
+    "created_at": { "type": "string", "format": "date-time" }
+  },
+  "required": [
+    "kind",
+    "evaluation_id",
+    "governed_context_id",
+    "commitment_point_id",
+    "result",
+    "diagnostics",
+    "created_at"
+  ],
+  "additionalProperties": true
+}

@@ -1,51 +1,49 @@
-# Claim Guardrails
+# Claims and Maturity
 
-Date: 2026-07-07.
+ICSL is a candidate standard. Public claims should describe the evidence that exists without implying certification, legal authority, or demonstrated production interoperability.
 
-## Allowed Claims
+## Supported Claims
 
-The project may claim:
+The project can state that:
 
-- ICSL has a v0.1 release-candidate package.
-- The conceptual model is frozen for candidate review.
-- A candidate normative spec exists.
-- A candidate package format exists.
-- A candidate conformance profile exists.
-- A standards harness exists.
-- The harness currently passes 40 fixtures.
-- The release is ready for internal and invited external review.
+- the ICSL v0.1 conceptual model is frozen for external consultation;
+- a candidate specification, package format, conformance profile, and implementation guide are published;
+- the reference layer contains twelve JSON Schemas and 72 diagnostic rules;
+- one synthetic Core-L2 package passes the included schema and hash verifier;
+- the published mutation suite meets 26 declared expectations;
+- the package attack runner rejects five specified adversarial changes;
+- exploratory service encodings informed the model but are not a validated benchmark;
+- broader fixtures, interoperability vectors, and independent implementation reports remain outstanding.
 
-## Prohibited Claims
+Each statement is deliberately bounded by its subject and evidence.
 
-The project must not claim:
+## Claims Not Yet Supported
 
-- ICSL is a final public standard.
-- Any implementation is unqualified `ICSL compliant`.
-- Production interoperability has been proven.
-- The package format is final.
-- The canonicalization profile is final.
-- The validator is a complete reference implementation.
-- ICSL produces legal advice or legal authority by itself.
-- AI systems are authorized as deterministic gate authorities.
+The project and implementers should not claim that:
 
-## Required Claim Shape
+- ICSL is a final or formally adopted public standard;
+- a product or institution is unqualifiedly “ICSL compliant”;
+- production interoperability has been demonstrated;
+- the candidate model is legally correct across jurisdictions;
+- an encoding establishes legal authority or overrides its source;
+- a receipt proves the substantive legality or authenticity of an act;
+- the current verifier is a complete reference implementation;
+- AI systems acquire authority by implementing ICSL;
+- exploratory corpus results demonstrate empirical validation or universal coverage.
 
-Any conformance claim must include:
+## Conformance Statements
 
-- claim subject
-- conformance class
-- ICSL version
-- test-suite version
-- result
+A conformance statement must identify the claim subject, ICSL version, conformance class, test-suite version, result, and validating implementation or report.
 
-Example:
+For example:
 
 ```text
-Example Validator X reports pass for ICSL 0.1-freeze Core-L2 using test suite 2026-07-07.seed.
+Validator X reports that package Y passes ICSL 0.1-freeze Core-L2
+against suite Z, version 0.3, using Validator X version 0.4.1.
 ```
 
-Avoid:
+“Validator X is ICSL compliant” is not an adequate claim because it omits the tested subject, class, suite, and result.
 
-```text
-Example Validator X is ICSL compliant.
-```
+## Legal and Institutional Effect
+
+ICSL represents an institution's account of governed action. It does not create authority, certify a source encoding, or determine which legal instrument prevails. Those questions remain governed by applicable law and institutional arrangements.

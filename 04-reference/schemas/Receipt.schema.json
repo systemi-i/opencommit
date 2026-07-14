@@ -4,18 +4,80 @@
   "title": "Receipt",
   "type": "object",
   "properties": {
+    "kind": { "const": "Receipt" },
     "receipt_id": { "type": "string" },
-    "receipt_hash": { "type": "string" },
+    "protocol_version_id": { "type": "string" },
+    "protocol_version_hash": {
+      "$ref": "ICSLCommon.schema.json#/$defs/TaggedHash",
+      "description": "REQUIRED part of the receipt content core (added in the 2026-07 repair sprint — see 07-decisions/): sha256 over the RFC 8785 (JCS) canonical bytes of the complete ProtocolVersion object named by protocol_version_id (the ProtocolVersion contains no hash of itself, so the preimage is non-self-referential). MUST equal the canonical hash of that ProtocolVersion (rule RECEIPT_PROTOCOL_VERSION_HASH_MATCH)."
+    },
+    "commitment_point_id": { "type": "string" },
+    "governed_context_id": { "type": "string" },
+    "outcome": { "type": "string" },
+    "commitment_type": {
+      "description": "Optional derived copy of the referenced CommitmentPoint's commitment_type (added in the 2026-07 repair sprint — see 07-decisions/): one of the eight core values, or the literal EXTENSION when the CommitmentPoint is extension-typed (widened in the 2026-07 repair sprint — see 07-decisions/). If present it MUST match the referenced CommitmentPoint's type — EXTENSION matches EXTENSION (rule RECEIPT_COMMITMENT_TYPE_MATCH).",
+      "oneOf": [
+        { "$ref": "ICSLCommon.schema.json#/$defs/CoreCommitmentType" },
+        { "const": "EXTENSION" }
+      ]
+    },
+    "commitment_type_extension_id": {
+      "type": "string",
+      "description": "Optional; when commitment_type is EXTENSION this MAY carry the extension type id declared by the CommitmentPoint's commitment_type_extension (added in the 2026-07 repair sprint — see 07-decisions/)."
+    },
+    "authority": { "type": "string" },
+    "created_at": { "type": "string", "format": "date-time" },
+    "effective_at": { "type": "string", "format": "date-time" },
+    "receipt_hash": { "$ref": "ICSLCommon.schema.json#/$defs/TaggedHash" },
     "previous_hash": {
-      "anyOf": [
-        { "type": "string" },
+      "oneOf": [
+        { "$ref": "ICSLCommon.schema.json#/$defs/TaggedHash" },
         { "type": "null" }
       ]
     },
-    "content_hash": { "type": "string" },
+    "acts_on": { "$ref": "ICSLCommon.schema.json#/$defs/ActsOn" },
+    "deemed": { "type": "boolean" },
     "content": { "type": "object" },
-    "created_at": { "type": "string" }
+    "content_hash": { "$ref": "ICSLCommon.schema.json#/$defs/TaggedHash" },
+    "ai_assistance": {
+      "$ref": "ICSLCommon.schema.json#/$defs/AiAssistance",
+      "description": "Optional AI-assistance provenance for the accepted commitment (added in the 2026-07 repair sprint — see 07-decisions/)."
+    },
+    "issuer": {
+      "type": "string",
+      "description": "Reserved for forward compatibility; unsigned in v0.1 (ADR-003)."
+    },
+    "signatures": {
+      "type": "array",
+      "description": "Reserved for forward compatibility; unsigned in v0.1 (ADR-003).",
+      "items": {
+        "type": "object",
+        "properties": {
+          "signer": { "type": "string" },
+          "key_id": { "type": "string" },
+          "alg": { "type": "string" },
+          "value": { "type": "string" }
+        },
+        "required": ["signer", "key_id", "alg", "value"],
+        "additionalProperties": false
+      }
+    }
   },
-  "required": ["receipt_id", "receipt_hash", "previous_hash"],
+  "required": [
+    "kind",
+    "receipt_id",
+    "protocol_version_id",
+    "protocol_version_hash",
+    "commitment_point_id",
+    "governed_context_id",
+    "outcome",
+    "authority",
+    "created_at",
+    "receipt_hash",
+    "previous_hash"
+  ],
+  "dependentRequired": {
+    "content": ["content_hash"]
+  },
   "additionalProperties": true
 }

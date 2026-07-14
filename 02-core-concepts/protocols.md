@@ -1,38 +1,25 @@
 # Protocols
 
-Protocols are the reusable public processes in OpenCommit.
+An ICSL protocol is a named governed process. A ProtocolVersion is an immutable publication of that process at a particular point in time.
 
-A protocol describes how a governed action should happen: who can act, what evidence is required, what dependencies must be resolved, what rules apply, what outcomes are possible, and what recourse exists.
+A ProtocolVersion identifies the responsible institution, describes the class of matters governed, and defines the CommitmentPoints at which institutional acts may occur. It does not attempt to reproduce every task, screen, notification, or internal handoff involved in service delivery. Those operational details belong in workflow and case-management systems unless they independently create a reliance-worthy institutional effect.
 
-Examples of protocols include:
+Examples include permit determination, emergency assistance, health referral, student-support eligibility, inspection and enforcement, grant disbursement, and administrative appeal.
 
-- construction permit review;
-- emergency cash assistance;
-- health referral;
-- student support eligibility;
-- climate project funding release;
-- public inspection and enforcement;
-- appeal intake and resolution.
+## Why Versioning Matters
 
-## Why Protocols Matter
+Public procedures change. Authority may move to a different office, evidentiary requirements may be amended, a deadline may change, or a new route of recourse may be created. A case must nevertheless remain interpretable under the rules that governed it when the institution acted.
 
-Without protocols, public-service logic is often trapped in policy documents, forms, case-management tools, local configuration, and staff memory.
+ICSL therefore treats each ProtocolVersion as immutable. A correction or amendment produces a new version rather than changing an old one in place. Runtime contexts and receipts pin the exact version by identifier and canonical hash.
 
-OpenCommit makes protocols explicit and versioned so they can be:
+## Relationship to Workflow
 
-- reviewed before deployment;
-- implemented across systems;
-- audited during execution;
-- reused across programs;
-- forked and adapted to local contexts;
-- compared across jurisdictions;
-- tested through conformance fixtures.
+ICSL is not a workflow-orchestration language. A conforming protocol provides the institutional information needed to evaluate and record consequential acts, but it does not necessarily specify screen order, queue management, staffing, message transport, retries, scheduling, or user-interface behavior.
 
-## Protocols and Autonomy
+Implementations may bind a ProtocolVersion to BPMN, CMMN, case-management configuration, decision engines, registries, or custom software. Those bindings remain outside canonical protocol truth so that replacing the implementation does not silently change the institution's commitments.
 
-Protocols do not require all institutions to use the same platform.
+## Federation and Autonomy
 
-Instead, each institution can publish, adapt, validate, or rely on protocols while retaining its own authority, legal context, and operational autonomy.
+Protocols do not require all institutions to use the same platform or substantive policy. Each institution may publish and maintain its own versions, cite its own legal sources, and adapt shared patterns to its jurisdiction.
 
-This is what makes an open governance network possible.
-
+Common structure makes those protocols easier to compare and their receipts easier to interpret. It supports federation through shared semantics while leaving authority with the institution that is legally responsible for the act.

@@ -1,17 +1,9 @@
 # Lineage and Rationale
 
-OpenCommit and ICSL build on several traditions:
+ICSL combines ideas from several established fields rather than claiming to invent institutional formalization from first principles.
 
-- institutional grammar and the work associated with Elinor Ostrom and Sue Crawford;
-- public administration and administrative law;
-- digital public infrastructure;
-- open standards and interoperability;
-- AI governance and accountable automation;
-- civic technology and service-delivery reform.
+Its principal intellectual lineage includes institutional grammar and polycentric governance; administrative law and procedural justice; rules as code and computational law; workflow, decision, and case-management standards; event-sourced records and verifiable data; digital public infrastructure; and operational approaches to AI governance.
 
-ICSL does not replace legal interpretation, institutional judgment, or democratic governance.
+The contribution ICSL proposes is a particular synthesis: a standard centered on reliance-worthy institutional acts, the conditions under which they may be accepted, and the receipts through which their effects can be inspected over time.
 
-It provides a structured layer for representing governed action so institutions, systems, and civic agents can coordinate without losing authority, accountability, recourse, or autonomy.
-
-See [Lineage and Rationale](lineage-and-rationale.md) for the full discussion.
-
+The [full lineage and rationale](lineage-and-rationale.md) explains what ICSL takes from these traditions, where it differs, and how it is intended to coexist with related standards.

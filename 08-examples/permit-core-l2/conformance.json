@@ -1,0 +1,9 @@
+{
+  "kind": "ConformanceDeclaration",
+  "claim_subject": "ICSL package 08-examples/permit-core-l2 (protocol org.example-city.building.construction-permit@2.0.0)",
+  "conformance_class": "Core-L2",
+  "icsl_version": "0.1-freeze",
+  "test_suite_version": "icsl.conformance.seed/2026-07-07.seed",
+  "result": "not_run",
+  "notes": "Honest posture: the ICSL conformance suite is unpublished, so no suite run exists and the result is declared not_run. The bundled verify.py performs schema validation, receipt-chain recomputation, and hash-vector recomputation only; passing verify.py is not a conformance-suite pass and supports no conformance claim beyond this declaration."
+}

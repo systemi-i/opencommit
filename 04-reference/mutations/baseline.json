@@ -1,0 +1,142 @@
+{
+  "kind": "ProtocolVersion",
+  "protocol_version_id": "urn:opencommit:mutation-baseline:pv:1.0.0",
+  "icsl_version": "0.1",
+  "encoding_depth": "L2",
+  "conformance_class": "Core-L2",
+  "institution": {
+    "id": "urn:opencommit:mutation-baseline:institution",
+    "name": "Baseline Permitting Authority",
+    "jurisdiction": "XX-BASELINE",
+    "reference": "Synthetic institution for the schema-mutation suite; not a real body."
+  },
+  "governed_context": {
+    "description": "Applications for the synthetic baseline permit decided and registered by the Baseline Permitting Authority. This embedded object is a GovernedContextDescriptor — a description of what class of matters the protocol governs — and carries no runtime members: runtime GovernedContext instances (with protocol_version_id and protocol_version_hash pins) live outside the ProtocolVersion, so no artifact embeds a hash of the object containing it.",
+    "subject_class": "baseline_permit_application",
+    "scope": "Single synthetic permit lifecycle: one decision act and one registration act.",
+    "jurisdiction_note": "XX-BASELINE (synthetic jurisdiction for the schema-mutation suite; not a real body)."
+  },
+  "commitment_points": [
+    {
+      "id": "cp-baseline-decide",
+      "name": "Permit decision",
+      "description": "Authoritative disposition of the baseline application among allowed outcomes.",
+      "commitment_type": "DECIDE",
+      "binding_effect_basis": {
+        "classification": "binding",
+        "effect_type": "determines_entitlement",
+        "adverse_outcome_possible": true,
+        "relied_on_by": ["applicant"],
+        "downstream_consequence": "Refusal blocks the governed activity until recourse concludes.",
+        "source": "Baseline Statute s.1",
+        "source_confidence": "high"
+      },
+      "binding_force": "substantive_binding",
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Baseline Permit Officer",
+          "authority_basis": "institutional_actor",
+          "legal_source": "Baseline Statute s.2",
+          "actor_type": "human_officeholder"
+        },
+        "evidence": {
+          "required": ["application_form", "identity_document"]
+        },
+        "reasoning": {
+          "rule": "Grant if all Baseline Statute s.3 criteria are met; refuse otherwise.",
+          "reference": "Baseline Statute s.3",
+          "mode": "deterministic_rule"
+        },
+        "dependency": {
+          "requires": []
+        },
+        "version": {
+          "protocol_version_id": "urn:opencommit:mutation-baseline:pv:1.0.0"
+        },
+        "recourse": {
+          "recourse_state": "available",
+          "channel": "administrative_review",
+          "deadline": "P30D",
+          "source": "Baseline Statute s.5"
+        }
+      },
+      "allowed_outcomes": [
+        {
+          "token": "granted",
+          "effect_class": "favorable",
+          "reason_giving": { "expectation": "reasons_required" }
+        },
+        {
+          "token": "refused",
+          "effect_class": "adverse",
+          "recourse": {
+            "recourse_state": "available",
+            "channel": "administrative_review",
+            "deadline": "P30D",
+            "suspensive_effect": false,
+            "source": "Baseline Statute s.5"
+          },
+          "reason_giving": { "expectation": "reasons_required" },
+          "notice_state": "notified_in_decision"
+        }
+      ],
+      "trigger": "institutional_act"
+    },
+    {
+      "id": "cp-baseline-attest",
+      "name": "Decision registration",
+      "description": "Constitutive attestation that the permit decision has been entered in the public register.",
+      "commitment_type": "ATTEST",
+      "binding_effect_basis": {
+        "classification": "binding",
+        "effect_type": "creates_institutional_fact",
+        "adverse_outcome_possible": false,
+        "relied_on_by": ["third_party_verifiers"],
+        "source": "Baseline Statute s.4",
+        "source_confidence": "high"
+      },
+      "binding_force": "evidentiary_binding",
+      "gates": {
+        "authority": {
+          "legal_authority_holder": "Baseline Registrar",
+          "authority_basis": "institutional_actor",
+          "legal_source": "Baseline Statute s.4",
+          "actor_type": "institutional_role"
+        },
+        "evidence": {
+          "required": ["decision_receipt"]
+        },
+        "reasoning": {
+          "rule": "Record the decision outcome verbatim in the register.",
+          "mode": "deterministic_rule"
+        },
+        "dependency": {
+          "requires": [
+            { "commitment_point": "cp-baseline-decide" }
+          ]
+        },
+        "version": {
+          "protocol_version_id": "urn:opencommit:mutation-baseline:pv:1.0.0"
+        },
+        "recourse": {
+          "recourse_state": "not_applicable",
+          "source": "Registration is mechanical; challenge lies against the underlying decision (cp-baseline-decide)."
+        }
+      },
+      "allowed_outcomes": [
+        {
+          "token": "recorded",
+          "effect_class": "procedural",
+          "reason_giving": { "expectation": "reasons_required" }
+        }
+      ],
+      "trigger": "institutional_act"
+    }
+  ],
+  "encoding_provenance": {
+    "drafting_method": "human",
+    "drafting_tool": "manual",
+    "approved_by": "mutation-suite maintainers",
+    "approval_basis": "Synthetic test fixture for the schema-mutation suite (added in the 2026-07 repair sprint — see 07-decisions/); not an encoding of a real institution."
+  }
+}

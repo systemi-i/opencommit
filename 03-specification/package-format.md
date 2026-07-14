@@ -8,7 +8,7 @@ Date: 2026-07-07.
 The ICSL package format gives protocol artifacts, conformance declarations, references,
 hash vectors, receipts, renderings, and optional execution bindings a stable envelope.
 
-The package format must preserve the central invariant: canonical protocol truth must be
+The package format MUST preserve the central invariant: canonical protocol truth MUST be
 separable from runtime bindings, credentials, interfaces, and deployment configuration.
 
 ## 2. Minimum Package
@@ -47,8 +47,11 @@ Only `protocol-version.json` is canonical protocol truth in the minimum package.
 
 Every file declared in the manifest MUST exist.
 
+The manifest MUST declare itself among the package files with role `manifest`.
+
 Suggested roles:
 
+- `manifest`
 - `protocol-version`
 - `conformance-declaration`
 - `hash-vector`
@@ -60,17 +63,24 @@ Suggested roles:
 
 ## 5. Hashes
 
-`hashes.json` records file hashes.
 
-Seed harness behavior:
+`hashes.json` records the package hash vector, conforming to the HashVector schema
+(`04-reference/schemas/HashVector.schema.json`).
+
+Normative behavior:
 
 - algorithm: SHA-256
-- hash input: source file bytes
-- hash vector covers every non-hash-vector file declared by the manifest
-- `hashes.json` is not required to hash itself
+- every hash value is a tagged string `sha256:<64 lowercase hex>`
+  (pattern `^sha256:[0-9a-f]{64}$`)
+- dual hashes: every entry carries a `source_hash` over the file's source bytes;
+  entries for JSON artifacts additionally carry a `canonical_hash` over the file's
+  RFC 8785 (JCS) canonical bytes
+- the hash vector MUST cover every file declared by the manifest, including
+  `manifest.json` itself
+- `hashes.json` is the only self-exempt file: it is not required to hash itself
 
-Open publication decision: whether final packages must include both source-byte hashes and
-canonical JSON hashes for JSON artifacts.
+Resolved (per ADR-002): final packages MUST include both source-byte hashes for every
+file and canonical-JSON hashes for JSON artifacts (the dual-hash decision).
 
 ## 6. Conformance Declaration
 

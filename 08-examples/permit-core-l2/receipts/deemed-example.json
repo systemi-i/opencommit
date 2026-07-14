@@ -1,0 +1,27 @@
+{
+  "kind": "Receipt",
+  "receipt_id": "rcpt-ec-000777-003",
+  "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+  "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+  "commitment_point_id": "cp-08-deemed-approval",
+  "commitment_type": "DECIDE",
+  "governed_context_id": "gc-ec-2026-000777",
+  "outcome": "deemed_approved",
+  "authority": "operation_of_law:ref-building-act",
+  "created_at": "2026-07-01T09:00:05Z",
+  "effective_at": "2026-07-01T09:00:00Z",
+  "deemed": true,
+  "ai_assistance": {
+    "involved": false,
+    "role": "none"
+  },
+  "content": {
+    "evaluation_current_time": "2026-07-01T09:00:05Z",
+    "anchor_receipt": "cp-03-completeness receipt rcpt-ec-000777-002, created 2026-04-02T09:00:00Z (not shipped in this package)",
+    "lapse_computation": "P90D elapsed at 2026-07-01T09:00:00Z; no cp-07-decision receipt exists in gc-ec-2026-000777 (attested absence, spec 5.4)",
+    "minting_runtime": "Example City permit case runtime, actor_type automated_deterministic_system under the spec section 8 delegation rule"
+  },
+  "previous_hash": "sha256:cb7abea619509e9c8ac30bc505d42e3b8169316bd43fa36498192d8865afc572",
+  "content_hash": "sha256:bab72996678014deeffd97f493e07c0f8a81ddc492eb1be3c05acbb6b4453d89",
+  "receipt_hash": "sha256:a770cc49ec9a068041098119223d73443b16bba59b64f56ba399314f053ac726"
+}

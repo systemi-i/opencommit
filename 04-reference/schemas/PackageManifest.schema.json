@@ -32,6 +32,23 @@
         },
         "required": ["path", "role"]
       }
+    },
+    "publisher": {
+      "type": "object",
+      "description": "Optional declaration of who published this encoding and their relationship to the institution (added in the 2026-07 repair sprint — see 07-decisions/). SHOULD at Core-L2. An encoding confers no independent legal effect; the underlying source prevails.",
+      "properties": {
+        "name": { "type": "string" },
+        "relationship": {
+          "type": "string",
+          "enum": [
+            "authoritative_self_published",
+            "delegated_publisher",
+            "third_party_unofficial"
+          ]
+        }
+      },
+      "required": ["name", "relationship"],
+      "additionalProperties": false
     }
   },
   "required": ["kind", "package_id", "icsl_version", "profile", "files"],

@@ -1,50 +1,38 @@
 # Feedback Intake Guide
 
-Date: 2026-07-07.
+Review feedback should be recorded in a way that preserves the evidence, decision, and resulting change. Freezing the conceptual model means that changes require reasons; it does not mean that foundational criticism is out of scope.
 
-## Principle
+## Categories
 
-Feedback should be triaged without immediately changing the conceptual model. The v0.1
-candidate is frozen for review. Feedback should be classified, not absorbed impulsively.
+Classify each issue as one of the following:
 
-## Intake Classes
-
-- Conceptual issue
-- Normative spec issue
-- Schema issue
-- Rule/diagnostic issue
-- Fixture/conformance issue
-- Package format issue
-- Governance/recourse issue
-- Implementation issue
-- Documentation issue
-- Out of scope for v0.1
+- conceptual model;
+- normative specification;
+- schema or diagnostic;
+- package or canonicalization;
+- fixture or conformance;
+- governance, authority, or recourse;
+- privacy or provenance;
+- implementation;
+- documentation;
+- future profile or extension.
 
 ## Severity
 
-- Blocking for public v0.1
-- Important before public v0.1
-- Useful improvement
-- Clarification only
-- Future profile or extension
+- **Blocking:** the candidate would be unsafe, contradictory, or unimplementable without resolution.
+- **Important:** material to the quality or interoperability of v0.1 but not a foundational contradiction.
+- **Improvement:** useful within v0.1 if it can be made without destabilizing the candidate.
+- **Clarification:** wording or examples can resolve the issue without changing requirements.
+- **Future:** valuable but properly addressed by a later version, profile, or extension.
 
-## Triage Steps
+## Required Information
 
-1. Record the feedback in the relevant template.
-2. Identify the affected artifact.
-3. Identify whether it challenges the frozen conceptual spine.
-4. Assign severity.
-5. Decide whether it affects release-candidate status or public-v0.1 readiness only.
-6. If accepted, map it to a concrete edit or fixture.
-7. If rejected, record the reason.
+A useful issue identifies the affected artifact and section, describes the observed problem, explains its consequence, and provides a concrete example or counterexample where possible. It should distinguish a disagreement with the model from an implementation defect or unclear explanation.
 
-## Reopening The Conceptual Model
+Submit issues through the [OpenCommit GitHub repository](https://github.com/systemi-i/opencommit/issues).
 
-Escalate before accepting feedback that would:
+## Triage and Decision
 
-- replace CommitmentPoint as the central primitive
-- remove one of the six gates
-- allow accepted commitments without receipts
-- make AI/probabilistic inference deterministic gate truth
-- allow canonical protocol truth to depend on deployment bindings
-- allow unqualified conformance claims
+Maintainers should assign a category and severity, identify whether the issue challenges a frozen invariant, and map accepted findings to a specification edit, schema or rule change, fixture, documentation correction, or future-work record. Rejected findings should receive a reason that another reviewer can examine.
+
+Changes to the conceptual model require an architecture decision record and regression evidence. Examples include replacing CommitmentPoint as the central primitive, changing the six-gate set, allowing accepted Commitments without Receipts, changing canonical identity, or permitting runtime bindings to alter canonical semantics.

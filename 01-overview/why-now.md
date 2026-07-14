@@ -1,39 +1,23 @@
 # Why Now
 
-Digital public infrastructure is scaling. AI is moving into public administration. Public institutions are being asked to coordinate across programs, platforms, sectors, and jurisdictions.
+Public administration is becoming more digital, automated, and interconnected. That transition is advancing faster than the institutional mechanisms needed to govern it.
 
-The question is no longer whether public action will become more digital, automated, and networked.
+## Digital Infrastructure Has Reached an Institutional Boundary
 
-The question is whether it can do so while preserving legitimacy, autonomy, accountability, recourse, and public trust.
+Identity systems, registries, payment rails, data exchanges, APIs, workflow products, and service portals have made public systems more capable. These components answer important technical questions: who a person is, where a record sits, whether a payment moved, or which task comes next.
 
-## The Infrastructure Gap
+They do not by themselves answer whether an action was institutionally valid. They do not establish who was authorized to make a decision, which evidence counted, which version of a rule applied, or what right of challenge followed. As systems become more connected, ambiguity about those matters travels further and becomes harder to correct.
 
-Most current investments focus on technical interoperability:
+## AI Makes Implicit Rules More Dangerous
 
-- identity systems;
-- registries;
-- payment rails;
-- data exchange;
-- APIs;
-- workflow tools;
-- service portals;
-- AI assistants.
+AI systems can help people complete forms, locate services, summarize evidence, route cases, and support officials. They can also turn undocumented practice into hidden decision logic. A routing recommendation may effectively deny access; an extracted fact may become durable without review; a drafting tool may narrow discretion that the law requires an official to exercise.
 
-These are necessary, but they do not fully solve institutional interoperability.
+Useful AI governance therefore requires more than general principles. Systems need machine-readable boundaries between assistance and authority, between provisional inference and accepted evidence, and between a recommendation and an institutional act. ICSL is designed to express those boundaries within the process being administered.
 
-Public services also need a way to represent who may act, under what rule, using what evidence, creating what obligation, with what right of review.
+## Coordination Is Becoming Federated
 
-## The AI Governance Gap
+Public services increasingly cross agencies, levels of government, private providers, civil-society organizations, and international institutions. Requiring every participant to adopt one platform is usually impractical and can concentrate power in the wrong place.
 
-AI-enabled systems can help people and institutions navigate public services. But without explicit protocols, authority boundaries, evidence rules, and recourse requirements, AI can accidentally become a hidden source of institutional action.
+A protocol standard offers another approach. Institutions can publish the terms under which they act, issue receipts that other systems can interpret, and adapt shared protocols to local law without giving up operational control. This makes coordination possible through common semantics rather than central ownership.
 
-OpenCommit gives AI and civic agents boundaries they can respect.
-
-It lets systems distinguish between assisting, recommending, routing, validating, and deciding.
-
-## The Coordination Gap
-
-Agencies, governments, funders, NGOs, service providers, and communities increasingly need to coordinate across systems without surrendering autonomy to one central platform.
-
-OpenCommit provides a way to federate governed action. Each institution can retain authority over its protocols while making commitments understandable and verifiable by others.
-
+The case for ICSL rests on this convergence: public infrastructure is becoming interconnected, AI is acting on increasingly consequential processes, and institutions need to coordinate without erasing legal or organizational boundaries. A standard for governed action is timely because the systems it would govern are being built now.

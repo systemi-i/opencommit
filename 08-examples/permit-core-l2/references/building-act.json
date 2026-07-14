@@ -1,0 +1,9 @@
+{
+  "id": "ref-building-act",
+  "label": "Building Act of the Republic of Exampleland (fictional), consolidated version",
+  "source_type": "statute",
+  "version": "2025-01-01",
+  "date": "2025-01-01",
+  "locator": "https://laws.example/exampleland/building-act/2025-01-01",
+  "note": "Fictional statute created for the ICSL Core-L2 proof exemplar. The locator does not resolve. In any conflict between an ICSL encoding and its underlying source, the underlying source prevails; an encoding confers no independent legal effect."
+}

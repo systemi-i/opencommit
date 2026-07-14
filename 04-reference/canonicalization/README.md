@@ -1,24 +1,34 @@
-# Canonicalization Seed Rules
+# Canonicalization Profile
 
-These are P0 rules for deterministic JSON canonicalization in the seed harness.
-They are sufficient for fixture work but should become a normative byte-level section
-before publication.
+ICSL uses established canonicalization standards rather than defining a bespoke byte format. Canonical JSON is required wherever content identity or hashing depends on a stable representation.
 
-## Seed Rules
+## Normative Profile
 
-1. JSON object keys are sorted by Unicode code point order.
-2. Arrays preserve source order.
-3. Null values are retained.
-4. Numbers are emitted using JavaScript JSON serialization.
-5. Strings are emitted using JSON string escaping.
-6. Whitespace is omitted from the canonical byte stream.
-7. Hashes are SHA-256 over UTF-8 canonical JSON bytes.
-8. Package hash vectors hash source file bytes in the seed harness.
-9. `hashes.json` is not required to include a hash of itself.
+1. Canonical bytes are produced using RFC 8785, the JSON Canonicalization Scheme (JCS).
+2. Canonicalized documents satisfy I-JSON constraints under RFC 7493.
+3. Legally meaningful quantities, monetary amounts, identifiers, dates, deadlines, and rates are encoded as JSON strings rather than JSON numbers.
+4. Object member names in canonical ICSL artifacts are ASCII. Values may contain Unicode.
+5. Hash-bearing fields use tagged lowercase strings of the form `sha256:<64 hexadecimal characters>`.
+6. A ProtocolVersion is identified by the SHA-256 hash of its complete JCS canonical bytes. The object does not contain its own hash.
+7. Package hash vectors contain a source-byte hash for every declared file and a canonical-JSON hash for every JSON artifact. `hashes.json` is self-exempt.
 
-## Open Standards Questions
+The ASCII member-name rule removes a cross-language ordering hazard. RFC 8785 sorts member names by UTF-16 code units, while some common runtimes sort Unicode strings by code point. Restricting keys to ASCII makes those orderings identical without limiting Unicode values.
 
-- Whether final ICSL canonicalization adopts RFC 8785 directly or a named profile.
-- Whether numeric domains should be restricted to strings for legal quantities and dates.
-- Whether null retention remains universal or is profile-specific.
-- Whether package hash vectors continue to hash source bytes, canonical JSON, or both.
+## Verifier Requirements
+
+Implementations should use a conforming RFC 8785 library. A verifier that uses compact, key-sorted JSON serialization as a fallback must first establish both of the following conditions and fail closed otherwise:
+
+1. the document contains no non-string JSON numbers, excluding booleans; and
+2. every member name is ASCII.
+
+Under those constraints, the fallback used by the published Python checks is byte-identical for the supported input domain. It is not a general JCS implementation and must not be represented as one.
+
+## Receipt Hash Preimage
+
+`receipt_hash` is the SHA-256 digest of the RFC 8785 canonical bytes of the Receipt object with the `receipt_hash` member removed. `previous_hash` contains the prior Receipt's hash; the genesis Receipt uses `null`.
+
+ProtocolVersion hashes, Receipt hashes, content hashes, and package hashes cover different preimages and must not be substituted for one another. The [candidate specification](../../03-specification/icsl-v0.1-candidate-spec.md) and [package format](../../03-specification/package-format.md) define those boundaries normatively.
+
+## Outstanding Interoperability Work
+
+The profile is precise, but independent cross-language vectors are still required before final v0.1. Those vectors should include Unicode values, nested objects, control characters, empty structures, receipt preimages, ProtocolVersion identity, and package dual hashes.

@@ -5,10 +5,79 @@
   "type": "object",
   "properties": {
     "authority": { "$ref": "ICSLCommon.schema.json#/$defs/AuthorityGate" },
-    "evidence": { "type": "object", "additionalProperties": true },
-    "reasoning": { "type": "object", "additionalProperties": true },
-    "dependency": { "type": "object", "additionalProperties": true },
-    "version": { "type": "object", "additionalProperties": true },
+    "evidence": {
+      "type": "object",
+      "properties": {
+        "required": {
+          "type": "array",
+          "minItems": 1,
+          "items": { "type": "string" }
+        },
+        "attested_absence": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "commitment_point": { "type": "string" }
+            },
+            "required": ["commitment_point"],
+            "additionalProperties": false
+          }
+        },
+        "notes": { "type": "string" }
+      },
+      "required": ["required"],
+      "additionalProperties": false
+    },
+    "reasoning": {
+      "type": "object",
+      "properties": {
+        "rule": { "type": "string" },
+        "reference": { "type": "string" },
+        "mode": {
+          "type": "string",
+          "description": "Reasoning mode (enum added in the 2026-07 repair sprint — see 07-decisions/). Where the underlying law confers discretion, use guided_discretion or open_discretion; do not convert discretion into a deterministic rule.",
+          "enum": [
+            "deterministic_rule",
+            "calculation",
+            "guided_discretion",
+            "open_discretion",
+            "ai_assisted",
+            "external_judgment",
+            "mixed"
+          ]
+        },
+        "notes": { "type": "string" }
+      },
+      "anyOf": [
+        { "required": ["rule"] },
+        { "required": ["reference"] }
+      ],
+      "additionalProperties": false
+    },
+    "dependency": {
+      "type": "object",
+      "properties": {
+        "requires": {
+          "type": "array",
+          "items": { "$ref": "ICSLCommon.schema.json#/$defs/DependencyExpression" }
+        }
+      },
+      "required": ["requires"],
+      "additionalProperties": false
+    },
+    "version": {
+      "type": "object",
+      "properties": {
+        "protocol_version_id": { "type": "string" },
+        "references": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["protocol_version_id"],
+      "additionalProperties": false
+    },
     "recourse": { "$ref": "ICSLCommon.schema.json#/$defs/RecourseGate" }
   },
   "required": ["authority", "evidence", "reasoning", "dependency", "version", "recourse"],
