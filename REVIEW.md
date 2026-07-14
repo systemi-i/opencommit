@@ -1,24 +1,7 @@
 # Review Instructions
 
-The ICSL v0.1 candidate should be reviewed from several angles.
+The ICSL v0.1 candidate is open for standards, governance, implementation, domain, privacy, and AI-governance review.
 
-## Standards Review
+Reviewers should begin with the [Public Review Guide](05-public-review/README.md), then use the [Reviewer Quickstart](05-public-review/reviewer-quickstart.md) for the technical artifacts and runnable checks. Feedback is submitted through [GitHub issues](https://github.com/systemi-i/opencommit/issues).
 
-Assess whether terms, object boundaries, conformance classes, package rules, and normative requirements are clear enough to implement consistently.
-
-## Governance Review
-
-Assess whether authority, evidence, recourse, binding effects, autonomy, and institutional responsibility are represented accurately and safely.
-
-## Implementation Review
-
-Assess whether the schemas, rule catalog, package format, and conformance suite are sufficient for validator and registry implementations.
-
-## AI Governance Review
-
-Assess whether the model makes AI boundaries operational and prevents AI systems from silently becoming hidden authorities.
-
-## Domain Review
-
-Test the model against real domains such as permits, crisis response, health referrals, student support, climate finance, infrastructure, inspections, appeals, and benefits.
-
+The purpose of review is to identify ambiguity, unsafe assumptions, legal or cultural narrowness, implementation barriers, and unsupported claims. Agreement with the model is not a prerequisite for useful participation.

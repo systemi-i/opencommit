@@ -1,38 +1,52 @@
-# Conformance Suite
+# Conformance Testing
 
-The ICSL v0.1 candidate includes a seed conformance suite.
+The final ICSL v0.1 conformance suite has not yet been published. The release target is at least 25 public fixtures covering valid artifacts, invalid structures, semantic contradictions, canonicalization, package behavior, extensions, and adversarial cases. Until that suite and independent validator reports exist, the project makes no claim of complete conformance or production interoperability.
 
-The suite is designed to test whether validators, package producers, and related tools can detect valid and invalid protocol structures, commitment points, gates, receipts, package metadata, references, conformance declarations, runtime leakage, and ambiguity traps.
+Three narrower, reviewer-runnable checks are included today.
 
-## What The Suite Tests
+## Schema-Mutation Suite
 
-The current fixture set covers:
+The [mutation suite](mutations/) applies declared changes to known-valid ProtocolVersion, Receipt, and GovernedContext baselines. Its 26 expectations test selected schema protections, rule coverage, canonicalization guards, extension boundaries, version identity, and class-depth consistency.
 
-- Core structural validity;
-- missing gates;
-- binding and recourse semantics;
-- receipt hash-chain behavior;
-- runtime binding smuggling;
-- reference version requirements;
-- unsupported extensions;
-- governance addendum requirements;
-- package manifest and hash-vector rules;
-- conformance declaration validity;
-- AI authority boundaries;
-- temporal current-time requirements;
-- dependency resolution;
-- durable evidence requirements;
-- canonicalization edge cases.
+Run it from the repository root:
 
-## Intended Use
+```sh
+python3 04-reference/mutations/run_mutations.py
+```
 
-The conformance suite is intended for:
+A successful run means that each published expectation produced its declared result. It does not mean that catalog rules were fully executed or that an arbitrary package conforms.
 
-- implementers building validators;
-- reviewers stress-testing the candidate spec;
-- standards contributors identifying ambiguity;
-- public-sector technology teams evaluating implementability;
-- AI governance reviewers testing runtime boundaries.
+## Worked-Package Verifier
 
-Because ICSL v0.1 is a candidate, passing the suite should be described as candidate conformance testing, not final certification.
+The synthetic permit package includes a verifier for its schemas, manifest, hash vector, ProtocolVersion identity, receipt chain, outcomes, act relationships, and selected semantic rules.
 
+```sh
+python3 08-examples/permit-core-l2/verify.py
+```
+
+The verifier is tied to the worked package and should not be described as a complete reference implementation.
+
+## Package Attack Runner
+
+The package also includes five persisted attacks covering target substitution, version-hash corruption, manifest path traversal, and canonicalization guards.
+
+```sh
+python3 08-examples/permit-core-l2/attacks.py
+```
+
+The runner first verifies an unchanged control package and then confirms that each mutation fails for its intended reason.
+
+## Planned Fixture Families
+
+The public conformance suite is expected to include:
+
+- Core-L1 structural fixtures;
+- Core-L2 authority, outcome, binding, recourse, lifecycle, and receipt fixtures;
+- Core-L3 governance and provenance fixtures;
+- canonicalization and cross-language hash vectors;
+- package, manifest, reference, and rendering fixtures;
+- extension negotiation and fallback fixtures;
+- runtime-smuggling and semantic-ambiguity attacks;
+- implementation reports showing how independent validators interpret diagnostics.
+
+Passing a future suite will still require a qualified claim naming the tested subject, class, ICSL version, suite version, validator, and result.

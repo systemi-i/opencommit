@@ -1,0 +1,22 @@
+{
+  "kind": "PackageManifest",
+  "package_id": "org.example-city.building.construction-permit.pkg@2.0.0",
+  "icsl_version": "0.1-freeze",
+  "profile": "Core-L2",
+  "publisher": {
+    "name": "OpenCommit / ICSL documentation project (fictional exemplar, not the encoded institution)",
+    "relationship": "third_party_unofficial"
+  },
+  "files": [
+    { "path": "manifest.json", "role": "manifest" },
+    { "path": "protocol-version.json", "role": "protocol-version" },
+    { "path": "references/building-act.json", "role": "reference" },
+    { "path": "receipts/chain-01.json", "role": "receipt" },
+    { "path": "receipts/deemed-example.json", "role": "receipt" },
+    { "path": "conformance.json", "role": "conformance-declaration" },
+    { "path": "hashes.json", "role": "hash-vector" },
+    { "path": "README.md", "role": "rendering" },
+    { "path": "verify.py", "role": "extension" },
+    { "path": "attacks.py", "role": "extension" }
+  ]
+}

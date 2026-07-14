@@ -1,49 +1,44 @@
-# OpenCommit Documentation
+# ICSL
 
-OpenCommit is an open initiative developing ICSL, the Institutional Coordination and Service Language, as a candidate standard for interoperable public commitments and governed digital action.
+The Institutional Commitment Specification Language (ICSL) is an open specification language for institutional protocols: governed processes composed of commitment-bearing acts. It expresses the governed structure of those processes and specifies the actions through which they produce institutional effects, in a form software can interpret without obscuring authority, accountability, or recourse.
 
-This repository is prepared for external consultation and GitBook publication. It explains the motivation, conceptual model, v0.1 candidate specification, package format, conformance profile, implementation guidance, reference schemas, and public review process.
+Public systems already exchange identity data, payments, records, and workflow events. They are much less capable of exchanging the institutional meaning of an action. A downstream system may receive a permit decision, referral, eligibility result, or inspection record without being able to determine who was authorized to act, which rule governed the action, what evidence supported it, what effect followed, or how the action may be challenged.
 
-## The Core Idea
+ICSL addresses that gap by making the institutional protocol a first-class, versioned artifact.
 
-Public services are not just transactions. They are institutional commitments.
+## How ICSL Works
 
-OpenCommit makes public-service rules, protocols, decisions, obligations, referrals, approvals, denials, appeals, and safeguards explicit, auditable, portable, and interoperable.
+An ICSL **ProtocolVersion** is an immutable publication of a governed process. It identifies the responsible institution, the class of matters governed, and the CommitmentPoints at which reliance-worthy institutional action may occur.
 
-The goal is an open governance network: an internet of interoperable public services and institutional actions that allows societies to coordinate and execute at network speed without losing legitimacy, autonomy, agency, accountability, or trust.
+A **CommitmentPoint** defines one atomic institutional act, such as a decision, attestation, appeal disposition, remedy, override, protocol change, closure, or delegation. Its Authority, Evidence, Reasoning, Dependency, Version, and Recourse gates state the conditions under which the act may be accepted.
 
-## Current Status
+An accepted act is a **Commitment**. A **Receipt** records that Commitment and pins it to the exact ProtocolVersion, CommitmentPoint, governed context, authority, and outcome involved. Later acts can suspend, remedy, override, or supersede an earlier Commitment without rewriting its history.
 
-ICSL v0.1 is a candidate specification for review, testing, critique, and pilot implementation.
+This structure separates institutional rules from the software used to administer them. Workflow engines, case-management products, registries, rules systems, and AI assistants may support execution, but they do not silently redefine what the institution has authorized.
 
-It is not yet a final public standard. Implementations should describe themselves as testing or reviewing the ICSL v0.1 candidate unless and until a later public standard is formally released.
+## Why It Matters
 
-## What Is Included
+For an individual institution, ICSL can make consequential procedures easier to inspect, test, compare, and move between technology providers. It can preserve institutional knowledge, reveal missing governance requirements, and give AI-assisted systems explicit operational limits.
 
-- Overview materials for funders, public-sector leaders, and reviewers.
-- Core concept explainers for protocols, commitments, gates, receipts, conformance, and civic agents.
-- The ICSL v0.1 candidate specification.
-- Package format, conformance profile, and implementation guide.
-- Reference JSON schemas, rule catalog, and canonicalization notes.
-- Public review materials, claim guardrails, and open issues.
-- Lineage and rationale connecting ICSL to institutional grammar, governance theory, digital public infrastructure, and AI governance.
+Across institutions, common protocol semantics can make public actions easier to interpret and rely on without requiring a shared platform or uniform substantive policy. This could support interoperable public services and, over time, an open governance network in which institutions coordinate at greater speed and scale while retaining legal and operational autonomy.
 
-## Suggested Reading Path
+## Candidate Status
 
-1. Start with [What Is OpenCommit?](01-overview/what-is-opencommit.md).
-2. Read [Five Tangible Unlocks](01-overview/five-tangible-unlocks.md).
-3. Review [Protocols](02-core-concepts/protocols.md), [Commitments](02-core-concepts/commitments.md), and [Receipts](02-core-concepts/receipts.md).
-4. Move to the [ICSL v0.1 Candidate Spec](03-specification/icsl-v0.1-candidate-spec.md).
-5. Use the [Public Review Guide](05-public-review/README.md) to submit feedback.
+ICSL v0.1 is published for external consultation. Its conceptual model is frozen, and this repository contains the candidate specification, schemas, diagnostic catalog, implementation guidance, worked package, and reviewer-runnable verification tools.
 
-## Consultation Goals
+ICSL is not a final standard, and no production-interoperability claim is made. Remaining work includes a broader conformance fixture set, cross-language canonicalization vectors, independent validator implementations, and applied institutional pilots. See [Status and Roadmap](STATUS.md) and [What v0.1 Claims and Does Not Claim](05-public-review/v0.1-scope-contract.md).
 
-External review should help determine whether ICSL v0.1:
+## Read the Documentation
 
-- defines the right conceptual primitives for governed digital action;
-- can represent real public-service protocols across domains;
-- protects authority, evidence, recourse, autonomy, and accountability;
-- supports AI-enabled civic agents without turning them into hidden authorities;
-- provides implementable schemas, conformance classes, and package rules;
-- can become useful infrastructure for digital public systems, public administration, and multilateral coordination.
+- [What Is ICSL?](01-overview/what-is-icsl.md) provides a short orientation.
+- [Introducing ICSL](01-overview/concept-note.md) presents the problem, model, value, boundaries, and tests for success.
+- [Five Practical Applications](01-overview/five-tangible-unlocks.md) applies the model across domains.
+- [Core Concepts](02-core-concepts/README.md) explains protocols, CommitmentPoints, gates, receipts, conformance, and AI boundaries.
+- [ICSL v0.1 Candidate Specification](03-specification/icsl-v0.1-candidate-spec.md) contains the normative model.
+- [Protocol Assessment Guide](04-reference/protocol-assessment-guide.md) defines how to assess source fidelity, ICSL representability, and candidate conformance.
+- [Agent Protocol-Alignment Brief](04-reference/agent-protocol-alignment-brief.md) is a copy-ready operating document for protocol-review agents.
+- [Public Review Guide](05-public-review/README.md) explains how to review the candidate and submit feedback.
 
+ICSL is developed through OpenCommit, the initiative responsible for its open stewardship and consultation process. Feedback is welcome through [GitHub issues](https://github.com/systemi-i/opencommit/issues).
+
+Documentation is licensed under CC BY 4.0. Schemas, rules, and verification code are licensed under Apache-2.0. See [Stewardship](STEWARDSHIP.md) and the repository license files for details.

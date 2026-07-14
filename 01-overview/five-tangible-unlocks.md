@@ -1,270 +1,67 @@
-# OpenCommit: Five Tangible Unlocks
+# Five Practical Applications
 
-OpenCommit is easiest to understand through concrete examples.
+> These scenarios explain capabilities the ICSL v0.1 candidate is intended to support. They are not production deployments or claims of demonstrated impact.
 
-The core idea is simple: public services can be represented as open, versioned protocols, and the important actions inside those protocols can create auditable commitments.
+The examples below use different domains to show different parts of the model: auditability, protocol adaptation, portable commitments, rights-preserving coordination, and multi-party assurance.
 
-Protocols describe the governed process: roles, rules, evidence, authority, dependencies, versions, and recourse.
+## 1. Permitting: Decisions That Can Be Audited While the Case Is Live
 
-Commitments are the moments when institutional meaning is created: an approval, denial, obligation, referral, inspection result, payment duty, deadline, sanction, appeal window, or safeguard requirement.
+A permitting protocol can identify the points at which an application becomes complete, an inspection finding is accepted, a permit is granted or refused, an appeal changes the effect of a decision, or a permit is revoked. Each point states the authority, evidence, reasoning, dependencies, version, outcomes, and recourse that govern it.
 
-Receipts make those actions traceable: what happened, under which protocol version, with what authority, using what evidence, and with what recourse.
+The resulting receipts give applicants, supervisors, auditors, courts, and downstream registries a common record of what the authority says occurred. They can distinguish a workflow event from an institutional act and trace later suspension or revocation without rewriting the earlier decision.
 
-Together, these examples show how OpenCommit can help societies coordinate and execute at network speed without losing legitimacy, autonomy, accountability, or trust.
+This can make delays, inconsistent practice, missing authority, and unavailable recourse visible earlier. It can also allow an institution to change case-management vendors without leaving the governing logic trapped in proprietary configuration.
 
-## 1. Permitting and Licensing
+**Distinct capability:** live traceability from a consequential action to its protocol version, authority, outcome, and recourse.
 
-**Domain:** local, municipal, and regional administration  
-**Main unlock:** live auditability and full traceability
+## 2. Crisis Response: Shared Protocols That Can Be Adapted Locally
 
-A city issues construction permits, business licenses, food safety approvals, transport permits, environmental clearances, or market authorizations. Each process has steps, authorities, evidence requirements, inspections, deadlines, approvals, denials, conditions, and appeal rights.
+Emergency response requires national authorities, municipalities, humanitarian agencies, funders, payment providers, and community organizations to act quickly under changing conditions. Shared procedures are useful, but a single fixed workflow rarely survives differences in law, geography, evidence availability, or delivery capacity.
 
-Today, much of that institutional logic is buried inside workflow systems, case files, policy manuals, forms, staff judgment, and vendor-specific configuration.
+ICSL allows a base protocol to be versioned and adapted while preserving the relationship between versions. A local protocol can change eligibility evidence, responsible authorities, delivery commitments, or grievance routes without becoming impossible to compare with the common model. Receipts can record which institution accepted which obligation under which local version.
 
-OpenCommit represents the whole permitting process as a versioned protocol.
+The result is not centralized control. Each participant retains responsibility for its own protocol and actions, while common semantics support coordination and review.
 
-The protocol can define:
+**Distinct capability:** forkable protocols that preserve local authority and adaptation without losing provenance or comparability.
 
-- who has authority to receive, review, approve, deny, condition, suspend, or revoke a permit;
-- what evidence is required at each stage;
-- which inspections are required;
-- what dependencies must be satisfied before approval;
-- what deadlines apply;
-- what conditions can be attached;
-- what recourse is available after denial, delay, or sanction.
+## 3. Health Referrals: Commitments That Travel With Existing Data
 
-Commitment points occur when:
+FHIR already provides mature structures for exchanging clinical and administrative information, including referral workflows. A ServiceRequest or Task can show what was requested and how work is progressing. Local institutions must still determine whether the referral creates a duty, who may accept it, how urgency is governed, and what happens if care is delayed or refused.
 
-- an application is accepted as complete;
-- an inspection is required;
-- a permit is approved, denied, or conditionally approved;
-- a correction window is opened;
-- a deadline is triggered;
-- an appeal pathway becomes available.
+An ICSL profile can express those institutional semantics around the existing FHIR exchange. FHIR remains the health-data and workflow layer; ICSL states the authority, evidence, binding force, acceptance point, and recourse associated with the referral.
 
-Receipts make each step traceable back to the rule version, evidence, authority, and recourse pathway that governed it.
+This could let a receiving provider distinguish an advisory recommendation from an accepted transfer of responsibility. It could also give patients and auditors a clearer record of handoffs without creating a parallel clinical-data system.
 
-This enables live auditability. A supervisor, applicant, auditor, court, oversight body, or downstream system can see not only what happened, but why it was institutionally valid.
+**Distinct capability:** portable institutional commitments layered onto an established domain standard rather than a replacement for it.
 
-The unlock:
+## 4. Education and Social Support: Coordination Without Making the Person a Data Object
 
-- real-time traceability for public decisions;
-- clearer accountability for approvals and denials;
-- easier comparison of bottlenecks across offices;
-- lower corruption risk;
-- reduced vendor lock-in because governance logic is portable;
-- AI assistants that can help applicants navigate the process without inventing eligibility or authority.
+A student or family may interact with schools, transport services, disability-support teams, benefits offices, health providers, and child-protection bodies. Better coordination is valuable, but indiscriminate data sharing can weaken consent, obscure responsibility, and make adverse decisions harder to challenge.
 
-The simple story:
+Protocols can specify which institution may determine eligibility, what evidence may be accepted, what support obligation follows, which privacy constraints apply, and where a family can seek review. Receipts can communicate accepted obligations and status without requiring every participating institution to merge its systems or authority.
 
-> A permit is no longer just a record in a portal. It becomes a governed action with a verifiable chain of authority, evidence, conditions, and recourse.
+Civic agents could then help a family understand requirements, assemble evidence, or prepare a challenge while remaining outside the authority boundary. The protocol, not the agent, determines when an institutional act occurs.
 
-## 2. International Crisis Response
+**Distinct capability:** person-centered coordination that keeps authority, consent, responsibility, and recourse explicit.
 
-**Domain:** humanitarian aid, disaster response, and multilateral coordination  
-**Main unlock:** forkable emergency protocols
+## 5. Climate and Infrastructure Finance: Verifiable Conditions Across Many Parties
 
-A flood, earthquake, epidemic, conflict, or displacement crisis requires fast coordination between national governments, local authorities, UN agencies, NGOs, donors, logistics providers, health systems, payment providers, and community organizations.
+Climate, nature, energy, and infrastructure programs often connect public authorities, development banks, private implementers, technical verifiers, communities, and oversight bodies. Payments may depend on permits, safeguards, milestones, consultation, evidence of delivery, and grievance mechanisms. Today these conditions are frequently reconciled through reports and bespoke assurance processes.
 
-In a crisis, institutions need speed. But speed often comes at the cost of clarity: unclear eligibility, overlapping mandates, duplicated aid, weak recourse, opaque prioritization, and fragmented reporting.
+An ICSL protocol can identify the acts that approve a project, accept evidence, clear a safeguard, create a payment obligation, recognize a community commitment, or open a grievance route. Receipts can allow the parties to verify those acts without requiring a common project-management platform.
 
-OpenCommit can represent emergency response as a set of versioned protocols.
+This does not validate the truth of an environmental claim by itself. It makes the authority, evidence requirement, acceptance, and downstream consequence of the claim explicit enough to audit and contest.
 
-The protocol can define:
+**Distinct capability:** multi-party assurance built around governed commitments rather than opaque reporting chains.
 
-- who can activate the emergency process;
-- what eligibility rules apply;
-- what evidence counts under crisis conditions;
-- what prioritization rules are valid;
-- what supplies, payments, shelter, referral, or protection obligations can be created;
-- what safeguards apply;
-- what grievance or appeal pathways remain available;
-- how local adaptations must be documented.
+## What the Examples Establish
 
-Commitment points occur when:
+The examples do not depend on one sector-specific product. They apply the same architecture to different institutional problems:
 
-- an emergency protocol is activated;
-- a household or community is marked eligible;
-- a supply, shelter, cash, health, or protection obligation is created;
-- an implementing partner accepts responsibility;
-- a grievance window opens;
-- a localized fork of the protocol is approved.
+- permitting demonstrates traceability and status over time;
+- crisis response demonstrates adaptation and federation;
+- health demonstrates integration with mature domain standards;
+- education demonstrates agency and rights across institutional boundaries;
+- climate and infrastructure finance demonstrates assurance across public, private, and multilateral actors.
 
-OpenCommit makes emergency protocols forkable. A base protocol can be adapted for local law, geography, language, risk, delivery capacity, and institutional roles while preserving enough structure for comparison and interoperability.
-
-This means multiple actors can coordinate without all using the same software platform.
-
-The unlock:
-
-- faster crisis coordination across institutions;
-- local adaptation without losing comparability;
-- transparent eligibility and prioritization;
-- better donor and community accountability;
-- AI and civic agents that can route people through services without inventing rules;
-- emergency response that moves quickly while preserving legitimacy and safeguards.
-
-The simple story:
-
-> In a crisis, institutions can move at network speed while preserving legitimacy, safeguards, and accountability.
-
-## 3. Health Referrals and Continuity of Care
-
-**Domain:** health systems, public health, and social care  
-**Main unlock:** portable commitments across institutions
-
-A patient may move from a local clinic to a hospital, lab, specialist, pharmacy, social worker, public health program, or benefits office. These systems may exchange data, but the institutional meaning of an action is often unclear.
-
-Is the referral urgent? Approved? Funded? Pending? Expired? Required? Optional? Appealable? Who is responsible for follow-up? What happens if the appointment is missed?
-
-OpenCommit can represent referral and continuity-of-care pathways as protocols.
-
-The protocol can define:
-
-- who can issue a referral;
-- what evidence or diagnosis supports it;
-- what downstream institution is expected to do;
-- what urgency level applies;
-- what consent or privacy constraints apply;
-- what follow-up duty is created;
-- what escalation or recourse exists if care is delayed or denied.
-
-Commitment points occur when:
-
-- triage is completed;
-- a referral is authorized;
-- a lab test, appointment, treatment, or follow-up duty is created;
-- a receiving institution accepts or rejects responsibility;
-- escalation is triggered;
-- the patient is notified of rights, status, or next steps.
-
-Receipts allow another provider, agency, or authorized system to understand the commitment without guessing from a raw data field or free-text note.
-
-The unlock:
-
-- referrals that carry institutional meaning across systems;
-- clearer responsibility for follow-up;
-- better continuity of care;
-- patient-visible status, obligations, and recourse;
-- AI assistants that help coordinate care without becoming medical or institutional authority;
-- system-level auditing of failures, delays, and handoff breakdowns.
-
-The simple story:
-
-> A referral becomes more than a message. It becomes a portable institutional commitment that another provider can understand and act on.
-
-## 4. Education Rights and Student Support
-
-**Domain:** education, child services, and social protection  
-**Main unlock:** rights-preserving coordination around a person
-
-A student may need support across school meals, transport, disability accommodations, scholarships, tutoring, attendance interventions, child protection, family benefits, or health services. These services often span multiple institutions.
-
-The challenge is not only data sharing. It is preserving agency, rights, consent, recourse, and institutional responsibility while coordinating support around a person.
-
-OpenCommit can represent student support as a set of governed protocols.
-
-The protocol can define:
-
-- who can determine eligibility;
-- what evidence is required;
-- what consent or privacy limits apply;
-- what support obligations are created;
-- who is responsible for delivery;
-- what deadlines apply;
-- when escalation is required;
-- how families can challenge denial, delay, or failure to provide support.
-
-Commitment points occur when:
-
-- a student is found eligible for a support service;
-- an accommodation duty is created;
-- a transport, meal, scholarship, tutoring, or intervention obligation is assigned;
-- a deadline is triggered;
-- a family is notified;
-- a recourse pathway opens.
-
-The protocol allows multiple institutions to coordinate without collapsing all authority into one system or treating the student as a passive data object.
-
-The unlock:
-
-- rights-preserving coordination across services;
-- clearer obligations for schools, agencies, and providers;
-- family-visible pathways for status, support, and appeal;
-- better continuity when a student changes school or jurisdiction;
-- civic agents that help families navigate support without overriding consent, authority, or recourse;
-- public systems that coordinate around people while preserving agency.
-
-The simple story:
-
-> Public systems can coordinate around people while preserving agency, rights, and recourse.
-
-## 5. Carbon, Nature, and Infrastructure Finance
-
-**Domain:** climate, nature, energy, infrastructure, and blended finance  
-**Main unlock:** trusted multi-party commitments
-
-A reforestation project, carbon credit program, grid upgrade, climate adaptation project, watershed restoration, or infrastructure investment can involve many actors: funders, development banks, regulators, ministries, local governments, private implementers, verifiers, communities, and oversight bodies.
-
-The hard part is not only moving money. It is tracking governed commitments across institutions.
-
-Who approved the project? What safeguards apply? What evidence verifies delivery? What obligations were created? What community consent or benefit-sharing commitments exist? What grievance mechanisms are available? What conditions trigger payment?
-
-OpenCommit can represent climate, nature, and infrastructure programs as protocols.
-
-The protocol can define:
-
-- funding conditions;
-- permitting and regulatory gates;
-- safeguard obligations;
-- community consent requirements;
-- delivery milestones;
-- verification evidence;
-- payment release conditions;
-- benefit-sharing obligations;
-- grievance and dispute pathways.
-
-Commitment points occur when:
-
-- a project is approved;
-- safeguard clearance is granted;
-- a milestone is completed;
-- evidence is verified;
-- a payment obligation is triggered;
-- a community benefit duty is created;
-- a grievance window opens;
-- a compliance failure is recorded.
-
-Receipts allow commitments to be traced across public, private, and multilateral actors without requiring everyone to use the same system.
-
-The unlock:
-
-- transparent funding and delivery commitments;
-- better auditability of environmental and infrastructure claims;
-- stronger community recourse;
-- easier comparison across programs and jurisdictions;
-- reduced greenwashing and reporting opacity;
-- federated coordination across funders, regulators, implementers, and communities.
-
-The simple story:
-
-> Climate and infrastructure finance can move through transparent, verifiable commitments instead of opaque reporting chains.
-
-## What These Examples Show Together
-
-These examples are not five disconnected use cases. They show different dimensions of the same infrastructure.
-
-Permitting shows live auditability and traceability.
-
-Crisis response shows forkable protocols and rapid coordination.
-
-Health shows portable commitments across institutions.
-
-Education shows rights-preserving, person-centered coordination.
-
-Carbon, nature, and infrastructure finance shows trusted multi-party commitments across public, private, and multilateral actors.
-
-Together, they show the OpenCommit thesis:
-
-> Public services can become programmable as protocols, accountable through commitments, and interoperable through receipts.
-
-The endgame is an open governance network: an internet of interoperable public services and institutional actions that allows societies to coordinate and execute at network speed without losing legitimacy, autonomy, agency, accountability, or trust.
+Together they show the path from local utility to network value. Protocols make governed processes inspectable. CommitmentPoints identify the acts that matter. Gates constrain when those acts may be accepted. Receipts let their meaning travel. At sufficient adoption, those capabilities could support an open governance network without requiring a single platform or uniform substantive policy.

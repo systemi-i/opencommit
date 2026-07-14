@@ -1,6 +1,8 @@
 .DS_Store
 node_modules/
 .gitbook/
+_book/
 .cache/
 dist/
 build/
+review/

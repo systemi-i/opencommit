@@ -1,0 +1,176 @@
+[
+  {
+    "kind": "Receipt",
+    "receipt_id": "rcpt-ec-000123-001",
+    "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "commitment_point_id": "cp-01-intake",
+    "commitment_type": "ATTEST",
+    "governed_context_id": "gc-ec-2026-000123",
+    "outcome": "registered",
+    "authority": "Example City Building Authority, registry office",
+    "created_at": "2026-03-02T09:15:00Z",
+    "ai_assistance": {
+      "involved": true,
+      "role": "fact_extraction",
+      "human_review": "attested"
+    },
+    "content": {
+      "application_id": "APP-2026-000123",
+      "filing_date": "2026-03-02",
+      "parcel_id": "EC-04-0912",
+      "fee_payment_recorded": true,
+      "applicant_dossier": {
+        "detached": true,
+        "content_hash": "sha256:4389f7f571ac1f6c17f1f87910e0f14c143bad107020fad22be35b73f139d22c",
+        "hashing": "salted-sha256; salt held by the authority so erasure or rectification of personal data cannot break chain verification"
+      }
+    },
+    "previous_hash": null,
+    "content_hash": "sha256:8fe6990a932bf41012601ef3cec67dc698d0e84ff5c1d2730bbf7a939481de17",
+    "receipt_hash": "sha256:a5fa6828085ad38e81019e504141b7ae09b855e2d243bd6fda23a89020afef77"
+  },
+  {
+    "kind": "Receipt",
+    "receipt_id": "rcpt-ec-000123-002",
+    "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "commitment_point_id": "cp-03-completeness",
+    "commitment_type": "DECIDE",
+    "governed_context_id": "gc-ec-2026-000123",
+    "outcome": "complete",
+    "authority": "Case officer, Example City Building Authority (director delegation decree 2026/03)",
+    "created_at": "2026-03-06T14:00:00Z",
+    "ai_assistance": {
+      "involved": false,
+      "role": "none"
+    },
+    "content": {
+      "checklist": "Building Act s.39(2)",
+      "determination_date": "2026-03-06",
+      "deemed_approval_anchor": "this receipt anchors the cp-08 clock (P90D)"
+    },
+    "previous_hash": "sha256:a5fa6828085ad38e81019e504141b7ae09b855e2d243bd6fda23a89020afef77",
+    "content_hash": "sha256:835aa5b21c57f1cc16ee823678067e7fe6b7b43720346f46e3e577481dba67ab",
+    "receipt_hash": "sha256:0d35f36f42c6b7cc9e53eaef4f5f4e67708d172edd1d81577f632b7331b69d30"
+  },
+  {
+    "kind": "Receipt",
+    "receipt_id": "rcpt-ec-000123-003",
+    "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "commitment_point_id": "cp-06-technical-review",
+    "commitment_type": "ATTEST",
+    "governed_context_id": "gc-ec-2026-000123",
+    "outcome": "conforming",
+    "authority": "Chief municipal engineer, Example City Building Authority (technical review delegation decree 2026/07)",
+    "created_at": "2026-04-14T10:30:00Z",
+    "ai_assistance": {
+      "involved": true,
+      "role": "recommendation",
+      "human_review": "attested"
+    },
+    "content": {
+      "finding": "conforming",
+      "zoning_plan_version": "2025-06",
+      "objections_addressed": "1 registered objection addressed (the cp-05 receipt is elided from this abbreviated chain)",
+      "certification": "automated conformity screening reviewed and certified by the reviewing engineer and the chief municipal engineer"
+    },
+    "previous_hash": "sha256:0d35f36f42c6b7cc9e53eaef4f5f4e67708d172edd1d81577f632b7331b69d30",
+    "content_hash": "sha256:5502c91e8f197364325f68ee6c51ba34ebce0cdaedb56bb41a6e003169ec41d6",
+    "receipt_hash": "sha256:ca3dd6b8c0b1290084b4f4eb4ea8bdfd413e5c4845316cd5f907d280fc76e22d"
+  },
+  {
+    "kind": "Receipt",
+    "receipt_id": "rcpt-ec-000123-004",
+    "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "commitment_point_id": "cp-07-decision",
+    "commitment_type": "DECIDE",
+    "governed_context_id": "gc-ec-2026-000123",
+    "outcome": "approved",
+    "authority": "Deputy director, Example City Building Authority (decree 2026/02, structure below the 2000 m2 threshold)",
+    "created_at": "2026-04-28T16:05:00Z",
+    "effective_at": "2026-04-30T00:00:00Z",
+    "ai_assistance": {
+      "involved": true,
+      "role": "drafting",
+      "human_review": "attested"
+    },
+    "content": {
+      "decision_number": "BD-2026-0458",
+      "structure_class": "residential, below the 2000 m2 gross-floor-area threshold",
+      "conditions": "none",
+      "reasons_dossier": {
+        "detached": true,
+        "content_hash": "sha256:fa7a088220977d92b9496ddf5fdd4b5a04263476bc18cef3270e74a36f48174c",
+        "hashing": "salted-sha256; salt held by the authority so erasure or rectification of personal data cannot break chain verification"
+      }
+    },
+    "previous_hash": "sha256:ca3dd6b8c0b1290084b4f4eb4ea8bdfd413e5c4845316cd5f907d280fc76e22d",
+    "content_hash": "sha256:5f452b3cc1c1dcf01392e9664f6bbae44c1ecc45a98e348f6cd6a8a9edfdcd64",
+    "receipt_hash": "sha256:53c2373b463ad27b14f8c0590878c7df1a7136016f9d1e216b3ed949ecfc58c5"
+  },
+  {
+    "kind": "Receipt",
+    "receipt_id": "rcpt-ec-000123-005",
+    "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "commitment_point_id": "cp-09-appeal-admissibility",
+    "commitment_type": "DECIDE",
+    "governed_context_id": "gc-ec-2026-000123",
+    "outcome": "admissible_effect_suspended",
+    "authority": "Municipal Appeals Board, presiding member",
+    "created_at": "2026-05-12T11:20:00Z",
+    "acts_on": {
+      "target_receipt_id": "rcpt-ec-000123-004",
+      "effect": "suspend"
+    },
+    "ai_assistance": {
+      "involved": false,
+      "role": "none"
+    },
+    "content": {
+      "appeal_number": "AB-2026-017",
+      "standing_basis": "registered objector (the cp-05 receipt is elided from this abbreviated chain)",
+      "admissibility": "standing, timeliness, and form satisfied (Building Act s.47(1))",
+      "effect_note": "admission suspends decision BD-2026-0458 under Building Act s.47(2) until disposition (cp-10-appeal-disposition)"
+    },
+    "previous_hash": "sha256:53c2373b463ad27b14f8c0590878c7df1a7136016f9d1e216b3ed949ecfc58c5",
+    "content_hash": "sha256:11c988d839443ff967dda1de8951705b1c9f6dc80cf5bf63fb96671d31ce3cf0",
+    "receipt_hash": "sha256:4d7545cad27faa33706b1b0318aa4c19fc14f6429733035ffd8e2963fb1b4006"
+  },
+  {
+    "kind": "Receipt",
+    "receipt_id": "rcpt-ec-000123-006",
+    "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
+    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "commitment_point_id": "cp-10-appeal-disposition",
+    "commitment_type": "APPEAL",
+    "governed_context_id": "gc-ec-2026-000123",
+    "outcome": "appeal_dismissed_effect_revived",
+    "authority": "Municipal Appeals Board",
+    "created_at": "2026-06-16T15:40:00Z",
+    "acts_on": {
+      "target_receipt_id": "rcpt-ec-000123-004",
+      "effect": "revive"
+    },
+    "ai_assistance": {
+      "involved": false,
+      "role": "none"
+    },
+    "content": {
+      "appeal_number": "AB-2026-017",
+      "disposition": "dismissed on the merits; the appealed decision is revived (Building Act s.48); admission per receipt rcpt-ec-000123-005 (cp-09-appeal-admissibility, outcome admissible_effect_suspended)",
+      "further_recourse": "Administrative Court within P30D (Building Act s.48(4))",
+      "reasons_dossier": {
+        "detached": true,
+        "content_hash": "sha256:c7c9d38e6f86d1cb7b043d17802bab55a423365e26cc644462b129ac8e628c1b",
+        "hashing": "salted-sha256; salt held by the authority so erasure or rectification of personal data cannot break chain verification"
+      }
+    },
+    "previous_hash": "sha256:4d7545cad27faa33706b1b0318aa4c19fc14f6429733035ffd8e2963fb1b4006",
+    "content_hash": "sha256:dbe1170847309fad4d47e1733fd75899047d05747844932d1389cef9a4daf44b",
+    "receipt_hash": "sha256:773cedcad8d2061256a077c4a04350c7c4774b3c8e9efd2a8638fcc0b4c891d2"
+  }
+]

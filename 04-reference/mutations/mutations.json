@@ -1,0 +1,357 @@
+{
+  "suite_id": "urn:opencommit:mutation-suite:0.1",
+  "icsl_version": "0.1",
+  "description": "Persisted schema-mutation regression suite (added in the 2026-07 repair sprint — see 07-decisions/). Each case applies JSON-pointer operations to a deep copy of the baseline artifact and states the expected schema verdict. expected = schema_reject means JSON Schema validation alone MUST reject the mutant; expected = schema_accept_rule_covers means the schema accepts the mutant and the named catalog rule is the normative protection; expected = guard_trip means the runner's own JCS guard MUST reject the case's probe object (runner self-test, no schema involved).",
+  "baseline": "baseline.json",
+  "baseline_schema": "ProtocolVersion.schema.json",
+  "baseline_receipt": "baseline_receipt.json",
+  "baseline_receipt_schema": "Receipt.schema.json",
+  "baseline_governed_context": "baseline_governed_context.json",
+  "baseline_governed_context_schema": "GovernedContext.schema.json",
+  "cases": [
+    {
+      "id": "M01",
+      "description": "Empty gates object on a CommitmentPoint (all six gates deleted).",
+      "target": "protocol_version",
+      "ops": [
+        { "op": "replace", "path": "/commitment_points/0/gates", "value": {} }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "GateConfig requires all six gates (authority, evidence, reasoning, dependency, version, recourse)."
+    },
+    {
+      "id": "M02",
+      "description": "Junk binding_effect_basis lacking the required effect_type and adverse_outcome_possible.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "replace",
+          "path": "/commitment_points/0/binding_effect_basis",
+          "value": {
+            "classification": "binding",
+            "notes": "junk basis object with no effect_type and no adverse_outcome_possible"
+          }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "BindingEffectBasis requires effect_type and adverse_outcome_possible."
+    },
+    {
+      "id": "M03",
+      "description": "Authority gate reduced to task_owner only (no legal_authority_holder, no delegated_authority, no operation-of-law basis).",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "replace",
+          "path": "/commitment_points/0/gates/authority",
+          "value": { "task_owner": "permits-team" }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "AuthorityGate anyOf requires legal_authority_holder, delegated_authority, or operation_of_law with legal_source."
+    },
+    {
+      "id": "M04",
+      "description": "Recourse gate missing recourse_state.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "replace",
+          "path": "/commitment_points/0/gates/recourse",
+          "value": { "channel": "administrative_review" }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "RecourseGate requires recourse_state."
+    },
+    {
+      "id": "M05",
+      "description": "Adverse-flag inconsistency: adverse_outcome_possible flipped to false while an adverse outcome (refused) remains in allowed_outcomes.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "replace",
+          "path": "/commitment_points/0/binding_effect_basis/adverse_outcome_possible",
+          "value": false
+        }
+      ],
+      "expected": "schema_accept_rule_covers",
+      "covering_rule": "ADVERSE_FLAG_OUTCOME_CONSISTENCY",
+      "expected_reason": "Cross-field consistency is not expressible as a local schema constraint; the catalog rule is the normative protection."
+    },
+    {
+      "id": "M06",
+      "description": "Deployment/orchestration keys smuggled into the evidence gate.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "add",
+          "path": "/commitment_points/0/gates/evidence/deployment",
+          "value": { "pipeline": "prod-rollout", "feature_flag": "permits_v2" }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "Evidence gate is closed (additionalProperties: false); ICSL is not a workflow/orchestration engine (spec section 2 non-goal)."
+    },
+    {
+      "id": "M07",
+      "description": "governed_context deleted from the ProtocolVersion.",
+      "target": "protocol_version",
+      "ops": [
+        { "op": "remove", "path": "/governed_context" }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "ProtocolVersion requires governed_context."
+    },
+    {
+      "id": "M08",
+      "description": "A seventh gate (notification) invented on the gate configuration.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "add",
+          "path": "/commitment_points/0/gates/notification",
+          "value": { "required_channels": ["email"] }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "GateConfig is closed (additionalProperties: false); the gate set is exactly six."
+    },
+    {
+      "id": "M09",
+      "description": "Prose dependency: a free-text string replaces a structured DependencyExpression.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "replace",
+          "path": "/commitment_points/1/gates/dependency/requires/0",
+          "value": "after the permit decision becomes final"
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "DependencyExpression admits only the closed structured forms; prose strings are rejected."
+    },
+    {
+      "id": "M10",
+      "description": "Bare-string outcomes replace the structured Outcome objects.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "replace",
+          "path": "/commitment_points/0/allowed_outcomes",
+          "value": ["granted", "refused"]
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "allowed_outcomes items must be Outcome objects with token and effect_class."
+    },
+    {
+      "id": "M11",
+      "description": "Invalid binding_force value outside the closed vocabulary.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "replace",
+          "path": "/commitment_points/0/binding_force",
+          "value": "mandatory"
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "BindingForce is a closed enum / mixed-object oneOf; 'mandatory' matches neither branch."
+    },
+    {
+      "id": "M12",
+      "description": "Mixed binding_force with only one component.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "replace",
+          "path": "/commitment_points/0/binding_force",
+          "value": { "type": "mixed", "components": ["procedural_binding"] }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "Mixed binding_force requires at least two distinct components (minItems: 2)."
+    },
+    {
+      "id": "M13",
+      "description": "commitment_type stripped from every CommitmentPoint (the original regression that dropped the IGSL v1/v1.1 field).",
+      "target": "protocol_version",
+      "ops": [
+        { "op": "remove", "path": "/commitment_points/0/commitment_type" },
+        { "op": "remove", "path": "/commitment_points/1/commitment_type" }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "commitment_type is required on every CommitmentPoint (ADR-008 restoration); validation must fail per CommitmentPoint.",
+      "related_rules": ["CP_COMMITMENT_TYPE_REQUIRED"]
+    },
+    {
+      "id": "M14",
+      "description": "GENERIC used as a commitment_type (Elinor authoring placeholder leaking into a canonical artifact).",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "replace",
+          "path": "/commitment_points/0/commitment_type",
+          "value": "GENERIC"
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "GENERIC is deliberately absent from the CoreCommitmentType enum and is not EXTENSION.",
+      "related_rules": ["CP_GENERIC_TYPE_FORBIDDEN"]
+    },
+    {
+      "id": "M15",
+      "description": "EXTENSION commitment_type without a commitment_type_extension declaration (conformance_class raised to Extended-L2 so the missing declaration, not class coupling, is what rejects).",
+      "target": "protocol_version",
+      "ops": [
+        { "op": "replace", "path": "/conformance_class", "value": "Extended-L2" },
+        {
+          "op": "replace",
+          "path": "/commitment_points/0/commitment_type",
+          "value": "EXTENSION"
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "commitment_type = EXTENSION conditionally requires commitment_type_extension.",
+      "related_rules": ["CP_EXTENSION_TYPE_DECLARATION_REQUIRED"]
+    },
+    {
+      "id": "M16",
+      "description": "EXTENSION declaration without fallback_semantics (conformance_class raised to Extended-L2 so the missing fallback, not class coupling, is what rejects).",
+      "target": "protocol_version",
+      "ops": [
+        { "op": "replace", "path": "/conformance_class", "value": "Extended-L2" },
+        { "op": "replace", "path": "/commitment_points/0/commitment_type", "value": "EXTENSION" },
+        {
+          "op": "add",
+          "path": "/commitment_points/0/commitment_type_extension",
+          "value": {
+            "id": "urn:opencommit:experimental:FACILITATE",
+            "definition": "Facilitates coordination between parties without determining rights or obligations.",
+            "rationale": "Corpus evidence: recurring FACILITATE acts across domains that no core type honestly classifies."
+          }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "CommitmentTypeExtension requires fallback_semantics (a core type, or the explicit string 'none'); silent undefined consumption is prohibited."
+    },
+    {
+      "id": "M17",
+      "description": "Fully declared EXTENSION-typed CommitmentPoint inside a ProtocolVersion declaring conformance_class Core-L2.",
+      "target": "protocol_version",
+      "ops": [
+        { "op": "replace", "path": "/commitment_points/0/commitment_type", "value": "EXTENSION" },
+        {
+          "op": "add",
+          "path": "/commitment_points/0/commitment_type_extension",
+          "value": {
+            "id": "urn:opencommit:experimental:FACILITATE",
+            "definition": "Facilitates coordination between parties without determining rights or obligations.",
+            "fallback_semantics": "none",
+            "rationale": "Corpus evidence: recurring FACILITATE acts across domains that no core type honestly classifies."
+          }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "Class coupling: EXTENSION-typed CommitmentPoints are permitted only in artifacts declaring Extended-L2; the baseline declares Core-L2 and the ProtocolVersion-level conditional must reject.",
+      "related_rules": ["CP_EXTENSION_REQUIRES_EXTENDED_CLASS"]
+    },
+    {
+      "id": "M18",
+      "description": "Core-typed CommitmentPoint (DECIDE) carrying a commitment_type_extension declaration.",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "add",
+          "path": "/commitment_points/0/commitment_type_extension",
+          "value": {
+            "id": "urn:opencommit:experimental:FACILITATE",
+            "definition": "Facilitates coordination between parties without determining rights or obligations.",
+            "fallback_semantics": "none",
+            "rationale": "Illegally attached to a core-typed CommitmentPoint."
+          }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "Bidirectional sealing: a core commitment_type prohibits commitment_type_extension; extension detail may not shadow a core classification."
+    },
+    {
+      "id": "M19",
+      "description": "Receipt missing protocol_version_hash (version-identity binding stripped).",
+      "target": "receipt",
+      "ops": [
+        { "op": "remove", "path": "/protocol_version_hash" }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "protocol_version_hash is REQUIRED in the Receipt content core: every receipt binds to the canonical RFC 8785 hash of the ProtocolVersion its protocol_version_id names.",
+      "related_rules": ["RECEIPT_PROTOCOL_VERSION_HASH_MATCH"]
+    },
+    {
+      "id": "M20",
+      "description": "Fully declared EXTENSION-typed CommitmentPoint with conformance_class OMITTED entirely (the second audit's exact probe: omission must not smuggle EXTENSION past the class coupling).",
+      "target": "protocol_version",
+      "ops": [
+        { "op": "remove", "path": "/conformance_class" },
+        { "op": "replace", "path": "/commitment_points/0/commitment_type", "value": "EXTENSION" },
+        {
+          "op": "add",
+          "path": "/commitment_points/0/commitment_type_extension",
+          "value": {
+            "id": "urn:opencommit:experimental:FACILITATE",
+            "definition": "Facilitates coordination between parties without determining rights or obligations.",
+            "fallback_semantics": "none",
+            "rationale": "Probe: omitting conformance_class must not license EXTENSION."
+          }
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "Reverse class coupling: if any CommitmentPoint has commitment_type EXTENSION, conformance_class is REQUIRED and must be Extended-L2; omitting the declaration no longer bypasses the coupling.",
+      "related_rules": ["CP_EXTENSION_REQUIRES_EXTENDED_CLASS"]
+    },
+    {
+      "id": "M21",
+      "description": "Runner self-test: the JCS guard must reject an object whose member name contains a non-ASCII character (RFC 8785 sorts member names by UTF-16 code units, Python by code points; ASCII member names are the canonical-profile precondition).",
+      "target": "jcs_guard",
+      "probe": {
+        "kind": "Probe",
+        "café": "member name contains U+00E9; the guard must trip before any bytes are hashed",
+        "nested": { "𝔘nicode": "non-BMP member name; UTF-16 vs code-point ordering diverges here" }
+      },
+      "expected": "guard_trip",
+      "expected_reason": "The guarded json.dumps approximation is JCS-equivalent only under the no-number AND ASCII-member-name preconditions; the runner must fail closed when either is violated."
+    },
+    {
+      "id": "M22",
+      "description": "encoding_depth L1 declared alongside conformance_class Core-L3 (class-depth inconsistency).",
+      "target": "protocol_version",
+      "ops": [
+        { "op": "replace", "path": "/encoding_depth", "value": "L1" },
+        { "op": "replace", "path": "/conformance_class", "value": "Core-L3" }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "Class-depth coupling: a declared conformance class -Ln requires encoding_depth Ln or greater (Core-L3 requires L3); the ProtocolVersion schema conditionals enforce this.",
+      "related_rules": ["ENCODING_DEPTH_CLASS_CONSISTENT"]
+    },
+    {
+      "id": "M23",
+      "description": "Embedded governed_context descriptor carrying runtime members (protocol_version_hash and current_time).",
+      "target": "protocol_version",
+      "ops": [
+        {
+          "op": "add",
+          "path": "/governed_context/protocol_version_hash",
+          "value": "sha256:3dea97d9cbad7a8db7d712e44e5514fc69d76771d3a5ded3d658f12d228627ee"
+        },
+        {
+          "op": "add",
+          "path": "/governed_context/current_time",
+          "value": "2026-07-13T12:00:00Z"
+        }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "ProtocolVersion.governed_context is a GovernedContextDescriptor (description, subject_class, scope, jurisdiction_note; additionalProperties false): it must not carry runtime members, so no artifact ever embeds a hash of the object containing it and no placeholder-hash convention exists.",
+      "related_rules": ["GOVERNED_CONTEXT_PROTOCOL_VERSION_HASH_MATCH"]
+    }
+  ]
+}

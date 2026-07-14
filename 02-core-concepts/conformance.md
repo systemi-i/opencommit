@@ -1,23 +1,21 @@
 # Conformance
 
-Conformance defines what it means for an implementation to support ICSL.
+Conformance states which ICSL requirements apply to a particular artifact or implementation and what evidence supports the claim.
 
-Because ICSL is meant to support many types of systems, conformance is not one-size-fits-all. Validators, registries, package producers, runtime systems, renderers, and AI-assisted tools may have different responsibilities.
+ICSL distinguishes structural, semantic, extended, and corpus-oriented responsibilities. A package producer, validator, runtime, registry, renderer, and AI-assisted tool may interact with the same protocol while performing different functions. A useful conformance claim must therefore identify its subject rather than describe an entire product as simply “ICSL compliant.”
 
-## Why Conformance Matters
+## Candidate Classes
 
-Conformance prevents vague claims like "ICSL compatible" from hiding important differences.
+`Core-L1` covers structural interoperability: required objects, six-gate presence, package structure, and canonical/runtime separation. `Core-L2` adds semantic checks for authority, outcomes, binding force, recourse, lifecycle, identity, and receipts. `Core-L3` adds high-fidelity governance and provenance requirements.
 
-It allows reviewers and implementers to ask:
+`Extended-L2` adds explicit extension negotiation to Core-L2. `Corpus-L3` adds source and encoding provenance needed for curated institutional corpora.
 
-- Which part of the standard does this system implement?
-- Which conformance class is claimed?
-- Which fixtures pass?
-- Which diagnostics are produced?
-- Does runtime behavior respect canonical protocol truth?
-- Does the system preserve authority, evidence, versioning, and recourse?
+Encoding depth and conformance class are related but distinct. Depth describes how much institutional detail an encoding contains; class describes the requirements against which the claim is evaluated.
 
-## Candidate Status
+## Claim Discipline
 
-ICSL v0.1 is a candidate specification. Conformance claims should be framed as candidate-stage testing unless a later public standard defines a stable certification process.
+A conformance statement must name the claim subject, ICSL version, conformance class, test-suite version, and result. It should also identify the validator or report that produced the result.
 
+Passing the currently published checks demonstrates only what those checks cover. The schema-mutation suite tests selected structural protections; the worked-package verifier tests one synthetic package; the attack runner tests five specified adversarial changes. None constitutes final certification or proof of production interoperability.
+
+The normative model is in the [Conformance Profile](../03-specification/conformance-profile.md).

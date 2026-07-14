@@ -1,34 +1,25 @@
-# Commitments
+# Commitments and CommitmentPoints
 
-Commitments are the points where a protocol creates real institutional meaning.
+ICSL centers the institutional act rather than the workflow task. The distinction is expressed through two related terms.
 
-A commitment can be an approval, denial, obligation, referral, inspection result, payment duty, deadline, sanction, appeal window, safeguard requirement, or other action that changes what an institution, person, or system may rely on.
+A **CommitmentPoint** is part of a ProtocolVersion. It defines a class of act that may create a reliance-worthy institutional effect when its conditions are satisfied. A **Commitment** is the accepted act produced at that CommitmentPoint in a particular governed context.
 
-## Commitment Points
+For example, a protocol may contain a CommitmentPoint for deciding a permit application. The approval or refusal of one applicant's case is the Commitment. The receipt records that particular act.
 
-In the ICSL specification, a commitment point is the structured object that describes one of these institutionally meaningful moments.
+## Inclusion Rule
 
-It records the gates, authority, evidence, binding effect, recourse status, dependencies, and version requirements that determine whether the action is valid.
+A stage belongs in ICSL when it creates, denies, certifies, modifies, delegates, remedies, appeals, supersedes, or closes an effect on which a person, institution, or downstream process may rely. A task assignment, draft, queue transition, notification, or recommendation does not qualify merely because it appears in a workflow.
 
-## Why Commitments Matter
+Practical effect matters more than labels. A step called “advisory” may still be a CommitmentPoint if it effectively forecloses access to a service or binds a later decision. Conversely, an important operational task may remain outside ICSL if it creates no institutional effect of its own.
 
-Public systems need to exchange more than data. They need to exchange the meaning of governed action.
+## Act Types and Effects
 
-For example:
+Each CommitmentPoint has one primary act type: `DECIDE`, `ATTEST`, `APPEAL`, `REMEDY`, `OVERRIDE`, `EVOLVE`, `CLOSE`, or `DELEGATE`. The type supports comparison and consistency checking; it does not create authority or binding force by itself.
 
-- an approved benefit is a commitment to provide support;
-- a denied permit is a decision with reasons and recourse;
-- a referral is an obligation or request that another institution must understand;
-- an appeal window creates a right to challenge;
-- a safeguard clearance creates conditions that downstream actors must respect.
+The CommitmentPoint separately declares its possible outcomes, binding force, authority, evidence, reasoning, dependencies, governing version, and recourse. This prevents a broad label such as “decision” or “certificate” from standing in for the institutional conditions that actually matter.
 
-OpenCommit makes those commitments portable and auditable.
+## Status Over Time
 
-## Commitments and Protocols
+Acceptance is not always the end of the act's history. A later Commitment may suspend, revive, vary, revoke, quash, supersede, or expire an earlier one. ICSL records those changes through new receipts that act on prior receipts. Current status is derived from the chain; history is not rewritten.
 
-Protocols define the process.
-
-Commitments are the accountable actions produced by that process.
-
-Receipts make those actions verifiable.
-
+This makes the model suitable for appeals, revocations, superseding decisions, and other processes in which the continuing effect of an earlier act matters as much as the original outcome.

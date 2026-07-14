@@ -1,46 +1,45 @@
-# Open Issues Before Public v0.1
+# Open Issues
 
-Date: 2026-07-07.
+The conceptual model is frozen for consultation, but several matters remain unresolved before a final v0.1 release. This page lists current questions only; resolved design decisions are recorded in the [decision log](../07-decisions/README.md).
 
-These issues do not reopen the frozen conceptual model. They must be resolved before a
-public v0.1 release claim.
+## Governance and Authority
 
-## Normative Model
+- Define the profile conditions under which governance-addendum fields become required and close their vocabularies where interoperability depends on them.
+- Represent joint and collegial authority, including boards, panels, quorum, and co-signature requirements.
+- Test the commitment taxonomy and Authority gate across legal traditions and multilateral institutions.
 
-- Decide exact field placement for `binding_force`.
-- Decide whether governance addendum fields are Core, profile-specific, or outcome-triggered.
-- Define exact enum values for governance addendum fields.
-- Define the minimum required fields inside `binding_effect_basis`.
+## Sources and Provenance
 
-## Canonicalization
+- Define reference-resolution behavior, including unavailable or superseded public sources.
+- Complete the minimum provenance requirements for `Corpus-L3`.
+- Specify how publication of a source encoding is itself authorized, reviewed, and versioned.
+- Establish a public corpus methodology covering sampling, source rights, encoder instructions, quality review, and inter-encoder reliability.
 
-- Decide whether to adopt RFC 8785 or publish a named ICSL canonical JSON profile.
-- Decide number handling for legal quantities, dates, and monetary values.
-- Decide whether final package hashes require source-byte hash, canonical hash, or both.
+## Privacy and Retention
 
-## Package Format
+- Define profiles for detachable personal-data payloads, including keyed or salted hashes, erasure workflows, and verification after erasure.
+- Determine when retention information is required and whether a null or unspecified retention profile is ever conformant.
 
-- Finalize `bindings/` placement and hash behavior.
-- Decide whether packages require `dependencies.json`.
-- Decide how package profiles declare unsupported extensions.
+## Conformance and Interoperability
 
-## References
-
-- Define reference resolution semantics.
-- Define minimum provenance for Corpus-L3.
-- Define how unavailable public sources are marked.
-
-## Conformance
-
-- Expand seed fixtures from 8 to at least 25 publishable fixtures.
-- Create negative package fixtures.
-- Create receipt hash-chain fixtures with canonical content hashes.
-- Create rendering fidelity fixtures.
-- Create extension feature-negotiation fixtures.
+- Publish at least 25 positive, negative, adversarial, and package-level fixtures.
+- Add canonicalization vectors exercised across multiple languages and implementations.
+- Add receipt-chain, extension-negotiation, rendering-fidelity, and runtime-leakage fixtures.
+- Produce independent validator implementations and implementation reports.
+- Define the process by which candidate testing may eventually support certification or formal conformance claims.
 
 ## Implementation
 
-- Harden schemas beyond skeleton state.
-- Add schema validation to the CLI harness or formalize schema validation as a separate tool.
-- Produce implementation reports from at least two independent validator paths.
-- Add deterministic test vectors for canonicalization.
+- Separate the worked-package verifier from a reusable validator architecture.
+- Define registry behavior for version discovery, source resolution, and immutable publication.
+- Test integration profiles with established domain standards, beginning with carefully bounded examples.
+- Measure the cost of creating and maintaining source-grounded encodings in real institutions.
+
+## Deferred Beyond v0.1
+
+- Migration semantics between candidate, release-candidate, and final identifiers and hashes.
+- Receipt signatures, key management, revocation, and possible Verifiable Credentials profiling.
+- Atomic bundles for legally indivisible instruments that perform more than one institutional act.
+- Cross-protocol transactions and distributed rollback or compensation semantics.
+
+An item may be deferred only if v0.1 remains internally coherent and the deferral is explicit in the specification or decision record.

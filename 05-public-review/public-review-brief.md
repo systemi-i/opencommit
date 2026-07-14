@@ -1,87 +1,33 @@
-# ICSL Public Review Brief
+# ICSL v0.1 Review Brief
 
-Status: candidate draft.  
-Date: 2026-07-07.
+ICSL is a candidate standard for describing governed public processes and recording the institutional acts produced under them. It is intended for public services, regulated processes, multi-institution programs, registries, and AI-assisted administration.
 
-## What Is ICSL?
+The model centers the CommitmentPoint: a defined point at which an institution may accept a reliance-worthy act. Every CommitmentPoint declares Authority, Evidence, Reasoning, Dependency, Version, and Recourse gates. Accepted acts produce receipts tied to the exact ProtocolVersion and to later changes in status.
 
-ICSL is a candidate standard for representing institutional protocols as explicit,
-versioned, auditable, interoperable commitment systems.
+## What Review Should Establish
 
-It is designed for public services, governance systems, regulated institutional processes,
-service delivery networks, registries, and AI-assisted administrative systems.
+The consultation should determine whether the candidate:
 
-## Core Idea
+- captures consequential institutional action without absorbing ordinary workflow;
+- represents discretion and legal variation without sacrificing machine interpretability;
+- makes adverse outcomes and recourse visible;
+- prevents deployment systems and AI tools from silently redefining authority or evidence;
+- gives independent implementers enough precision to reproduce validation and hashing behavior;
+- can complement established domain standards instead of duplicating them;
+- supports federation without imposing one platform, policy, or legal tradition.
 
-ICSL does not start with tasks or forms. It starts with institutional commitments.
+Particular attention is requested on the commitment taxonomy. Reviewers working in civil-law, common-law, customary, Indigenous, federal, and multilateral settings should identify acts that do not fit the eight core types or that produce materially different classifications under the published boundary tests.
 
-The atomic unit is the CommitmentPoint: the moment an institution accepts, denies, certifies,
-modifies, delegates, remedies, supersedes, or closes a reliance-worthy institutional effect.
+## Current Evidence and Limits
 
-Every CommitmentPoint has six gates:
+The conceptual model is frozen for consultation. Twelve reference schemas, 72 diagnostics, a 26-expectation mutation suite, a worked Core-L2 package, and five package-level attacks are available for inspection.
 
-- Authority
-- Evidence
-- Reasoning
-- Dependency
-- Version
-- Recourse
+ICSL is not a final standard. The fixture set is incomplete, production interoperability has not been demonstrated, the worked package is synthetic, and v0.1 receipts are unsigned. An ICSL encoding may also misrepresent its source; the authoritative legal or institutional source always prevails.
 
-## Why It Matters
+Reviewers should read [What v0.1 Claims and Does Not Claim](v0.1-scope-contract.md) before evaluating broader project claims.
 
-ICSL can help create an interoperable public-service layer where institutions can exchange
-not only data, but governed actions with explicit authority, evidence, versioning, recourse,
-and receipts.
+## Who Should Review
 
-This could improve:
+The project welcomes review from public-service operators, legal and institutional scholars, standards engineers, administrative-law practitioners, DPI teams, civic-technology builders, AI governance researchers, civil-society organizations, and implementers of validators, registries, workflows, and domain standards.
 
-- public-service delivery
-- cross-agency coordination
-- governance transparency
-- interoperability
-- auditability
-- comparability
-- AI safety in institutional contexts
-- accountability at scale
-
-## Current Status
-
-The conceptual model is frozen for v0.1 candidate work.
-
-The review package includes:
-
-- conceptual freeze decision
-- hardening patch
-- standards-readiness review
-- seed schemas
-- seed conformance harness
-- initial fixtures
-- package example
-
-ICSL is not yet a final public standard.
-
-## Review Questions
-
-Reviewers should ask:
-
-- Is CommitmentPoint the right primitive?
-- Are the six gates sufficient and necessary?
-- Does the recourse model handle adverse outcomes clearly?
-- Does the model protect canonical governance semantics from runtime/vendor bindings?
-- Are conformance claims specific enough?
-- Can independent implementers produce the same validation results?
-- Does this support public-service interoperability without erasing local legal variation?
-
-## Desired Feedback
-
-The project needs feedback from:
-
-- public-service operators
-- standards experts
-- legal-informatics researchers
-- institutional economists
-- digital public infrastructure teams
-- civic technology builders
-- administrative-law experts
-- AI governance researchers
-- validator and registry implementers
+Feedback can be submitted through [GitHub issues](https://github.com/systemi-i/opencommit/issues).

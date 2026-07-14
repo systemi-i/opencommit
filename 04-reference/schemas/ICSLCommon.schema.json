@@ -7,6 +7,336 @@
       "type": "string",
       "enum": ["Core-L1", "Core-L2", "Core-L3", "Extended-L2", "Corpus-L3"]
     },
+    "GovernedContextDescriptor": {
+      "type": "object",
+      "description": "Descriptor of the class of matters a ProtocolVersion governs (added in the 2026-07 repair sprint — see 07-decisions/). This is NOT the runtime GovernedContext: it is purely descriptive and MUST NOT carry runtime members — protocol_version_id, protocol_version_hash, governed_context_id, and current_time are all excluded by additionalProperties: false. Because the embedded descriptor carries no hash, a ProtocolVersion never contains a hash of itself and no zero-hash placeholder convention exists anywhere. The runtime GovernedContext is a separate top-level artifact (GovernedContext.schema.json) that pins protocol_version_id AND protocol_version_hash.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Human-readable statement of what class of matters the protocol governs."
+        },
+        "subject_class": {
+          "type": "string",
+          "description": "Optional class of subjects the protocol applies to (e.g. permit applicants)."
+        },
+        "scope": {
+          "type": "string",
+          "description": "Optional scope delimitation (subject matter, territory, programme)."
+        },
+        "jurisdiction_note": {
+          "type": "string",
+          "description": "Optional note on the jurisdiction(s) within which the protocol operates."
+        }
+      },
+      "required": ["description"],
+      "additionalProperties": false
+    },
+    "CoreCommitmentType": {
+      "type": "string",
+      "description": "The eight core commitment act types (restored from IGSL v1/v1.1 in the 2026-07 repair sprint — see 07-decisions/ADR-008). Classificatory only: the type creates no institutional effect by itself and never substitutes for the structural fields it is checked against. GENERIC is deliberately absent — it is an Elinor authoring placeholder and is forbidden in canonical artifacts (rule CP_GENERIC_TYPE_FORBIDDEN).",
+      "enum": [
+        "DECIDE",
+        "ATTEST",
+        "APPEAL",
+        "REMEDY",
+        "OVERRIDE",
+        "EVOLVE",
+        "CLOSE",
+        "DELEGATE"
+      ]
+    },
+    "CommitmentTypeExtension": {
+      "type": "object",
+      "description": "Declaration object for an EXTENSION commitment type (added in the 2026-07 repair sprint — see 07-decisions/ADR-008). Valid only at Extended-L2. fallback_semantics is required: either a core type consumers may treat the act as, or the explicit string \"none\" (consumers treat the CommitmentPoint as opaque and class-aware unsupported-extension behavior applies).",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Namespaced extension type identifier, e.g. urn:opencommit:experimental:FACILITATE.",
+          "pattern": "^urn:"
+        },
+        "definition": { "type": "string" },
+        "fallback_semantics": {
+          "oneOf": [
+            { "$ref": "#/$defs/CoreCommitmentType" },
+            { "const": "none" }
+          ]
+        },
+        "rationale": { "type": "string" }
+      },
+      "required": ["id", "definition", "fallback_semantics", "rationale"],
+      "additionalProperties": false
+    },
+    "TaggedHash": {
+      "type": "string",
+      "pattern": "^sha256:[0-9a-f]{64}$"
+    },
+    "CommitmentStatus": {
+      "type": "string",
+      "enum": [
+        "accepted",
+        "suspended",
+        "revoked",
+        "quashed",
+        "superseded",
+        "expired",
+        "varied"
+      ]
+    },
+    "ActsOnEffect": {
+      "type": "string",
+      "enum": [
+        "suspend",
+        "revive",
+        "revoke_ex_tunc",
+        "revoke_ex_nunc",
+        "quash",
+        "supersede",
+        "vary",
+        "expire"
+      ]
+    },
+    "ActsOn": {
+      "type": "object",
+      "properties": {
+        "target_receipt_id": { "type": "string" },
+        "effect": { "$ref": "#/$defs/ActsOnEffect" }
+      },
+      "required": ["target_receipt_id", "effect"],
+      "additionalProperties": false
+    },
+    "ActsOnAllowed": {
+      "type": "object",
+      "description": "Typed act relationship at the template level (restructured in the 2026-07 repair sprint — see 07-decisions/). targets names the CommitmentPoints whose receipts this CommitmentPoint may act on; at runtime a Receipt's acts_on.target_receipt_id MUST reference a receipt whose commitment_point_id is in targets (rule ACTS_ON_TARGET_MEMBERSHIP).",
+      "properties": {
+        "allowed_effects": {
+          "type": "array",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "$ref": "#/$defs/ActsOnEffect" }
+        },
+        "targets": {
+          "type": "array",
+          "description": "Ids of the CommitmentPoints whose receipts this CommitmentPoint may act on.",
+          "minItems": 1,
+          "uniqueItems": true,
+          "items": { "type": "string" }
+        },
+        "basis_reference": {
+          "type": "string",
+          "description": "Optional Reference id giving the authority basis for the act relationship. Required (via schema conditional and catalog rule) when the acting CommitmentPoint's commitment_type is OVERRIDE."
+        }
+      },
+      "required": ["allowed_effects", "targets"],
+      "additionalProperties": false
+    },
+    "Evolves": {
+      "type": "object",
+      "description": "Target of an EVOLVE commitment: the protocol or version being changed prospectively (added in the 2026-07 repair sprint — see 07-decisions/). At least one of protocol_id, protocol_version_id, or reference is required.",
+      "properties": {
+        "protocol_id": { "type": "string" },
+        "protocol_version_id": { "type": "string" },
+        "reference": {
+          "type": "string",
+          "description": "Reference id identifying the governing instrument being changed."
+        }
+      },
+      "anyOf": [
+        { "required": ["protocol_id"] },
+        { "required": ["protocol_version_id"] },
+        { "required": ["reference"] }
+      ],
+      "additionalProperties": false
+    },
+    "Delegation": {
+      "type": "object",
+      "description": "Bounded authority transfer declared by a DELEGATE commitment (added in the 2026-07 repair sprint — see 07-decisions/): identified recipient plus defined scope — the delegated_authority later Authority gates rely on.",
+      "properties": {
+        "recipient": { "type": "string" },
+        "scope": { "type": "string" },
+        "basis_reference": {
+          "type": "string",
+          "description": "Optional Reference id giving the authority basis for the delegation."
+        }
+      },
+      "required": ["recipient", "scope"],
+      "additionalProperties": false
+    },
+    "Outcome": {
+      "type": "object",
+      "properties": {
+        "token": { "type": "string" },
+        "effect_class": {
+          "type": "string",
+          "enum": ["favorable", "adverse", "mixed", "procedural"]
+        },
+        "recourse": { "$ref": "#/$defs/RecourseGate" },
+        "notice_state": { "type": "string" },
+        "reason_giving": {
+          "type": "object",
+          "description": "Reason-giving expectation for this outcome (added in the 2026-07 repair sprint — see 07-decisions/). none_required_by_law requires legal_basis.",
+          "properties": {
+            "expectation": {
+              "type": "string",
+              "enum": ["reasons_required", "none_required_by_law"]
+            },
+            "legal_basis": { "type": "string" }
+          },
+          "required": ["expectation"],
+          "additionalProperties": false
+        },
+        "dependencies": {
+          "type": "array",
+          "items": { "$ref": "#/$defs/DependencyExpression" }
+        }
+      },
+      "required": ["token", "effect_class"],
+      "additionalProperties": false
+    },
+    "AiAssistance": {
+      "type": "object",
+      "description": "AI-assistance provenance for an accepted commitment (added in the 2026-07 repair sprint — see 07-decisions/).",
+      "properties": {
+        "involved": { "type": "boolean" },
+        "role": {
+          "type": "string",
+          "enum": ["fact_extraction", "recommendation", "drafting", "routing", "none"]
+        },
+        "human_review": {
+          "type": "string",
+          "enum": ["attested", "none"]
+        }
+      },
+      "required": ["involved"],
+      "additionalProperties": false
+    },
+    "EncodingProvenance": {
+      "type": "object",
+      "description": "Provenance of the encoding itself: how the ICSL artifact was drafted and who approved it (added in the 2026-07 repair sprint — see 07-decisions/).",
+      "properties": {
+        "drafting_method": {
+          "type": "string",
+          "enum": ["human", "ai_assisted", "automated_conversion"]
+        },
+        "drafting_tool": { "type": "string" },
+        "approved_by": { "type": "string" },
+        "approval_basis": { "type": "string" },
+        "sources_consulted": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["drafting_method", "approved_by"],
+      "additionalProperties": false
+    },
+    "AnchorEvent": {
+      "type": "object",
+      "properties": {
+        "commitment_point_id": { "type": "string" },
+        "event": { "const": "receipt_created" }
+      },
+      "required": ["commitment_point_id", "event"],
+      "additionalProperties": false
+    },
+    "DependencyExpression": {
+      "oneOf": [
+        {
+          "type": "object",
+          "properties": {
+            "commitment_point": { "type": "string" },
+            "outcome": { "type": "string" }
+          },
+          "required": ["commitment_point"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "absent": {
+              "type": "object",
+              "properties": {
+                "commitment_point": { "type": "string" }
+              },
+              "required": ["commitment_point"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["absent"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "external": { "type": "string" }
+          },
+          "required": ["external"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "temporal": {
+              "type": "object",
+              "properties": {
+                "anchor": { "$ref": "#/$defs/AnchorEvent" },
+                "operator": { "const": "elapsed" },
+                "duration": { "type": "string", "pattern": "^P" }
+              },
+              "required": ["anchor", "operator", "duration"],
+              "additionalProperties": false
+            }
+          },
+          "required": ["temporal"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "any_of": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/DependencyExpression" }
+            }
+          },
+          "required": ["any_of"],
+          "additionalProperties": false
+        },
+        {
+          "type": "object",
+          "properties": {
+            "all_of": {
+              "type": "array",
+              "minItems": 1,
+              "items": { "$ref": "#/$defs/DependencyExpression" }
+            }
+          },
+          "required": ["all_of"],
+          "additionalProperties": false
+        }
+      ]
+    },
+    "TriggerCondition": {
+      "type": "object",
+      "properties": {
+        "anchor": { "$ref": "#/$defs/AnchorEvent" },
+        "duration": { "type": "string", "pattern": "^P" },
+        "requires_absence": {
+          "type": "array",
+          "items": { "type": "string" }
+        }
+      },
+      "required": ["anchor", "duration"],
+      "additionalProperties": false
+    },
+    "Deadline": {
+      "type": "object",
+      "properties": {
+        "duration": { "type": "string", "pattern": "^P" },
+        "anchor_event": { "type": "string" },
+        "suspension_rules": { "type": "string" }
+      },
+      "required": ["duration", "anchor_event"],
+      "additionalProperties": false
+    },
     "BindingForce": {
       "oneOf": [
         {
@@ -73,7 +403,7 @@
         },
         "procedural_outcome": { "type": "string" }
       },
-      "minProperties": 1,
+      "required": ["effect_type", "adverse_outcome_possible"],
       "additionalProperties": true
     },
     "AuthorityGate": {
@@ -83,7 +413,44 @@
         "authority_selection_rule": { "type": "string" },
         "delegated_authority": { "type": "string" },
         "task_owner": { "type": "string" },
-        "fallback_owner": { "type": "string" }
+        "fallback_owner": { "type": "string" },
+        "authority_basis": {
+          "type": "string",
+          "enum": ["institutional_actor", "operation_of_law"],
+          "default": "institutional_actor"
+        },
+        "legal_source": { "type": "string" },
+        "actor_type": {
+          "type": "string",
+          "description": "Type of actor holding or exercising the authority (added in the 2026-07 repair sprint — see 07-decisions/). AI/probabilistic and automated actors are subject to the delegation rule in spec section 8.",
+          "enum": [
+            "human_officeholder",
+            "institutional_role",
+            "delegated_entity",
+            "automated_deterministic_system",
+            "ai_probabilistic_system",
+            "hybrid_human_ai"
+          ]
+        }
+      },
+      "anyOf": [
+        { "required": ["legal_authority_holder"] },
+        { "required": ["delegated_authority"] },
+        {
+          "properties": {
+            "authority_basis": { "const": "operation_of_law" }
+          },
+          "required": ["authority_basis", "legal_source"]
+        }
+      ],
+      "if": {
+        "properties": {
+          "authority_basis": { "const": "operation_of_law" }
+        },
+        "required": ["authority_basis"]
+      },
+      "then": {
+        "required": ["legal_source"]
       },
       "additionalProperties": true
     },
@@ -98,7 +465,11 @@
         "remedy_type": { "type": "string" },
         "suspensive_effect": { "type": "boolean" },
         "source": { "type": "string" },
-        "accessibility_note": { "type": "string" }
+        "accessibility_note": { "type": "string" },
+        "legal_basis": {
+          "type": "string",
+          "description": "Citation or Reference id for a recourse-exclusion assertion (added in the 2026-07 repair sprint — see 07-decisions/). Required where recourse_state is legally_unavailable, and where recourse_state is not_applicable on an adverse or mixed outcome."
+        }
       },
       "required": ["recourse_state"],
       "additionalProperties": true
