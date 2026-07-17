@@ -2,7 +2,7 @@
   "kind": "GovernedContext",
   "governed_context_id": "urn:opencommit:mutation-baseline:gc:case-0001",
   "protocol_version_id": "urn:opencommit:mutation-baseline:pv:1.0.0",
-  "protocol_version_hash": "sha256:3dea97d9cbad7a8db7d712e44e5514fc69d76771d3a5ded3d658f12d228627ee",
+  "protocol_version_hash": "sha256:133a1a28ded00d53957c03e20931eb77bc674325fce7d84c37178bca8ea775b2",
   "current_time": "2026-07-13T12:00:00Z",
   "subject_ref": "urn:opencommit:mutation-baseline:subject:applicant-0001",
   "state": {

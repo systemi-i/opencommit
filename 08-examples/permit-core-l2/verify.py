@@ -12,14 +12,14 @@ ADR-002/ADR-003):
      each receipt with the receipt_hash member removed, previous_hash linkage
      (genesis null), content_hash over the JCS canonical bytes of content,
      outcome tokens and acts_on effects allowed by the ProtocolVersion;
-  2a. commitment_type (added in the 2026-07 repair sprint -- see 07-decisions/):
+  2a. commitment_type:
      every CommitmentPoint carries a valid core commitment_type (this canonical
      Core-L2 package admits no EXTENSION marker and GENERIC is forbidden);
      every receipt's derived commitment_type copy equals its CommitmentPoint's
      type (RECEIPT_COMMITMENT_TYPE_MATCH); relational types identify their
      targets (APPEAL_TARGET_REQUIRED, REMEDY_TARGET_IDENTIFIED,
      OVERRIDE_TARGET_AND_BASIS_REQUIRED via acts_on_allowed);
-  2b. version identity (added in the 2026-07 repair sprint -- see 07-decisions/):
+  2b. version identity:
      every receipt's protocol_version_hash equals the recomputed canonical
      (JCS + sha256) hash of protocol-version.json
      (RECEIPT_PROTOCOL_VERSION_HASH_MATCH). The ProtocolVersion object contains
@@ -27,9 +27,8 @@ ADR-002/ADR-003):
      embedded governed_context is a GovernedContextDescriptor -- descriptive
      only, no runtime members (protocol_version_id, protocol_version_hash,
      governed_context_id, current_time), so no zero-hash convention exists
-     anywhere (descriptor reshape, 2026-07 repair sprint -- see 07-decisions/);
-  2c. typed act relationships (added in the 2026-07 repair sprint -- see
-     07-decisions/): acts_on_allowed.targets reference existing CommitmentPoint
+     anywhere;
+  2c. typed act relationships: acts_on_allowed.targets reference existing CommitmentPoint
      ids, and every receipt's acts_on.target_receipt_id resolves to a receipt
      whose commitment_point_id is in the acting CP's acts_on_allowed.targets
      (ACTS_ON_TARGET_MEMBERSHIP -- an appeal cannot act on an unrelated receipt);
@@ -246,8 +245,7 @@ def main():
     check(protocol["conformance_class"] == manifest["profile"],
           "protocol conformance_class matches manifest profile")
 
-    # embedded governed_context is a GovernedContextDescriptor (descriptor
-    # reshape, 2026-07 repair sprint -- see 07-decisions/): descriptive only,
+    # embedded governed_context is a GovernedContextDescriptor: descriptive only,
     # no runtime members, so no zero-hash convention exists anywhere.
     gcd = protocol.get("governed_context")
     check(isinstance(gcd, dict) and "description" in gcd,
@@ -266,8 +264,8 @@ def main():
               "(description, subject_class?, scope?, jurisdiction_note?)"
               + ("" if not extra else " (unexpected: " + ", ".join(extra) + ")"))
 
-    # canonical version-identity hash (added in the 2026-07 repair sprint --
-    # see 07-decisions/): JCS + sha256 over the complete ProtocolVersion object.
+    # Canonical version-identity hash: JCS + sha256 over the complete
+    # ProtocolVersion object.
     # The object contains no hash of itself, so the preimage is
     # non-self-referential and this recomputation is well-defined.
     check("protocol_version_hash" not in protocol,
@@ -285,7 +283,6 @@ def main():
     # commitment_type checks (CP_COMMITMENT_TYPE_REQUIRED / _INVALID,
     # CP_GENERIC_TYPE_FORBIDDEN, APPEAL_TARGET_REQUIRED, REMEDY_TARGET_IDENTIFIED,
     # OVERRIDE_TARGET_AND_BASIS_REQUIRED)
-    # -- added in the 2026-07 repair sprint, see 07-decisions/
     reference_ids = {r["id"] for r in protocol.get("references", [])}
     for cp in protocol["commitment_points"]:
         ct = cp.get("commitment_type")
@@ -338,8 +335,7 @@ def main():
             check(receipt["outcome"] in tokens, "outcome token allowed by CP: " + label)
         check(receipt["protocol_version_id"] == protocol["protocol_version_id"],
               "receipt pins this ProtocolVersion: " + label)
-        # version-identity binding (RECEIPT_PROTOCOL_VERSION_HASH_MATCH; added in
-        # the 2026-07 repair sprint -- see 07-decisions/)
+        # Version-identity binding (RECEIPT_PROTOCOL_VERSION_HASH_MATCH).
         check("protocol_version_hash" in receipt,
               "receipt carries protocol_version_hash: " + label)
         if "protocol_version_hash" in receipt:
@@ -372,8 +368,7 @@ def main():
             check(target in by_id, "acts_on target is an earlier receipt in the chain: " + label)
             allowed = (cp or {}).get("acts_on_allowed", {}).get("allowed_effects", [])
             check(effect in allowed, "acts_on effect allowed by CP acts_on_allowed: " + label)
-            # runtime target membership (ACTS_ON_TARGET_MEMBERSHIP; added in the
-            # 2026-07 repair sprint -- see 07-decisions/): the acted-on receipt's
+            # Runtime target membership (ACTS_ON_TARGET_MEMBERSHIP): the acted-on receipt's
             # CommitmentPoint must be among the acting CP's declared targets, so
             # an appeal (or remedy/override) cannot act on an unrelated receipt.
             if target in by_id:

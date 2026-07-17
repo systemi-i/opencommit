@@ -20,7 +20,7 @@ This structure separates institutional rules from the software used to administe
 
 For an individual institution, ICSL can make consequential procedures easier to inspect, test, compare, and move between technology providers. It can preserve institutional knowledge, reveal missing governance requirements, and give AI-assisted systems explicit operational limits.
 
-Across institutions, common protocol semantics can make public actions easier to interpret and rely on without requiring a shared platform or uniform substantive policy. This could support interoperable public services and, over time, an open governance network in which institutions coordinate at greater speed and scale while retaining legal and operational autonomy.
+Across institutions, common protocol semantics can make public actions easier to interpret and rely on without requiring a shared platform or uniform substantive policy. ICSL is intended to provide part of the foundation for interoperable public services and, over time, an open governance network in which institutions coordinate at greater speed and scale while retaining legal and operational autonomy. The v0.1 candidate does not yet define cross-protocol composition or demonstrate production federation.
 
 ## Candidate Status
 

@@ -9,7 +9,8 @@ reviewer can re-run it independently. It contains:
 | `baseline.json` | A minimal ProtocolVersion (two CommitmentPoints, `DECIDE` + `ATTEST`, all six gates, structured outcomes) that MUST validate cleanly against `../schemas/ProtocolVersion.schema.json`. Its embedded `governed_context` is a **GovernedContextDescriptor** — a description of what class of matters the protocol governs — and carries no runtime members and no hash fields. |
 | `baseline_governed_context.json` | The sample **runtime** GovernedContext used by context cases. It pins `protocol_version_id` AND `protocol_version_hash` — the latter is the REAL canonical hash of `baseline.json`, verified by the runner (control C00). |
 | `baseline_receipt.json` | A minimal Receipt that MUST validate cleanly against `../schemas/Receipt.schema.json`. Its `protocol_version_hash` is the REAL canonical hash of `baseline.json`, and its `receipt_hash` is the REAL ADR-003 preimage hash (canonical receipt bytes minus the `receipt_hash` member); the runner recomputes and verifies both (control R00). |
-| `mutations.json` | The expectations manifest: cases M01–M23, each either a set of JSON-pointer operations applied to a deep copy of a baseline with the expected verdict, or a runner self-test probe. |
+| `baseline_conformance.json` | A minimal ConformanceDeclaration with an explicit `claim_subject_type`; control D00 validates it against `ConformanceDeclaration.schema.json`. |
+| `mutations.json` | The expectations manifest: cases M01–M24, each either a set of JSON-pointer operations applied to a deep copy of a baseline with the expected verdict, or a runner self-test probe. |
 | `run_mutations.py` | The runner. Exit status 0 if and only if every expectation (including baseline validity and the baseline hash bindings) is met. |
 
 There is no placeholder-hash convention anywhere in this suite: the
@@ -75,6 +76,9 @@ companion attack runner: `python3 08-examples/permit-core-l2/attacks.py`
   `conformance_class` Core-L3 (class-depth coupling); and an embedded
   `governed_context` descriptor carrying runtime members
   (`protocol_version_hash` / `current_time` — descriptor prohibition).
+- **M24** — conformance applicability: removing `claim_subject_type` is a
+  schema rejection, so a harness never has to infer the subject profile from
+  a descriptive name.
 
 ## Version identity
 

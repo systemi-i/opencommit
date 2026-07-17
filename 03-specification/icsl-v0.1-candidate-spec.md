@@ -1,7 +1,7 @@
 # ICSL v0.1 Candidate Specification
 
 - Status: candidate draft.
-- Date: 2026-07-13.
+- Date: 2026-07-16.
 
 The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RECOMMENDED, NOT RECOMMENDED, MAY, and OPTIONAL in this document are to be interpreted as described in BCP 14 [RFC 2119] [RFC 8174] when, and only when, they appear in all capitals.
 
@@ -9,9 +9,15 @@ The key words MUST, MUST NOT, REQUIRED, SHALL, SHALL NOT, SHOULD, SHOULD NOT, RE
 
 The Institutional Commitment Specification Language (ICSL) is a specification language
 for institutional protocols: governed processes composed of commitment-bearing acts. It
-defines a canonical way to express both the governed structure of those processes and the
-institutional acts through which they produce effects, as interoperable, auditable,
-versioned, and testable commitment systems.
+defines a common model and JSON representation for the commitment-bearing structure of
+those processes and the institutional acts through which they produce effects.
+
+Authoring that representation is a semantic and institutional judgment. ICSL does not
+determine a unique encoding of an underlying law, policy, or practice. Once an artifact
+has been authored, the canonicalization, identity, hashing, and derived-status rules in
+this specification produce deterministic technical results for the same conforming JSON
+value. That determinism does not establish semantic equivalence between independently
+authored encodings, fidelity to source, legal adequacy, or production interoperability.
 
 ICSL exists so that public services, governed processes, institutional workflows, and
 interoperable delivery systems can describe not only what tasks happen, but which
@@ -44,6 +50,11 @@ ICSL does not specify:
 - a complete workflow or orchestration engine — a conformant ICSL protocol specifies
   governable institutional action and its evidence; it does not by itself provide task
   management, scheduling, or execution orchestration
+
+ICSL v0.1 also does not specify protocol composition, federation governance, discovery,
+cross-institution trust negotiation, authorization to disclose Receipts, or end-to-end
+execution. Its objects may be used by systems that provide those capabilities, but
+conformance to this specification does not demonstrate them.
 
 ## 3. Core Model
 
@@ -700,7 +711,7 @@ A CommitmentPoint MAY declare, at template level (see 3.5a):
 acts_on_allowed = {
   allowed_effects: [suspend | revive | revoke_ex_tunc | revoke_ex_nunc | quash | supersede | vary | expire],
                                           // REQUIRED, at least one
-  targets: [commitment_point id, ...],    // REQUIRED, at least one
+  targets: [commitment_point_id, ...],   // REQUIRED, at least one
   basis_reference?: Reference id
 }
 ```
@@ -750,10 +761,15 @@ Receipts are hash-linked into a chain (see 5.3).
 ### 5.1 Acceptance
 
 
-Acceptance is the act by which the authority satisfying all six gates records the
-Commitment. Runtimes MUST distinguish attempted from accepted commitments. An accepted
-adverse outcome (e.g. a denial) is a Commitment producing a Receipt with full recourse
-machinery. A blocked or rejected attempt produces an EvaluationRecord, never a Receipt.
+Acceptance is the institutional act by which the authority identified by the applicable
+Authority gate accepts an act as a Commitment after the conditions declared by the pinned
+ProtocolVersion are recorded as satisfied for a GovernedContext. A runtime records the
+authority's acceptance; it does not perform the institutional act or independently confer
+authority. The record is an assertion under the encoding, not a validator's determination
+that the actor possessed lawful authority or that all six gates were legally adequate.
+Runtimes MUST distinguish attempted from accepted commitments. An accepted adverse outcome
+(e.g. a denial) is a Commitment producing a Receipt with full recourse machinery. A blocked
+or rejected attempt produces an EvaluationRecord, never a Receipt.
 
 ### 5.2 Receipt Content Core
 
@@ -845,7 +861,9 @@ EvaluationRecord MUST NOT enter the receipt chain.
 ## 6. Canonical JSON and Temporal Profile
 
 
-Canonical JSON is the normative representation for ICSL v0.1 candidate artifacts.
+Canonical JSON is the normative byte-level representation for ICSL v0.1 candidate
+artifacts. Canonicalization starts from an already-authored JSON value; it does not select
+institutional semantics or make independently authored encodings equivalent.
 
 ### 6.1 Canonicalization Profile
 
@@ -1017,7 +1035,9 @@ ICSL conformance is not a single unqualified binary claim.
 
 A conformance declaration MUST identify:
 
-- claim subject
+- claim subject identity (`claim_subject`)
+- claim subject type (`claim_subject_type`): `protocol_package`, `parser`, `validator`,
+  `composer`, `registry`, `runtime_engine`, `renderer`, or `corpus_release`
 - conformance class
 - ICSL version
 - test-suite version
@@ -1033,7 +1053,12 @@ Candidate conformance classes:
 
 Protocol encoding depths:
 
-- `L1` - structural encoding sufficient for basic parsing and gate presence.
+- `L1` - the minimum institutional skeleton: a parseable encoding containing the required
+  institutional boundary, governed-context descriptor, CommitmentPoints, commitment
+  types, six gate slots, outcomes, and binding-effect declarations. Core-L1 establishes
+  presence and structural placement, not semantic adequacy, source fidelity, legal
+  validity, privacy compliance, runtime executability, receipt-chain behavior, or
+  cross-system interoperability.
 - `L2` - semantic encoding sufficient for binding, authority, recourse, canonicalization, and package claims.
 - `L3` - high-fidelity encoding with references, governance addendum, reason-giving, renderings, and corpus-grade provenance.
 
@@ -1052,6 +1077,21 @@ greater.
 
 No implementation MAY claim unqualified `ICSL compliant` status. Claims MUST name class,
 ICSL version, and test-suite version.
+
+Catalog-rule applicability is the intersection of class scope and claim-subject type. A
+rule applies directly only when the claimed class includes the rule's `scope` and the
+claim's `claim_subject_type` appears in the rule's
+`applicability.direct_claim_subject_types`. An artifact-facing rule MAY serve as a fixture
+oracle for an implementation suite without becoming a direct property of that
+implementation. A `pass` result requires a published test-suite profile for the declared
+subject type.
+
+Conformance validates the declared representation, not the legality or practical adequacy
+of the represented action. A validator MAY determine that a notice, reason-giving,
+recourse, or legal-basis posture is present and structurally consistent. It MUST NOT
+represent that result as proof that notice was legally effective, reasons were
+substantively adequate, recourse was accessible in practice, evidence was true, or the
+cited authority was valid in the applicable jurisdiction.
 
 ## 10. Diagnostics
 
@@ -1097,17 +1137,32 @@ specification. v0.1 does not require it.
 ## 12. Privacy and Data Protection Considerations
 
 
-Personal data MUST NOT be embedded directly in hash-chained canonical receipt content.
+Receipts and receipt chains are not public by default. Publication of a ProtocolVersion
+does not imply publication of the Receipts produced under it. Disclosure or
+cross-institution sharing requires a separately established purpose, lawful basis,
+authorization, access policy, retention policy, and security controls outside ICSL.
+
+Personal data MUST NOT be embedded directly in hash-chained canonical Receipt content.
 This clause grounds catalog rule `PERSONAL_DATA_NOT_IN_CANONICAL_RECEIPT` (error,
-`Core-L2`). Personal-data payloads belong in detachable content referenced by
-`content_hash` (see 5.2), using salted or keyed hashing so that erasure or rectification
-can occur without breaking chain verification.
+`Core-L2`). Removing direct identifiers does not by itself anonymize a Receipt:
+`receipt_id`, `governed_context_id`, authority, outcome, timestamps, protocol identifiers,
+content hashes, and chain relationships can enable singling out, correlation, or
+linkability. Hashing is neither encryption nor anonymization. Implementations SHOULD use
+non-meaningful, context-specific identifiers and MUST assess metadata and chain-level
+linkability.
 
-Evidence gates SHOULD minimize personal data to what the gate requires.
+Personal-data payloads belong outside the canonical Receipt. A `content_hash` is a content
+commitment; it is not a locator, disclosure authorization, or privacy guarantee. v0.1
+defines direct SHA-256 verification when `content` and `content_hash` are both present. It
+does not define an interoperable salted or keyed content-commitment profile, including key
+or salt handling and verification after rectification or erasure. Implementations MUST
+NOT describe v0.1 conformance as supplying those properties.
 
-Where receipts are shared across institutions, the allocation of data-protection roles
-(controller, processor) is made by agreement between the parties outside ICSL. ICSL does
-not by itself provide a lawful basis for processing.
+Evidence gates SHOULD minimize personal data to what the gate requires. ICSL does not
+provide a lawful basis for processing or determine controller and processor roles.
+Public or cross-institution Receipt publication requires a documented threat model
+covering linkability, enumeration, selective disclosure, retention, residency,
+rectification, and erasure. v0.1 defines no general profile for those obligations.
 
 ## 13. Publication Status
 

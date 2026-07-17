@@ -1,7 +1,7 @@
 # ICSL Implementation Guide Candidate
 
 Status: candidate draft.  
-Date: 2026-07-09.
+Date: 2026-07-16.
 
 ## 1. Audiences
 
@@ -24,8 +24,9 @@ Recommended implementation order:
 3. Enforce six-gate presence.
 4. Enforce canonical/runtime separation.
 5. Validate binding effect basis and outcome effect classes.
-6. Validate authority semantics, including operation-of-law authority bases.
-7. Validate recourse semantics, keyed off Outcome.effect_class.
+6. Check declared authority structures and operation-of-law references for required fields
+   and internal consistency.
+7. Check declared recourse structures against encoded Outcome.effect_class values.
 8. Validate the dependency grammar.
 9. Implement RFC 8785 (JCS) canonicalization and dual hashes (tagged hash format).
 10. Validate receipt content core and verify receipt chains.
@@ -53,6 +54,13 @@ Each diagnostic SHOULD include:
 Validators SHOULD fail closed for unknown required semantics at the claimed conformance
 class.
 
+A validator evaluates representations against ICSL requirements; it does not adjudicate
+the underlying law or facts. Passing validation can establish that a required notice,
+reason-giving, recourse, or legal-basis posture is declared and structurally consistent.
+It cannot establish that notice was legally effective, reasons were substantively
+adequate, evidence was true, recourse was usable in practice, or the cited authority was
+valid. Implementations MUST NOT present structural validation as a legal determination.
+
 At Core-L2 and above a validator MUST additionally check:
 
 - every Outcome carries token and effect_class, and adverse_outcome_possible is
@@ -68,8 +76,10 @@ At Core-L2 and above a validator MUST additionally check:
   (RECOURSE_EXCLUSION_REQUIRES_BASIS);
 - adverse and mixed outcomes declare notice_state and reason_giving
   (ADVERSE_OUTCOME_NOTICE_REQUIRED, ADVERSE_OUTCOME_REASON_GIVING_DECLARED);
-- canonical receipt content embeds no personal data directly
-  (PERSONAL_DATA_NOT_IN_CANONICAL_RECEIPT);
+- canonical Receipt fields comply with the defined structural privacy restrictions
+  (PERSONAL_DATA_NOT_IN_CANONICAL_RECEIPT). A generic validator cannot reliably determine
+  whether arbitrary strings, identifiers, or linked data are personal data, and MUST NOT
+  claim that this check proves anonymity or data-protection compliance;
 - an AuthorityGate whose actor_type is automated_deterministic_system,
   ai_probabilistic_system, or hybrid_human_ai satisfies the delegation rule of spec
   section 8 (AI_AUTHORITY_DELEGATION_BASIS_REQUIRED);
@@ -87,6 +97,10 @@ At Core-L2 and above a validator MUST additionally check:
 ## 4. Runtime Behavior
 
 A runtime MUST evaluate a GovernedContext against a pinned ProtocolVersion.
+
+These requirements apply to an implementation claiming runtime behavior under a named
+conformance class. ICSL does not provide a complete runtime, workflow, connector layer,
+federation mechanism, or enforcement guarantee.
 
 A runtime MUST NOT let deployment bindings alter canonical gate outcomes.
 
@@ -123,6 +137,12 @@ type (RECEIPT_COMMITMENT_TYPE_MATCH).
 ## 5. Composer Behavior
 
 A composer helps authors create ICSL artifacts.
+
+A composer assists semantic authoring; it does not canonicalize institutional judgment.
+It SHOULD preserve alternatives, uncertainty, source citations, and human approval where
+more than one encoding is plausible. Deterministic canonical bytes establish the identity
+of the resolved artifact; they do not prove that its semantic choices were uniquely
+determined or correct.
 
 A composer SHOULD:
 
@@ -162,6 +182,10 @@ A composer MUST NOT hide uncertainty by producing overconfident conformance clai
 ## 6. Registry Behavior
 
 A registry stores, indexes, and distributes ProtocolVersions and packages.
+
+This section concerns ProtocolVersions and packages. It does not make Receipt publication
+a registry requirement. Registries MUST treat Receipts and chains as non-public by
+default unless a separate access profile and authorization policy applies.
 
 A registry SHOULD:
 
@@ -211,7 +235,27 @@ Authority and Evidence gates of the consuming CommitmentPoint, or, where facts a
 accepted in advance or in bulk, it MUST be its own evidentiary_binding CommitmentPoint
 (FACT_ACCEPTANCE_GOVERNED).
 
-## 9. Common Failure Modes
+## 9. Semantic Authoring and Deterministic Publication
+
+Protocol authoring is an interpretive activity. Authors and AI-assisted tools may work in
+a semantic representation that contains drafts, source excerpts, confidence assessments,
+unresolved questions, and explanatory notes. That working representation is not canonical
+protocol truth and MUST NOT be hashed or published as though it were a ProtocolVersion.
+
+Publication SHOULD use a deterministic toolchain that:
+
+1. resolves or explicitly records all required authoring decisions;
+2. emits a schema-valid ProtocolVersion using the normative lexical forms;
+3. validates the artifact at its claimed class and depth;
+4. produces RFC 8785 canonical bytes and the ProtocolVersion hash without model inference;
+5. records the source artifact, tool version, validation result, and approving actor; and
+6. fails closed if repeated publication of the same resolved input produces different bytes.
+
+Probabilistic systems may propose semantic content, classifications, or corrections. They
+MUST NOT occupy the canonicalization or hashing step, and their output becomes publishable
+only through the declared review and approval process.
+
+## 10. Common Failure Modes
 
 High-risk implementation failures:
 
@@ -222,3 +266,5 @@ High-risk implementation failures:
 - claiming conformance without naming class and test-suite version
 - allowing UI renderings to add or suppress legal semantics
 - treating AI classification as deterministic institutional truth
+- presenting schema or rule validation as a judgment that an act was lawful or adequate
+- making receipts or resolvable receipt indexes public by default

@@ -18,6 +18,6 @@ Useful AI governance therefore requires more than general principles. Systems ne
 
 Public services increasingly cross agencies, levels of government, private providers, civil-society organizations, and international institutions. Requiring every participant to adopt one platform is usually impractical and can concentrate power in the wrong place.
 
-A protocol standard offers another approach. Institutions can publish the terms under which they act, issue receipts that other systems can interpret, and adapt shared protocols to local law without giving up operational control. This makes coordination possible through common semantics rather than central ownership.
+A protocol standard offers another approach. Institutions can publish the terms under which they act and, where separately authorized, exchange minimized Receipts that other systems can interpret as declared institutional claims. Common semantics could support coordination without central ownership, but v0.1 does not specify federation, composition, disclosure authorization, trust negotiation, or cross-institution execution.
 
 The case for ICSL rests on this convergence: public infrastructure is becoming interconnected, AI is acting on increasingly consequential processes, and institutions need to coordinate without erasing legal or organizational boundaries. A standard for governed action is timely because the systems it would govern are being built now.

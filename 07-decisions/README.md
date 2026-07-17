@@ -14,3 +14,4 @@ An accepted ADR explains the design but does not replace normative specification
 | [ADR-006](ADR-006-opencommit-naming.md) | Resolve the OpenCommit initiative name | Open |
 | [ADR-007](ADR-007-v0.1-scope.md) | Adopt an authoritative v0.1 scope statement | Accepted |
 | [ADR-008](ADR-008-commitment-act-taxonomy.md) | Adopt the eight commitment-act types and extension boundary | Accepted |
+| [ADR-009](ADR-009-conformance-claim-subject-applicability.md) | Make conformance rules explicit by claim-subject type | Accepted |

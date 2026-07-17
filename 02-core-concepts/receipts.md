@@ -19,3 +19,9 @@ Because the receipt pins the protocol by canonical hash, a consumer does not hav
 That capability supports handoffs between agencies, registries, auditors, service providers, and civic agents. Each consumer still applies its own trust and legal rules, but the object being evaluated has a common structure.
 
 Receipts are therefore an interoperability mechanism, not a universal source of trust. They make claims precise enough to verify, compare, and contest.
+
+Receipts and receipt chains are not public by default. Even without direct personal data,
+their identifiers, outcomes, timestamps, hashes, and links can enable correlation or
+singling out. Publication or cross-institution exchange therefore requires separate
+purpose, authority, access, retention, and privacy controls; v0.1 conformance supplies
+none of those permissions or protections.

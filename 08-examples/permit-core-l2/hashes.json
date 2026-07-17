@@ -9,8 +9,8 @@
     },
     {
       "path": "protocol-version.json",
-      "source_hash": "sha256:85ecbbfbc2f3c9554fa2f81b67563397b3700a7a0b1a202aa5897b03e2286180",
-      "canonical_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726"
+      "source_hash": "sha256:92373575a6d00f41aa23b289317dbb6f2d6937084d896760262f8b5db39769f8",
+      "canonical_hash": "sha256:41cc5f0a06255e9897499c34f4ac78449b590ea999c51973bc101a16f1512207"
     },
     {
       "path": "references/building-act.json",
@@ -19,30 +19,30 @@
     },
     {
       "path": "receipts/chain-01.json",
-      "source_hash": "sha256:88c97469d3d185c8bf10b6c90cc636d0e6aaba1d5f77c658a178423c51659b09",
-      "canonical_hash": "sha256:5cc77467fdfc11095ec91d0a151214bcb6cabf65b71997dee8cb52527eab7d8e"
+      "source_hash": "sha256:b66fae89bb6fc039cf54fe1e6d57018eec0bd4b53fa7704cf8d3f044df11300e",
+      "canonical_hash": "sha256:634cbf6d9d22a93871b26efd0c5ae7664870b53eae2313699463b6b8f058ea82"
     },
     {
       "path": "receipts/deemed-example.json",
-      "source_hash": "sha256:479d894481b9ddf51bd54f2948442187493966848d0a295a2c7b5b773df3bb18",
-      "canonical_hash": "sha256:275e1558719c503fbafa4bd4cb5f0a3987200bdc2ba234c46f9ce715c896885e"
+      "source_hash": "sha256:6fb5c03de928abf6d6ee0ebea850ea6881a314e4b3da2739413bfcb8d1221682",
+      "canonical_hash": "sha256:2b5360f76724fa112b528830a27c407b4ede80289f8e407580aa14923ca15f0f"
     },
     {
       "path": "conformance.json",
-      "source_hash": "sha256:2afd6a14df0c45429d289b9aba158183e073185699aa9fd95445393db3bff126",
-      "canonical_hash": "sha256:dbc67248bd5ecec65f65d7bfd9d5ac819c9c4cd8ff74afe51fc5d876cd44edfb"
+      "source_hash": "sha256:fad7268b6bcb22bad628924eafa8cafcb2c200ae0c632dbd104748ad256b70e3",
+      "canonical_hash": "sha256:94e90d596918c00a30e78fe22768e58b07f0e4f9fb08d4c0b1595732a86febc2"
     },
     {
       "path": "README.md",
-      "source_hash": "sha256:ae6fd37429b3754c07691db2d51546dc1fb8a91aa54e975c155d1cad2c02bda9"
+      "source_hash": "sha256:16e6f904672f1427967fd25fabdb49dd5bf92c76ac397fcde16110ed9c1e078e"
     },
     {
       "path": "verify.py",
-      "source_hash": "sha256:1701182707d3a1f7ff212f90b6f15809307597f2aea7cb182b1ca8d6b6b2bc1b"
+      "source_hash": "sha256:d95077838546fd4e5a2e83f683be4fd7fb7b91114a6ec268dd8cb04252a658b7"
     },
     {
       "path": "attacks.py",
-      "source_hash": "sha256:b02b65003e4d185b3cc0b17ce335489817e6de9d51fa9576b695e5dcdd755179"
+      "source_hash": "sha256:38bad611c4fd824254a2b0e6b2e097facde5fcda76e62c44e76ce79ccbd40bd2"
     }
   ]
 }

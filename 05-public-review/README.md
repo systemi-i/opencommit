@@ -21,7 +21,7 @@ Reviewers are invited to examine:
 
 ## Review Evidence
 
-The repository includes reviewer-runnable schemas, a 72-rule diagnostic catalog, a 26-expectation mutation suite, a synthetic Core-L2 package, a package verifier, and five persisted semantic attacks. These artifacts demonstrate internal consistency over a limited surface. They do not establish complete conformance or production interoperability.
+The repository includes reviewer-runnable schemas, a 74-rule diagnostic catalog, a 28-expectation mutation suite, a synthetic Core-L2 package, a package verifier, and five persisted semantic attacks. These artifacts demonstrate internal consistency over a limited surface. They do not establish complete conformance or production interoperability.
 
 The larger conformance fixture set and independent implementation reports remain future release requirements. Reviewers should treat absence of that evidence as a current limitation, not infer it from the existence of the smaller checks.
 
@@ -30,6 +30,11 @@ The larger conformance fixture set and independent implementation reports remain
 Submit feedback through [GitHub issues](https://github.com/systemi-i/opencommit/issues). A useful issue identifies the affected section or artifact, explains the practical consequence, provides an example where possible, and states whether the issue should block v0.1 or be scheduled for later work.
 
 Use the [Feedback Intake Guide](feedback-intake-guide.md) for categories and severity. The [Reviewer Quickstart](reviewer-quickstart.md) provides a short technical path through the repository.
+
+The proposed [July 2026 consultation disposition](consultation-disposition-2026-07.md)
+shows how one implementation-informed submission was classified. Accepted adjacent work
+is organized in the [Companion Specifications and Research Roadmap](companion-roadmap.md)
+so that deferral does not make it invisible or imply that the capability already exists.
 
 ## Review Posture
 

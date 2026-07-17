@@ -12,7 +12,7 @@
     },
     "protocol_version_hash": {
       "$ref": "ICSLCommon.schema.json#/$defs/TaggedHash",
-      "description": "REQUIRED (added in the 2026-07 repair sprint — see 07-decisions/): sha256 over the RFC 8785 (JCS) canonical bytes of the complete pinned ProtocolVersion object (the ProtocolVersion contains no hash of itself, so the preimage is non-self-referential). Pins the exact protocol-version content, not just its id."
+      "description": "REQUIRED: sha256 over the RFC 8785 (JCS) canonical bytes of the complete pinned ProtocolVersion object (the ProtocolVersion contains no hash of itself, so the preimage is non-self-referential). Pins the exact protocol-version content, not just its id."
     },
     "current_time": {
       "type": "string",

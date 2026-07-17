@@ -1,7 +1,7 @@
 # ICSL Conformance Profile Candidate
 
 - Status: candidate draft.
-- Date: 2026-07-07.
+- Date: 2026-07-16.
 
 ## 1. Principle
 
@@ -10,7 +10,8 @@ is not valid.
 
 Every conformance claim MUST identify:
 
-- claim subject
+- claim subject identity
+- claim subject type
 - conformance class
 - ICSL version
 - test-suite version
@@ -18,18 +19,49 @@ Every conformance claim MUST identify:
 
 ## 2. Claim Subjects
 
-Conformance may be claimed by:
+`claim_subject` identifies the particular artifact or implementation. The required
+`claim_subject_type` discriminator selects one of the following closed tokens:
 
-- protocol packages
-- parsers
-- validators
-- composers
-- registries
-- runtime engines
-- renderers
-- corpus releases
+| Token | Subject |
+| --- | --- |
+| `protocol_package` | A specific protocol package |
+| `parser` | A parser implementation and version |
+| `validator` | A validator implementation and version |
+| `composer` | A composer implementation and version |
+| `registry` | A registry implementation and version |
+| `runtime_engine` | A runtime implementation and version |
+| `renderer` | A renderer implementation and version |
+| `corpus_release` | A specific corpus release |
 
-The subject MUST be explicit.
+Class and subject type are independent axes. A catalog rule applies directly only when
+the claimed class includes the rule's `scope` **and** the claim's `claim_subject_type` is
+listed in `applicability.direct_claim_subject_types`. The rule's `evaluation_target` and
+`artifact_condition` then determine what must be evaluated. Class scope alone MUST NOT
+be used as an applicability test.
+
+A rule may serve as the expected oracle for a fixture used to test an implementation.
+That does not make an artifact-facing rule a direct property of the parser, validator,
+composer, registry, runtime, or renderer itself.
+
+### 2.1 Current Subject-Profile Status
+
+A published suite profile is a versioned, publicly accessible specification that names
+the claim subject type and supported classes, identifies the applicable catalog rules and
+fixture behaviors, defines the test procedure and result criteria, and identifies the
+suite implementation and version. A declaration's `test_suite_version` MUST identify
+that profile; bundled checks or examples do not constitute a profile unless they are
+published as one and cover its declared behavior.
+
+| Claim subject type | Direct catalog coverage | Candidate posture |
+| --- | --- | --- |
+| `protocol_package` | Package, ProtocolVersion, declared conformance, and included or claimed artifacts | Profile unpublished; qualified candidate assessment is supported, but result cannot be `pass` |
+| `corpus_release` | Package and artifact rules plus Corpus-L3 provenance rules | Profile incomplete; no passing Corpus-L3 claim is currently supported |
+| `parser` | Conformance-declaration rules only | Subject-specific suite unpublished; result cannot be `pass` |
+| `validator` | Conformance-declaration rules and declared consumer behavior; artifact rules may be fixture oracles | Subject-specific suite unpublished; result cannot be `pass` |
+| `composer` | Conformance-declaration rules only | Subject-specific suite unpublished; result cannot be `pass` |
+| `registry` | Conformance-declaration rules only | Subject-specific suite unpublished; result cannot be `pass` |
+| `runtime_engine` | Conformance-declaration and consumer-behavior rules | Subject-specific suite unpublished; result cannot be `pass` |
+| `renderer` | Conformance-declaration rules only; rendering rules require fixture evaluation | Subject-specific suite unpublished; result cannot be `pass` |
 
 ## 3. Classes
 
@@ -41,7 +73,10 @@ it is evaluated; higher Core classes inherit it.
 
 ### Core-L1
 
-Core-L1 covers structural interoperability:
+Core-L1 defines the minimum institutional skeleton. It covers structural interoperability,
+but it is not semantics-free: binding-effect basis is required because an act that cannot
+affect institutional conduct does not qualify as a CommitmentPoint merely by appearing in
+a process:
 
 - parseable package
 - ProtocolVersion present, with institution identification and governed-context declaration
@@ -89,6 +124,12 @@ Core-L3 covers high-fidelity institutional semantics:
 - Core-L2 requirements
 - governance addendum where triggered
 - reason-giving sufficiency
+
+Conformance at any class establishes only the requirements that the claimed test suite can
+evaluate. In particular, a validator can check that notice, reason-giving, recourse, and
+legal-basis postures are present and structurally consistent. It does not thereby determine
+that notice was legally effective, reasons were substantively adequate, recourse was
+accessible in practice, or the cited basis was valid in the applicable jurisdiction.
 
 ### Extended-L2
 
@@ -150,7 +191,7 @@ marked fixture-only.
 | Core-L1 | outcomes declared | CP_ALLOWED_OUTCOMES_REQUIRED |
 | Core-L1 | canonical/runtime separation | CANONICAL_NO_DEPLOYMENT_BINDINGS |
 | Core-L1 | rendering boundary | RENDERING_NO_NEW_SEMANTICS |
-| Core-L1 | conformance declaration | CONFORMANCE_DECLARATION_REQUIRED, CONFORMANCE_CLASS_INVALID, CONFORMANCE_RESULT_INVALID |
+| Core-L1 | conformance declaration and subject applicability | CONFORMANCE_DECLARATION_REQUIRED, CONFORMANCE_SUBJECT_TYPE_INVALID, CONFORMANCE_SUBJECT_PROFILE_REQUIRED, CONFORMANCE_CLASS_INVALID, CONFORMANCE_RESULT_INVALID |
 | Core-L2 | authority distinctions | TASK_OWNER_NOT_AUTHORITY, AI_NOT_GATE_AUTHORITY, OPERATION_OF_LAW_REQUIRES_LEGAL_SOURCE |
 | Core-L2 | AI authority boundary (actor typing, delegation rule) | AI_AUTHORITY_DELEGATION_BASIS_REQUIRED |
 | Core-L2 | discretion representation (anti-fettering) | DISCRETION_NOT_FETTERED (warning) |
@@ -209,9 +250,11 @@ fields, reason-giving, non-executing normative fields, renderings, and provenanc
 ### Class–Depth Rule
 
 
-A conformance class with suffix `-Ln` requires the claim subject's encoding depth to be
-`Ln` or greater. A package encoded at depth L1 cannot claim Core-L2; a Corpus-L3 claim
-requires depth L3.
+A conformance class with suffix `-Ln` requires the claimed ProtocolVersion's encoding
+depth to be `Ln` or greater. A protocol package whose ProtocolVersion is encoded at depth
+L1 cannot claim Core-L2; a Corpus-L3 release requires depth L3. Implementation subjects
+do not themselves possess an encoding depth; their subject-specific profiles may state
+which artifact depths they must process.
 
 This coupling is schema-enforced on ProtocolVersion: when `conformance_class` is present, `encoding_depth` is REQUIRED
 and constrained per class (Core-L1 → L1/L2/L3; Core-L2 and Extended-L2 → L2/L3; Core-L3
@@ -224,6 +267,13 @@ A conformance declaration MUST name the test-suite identifier and version used. 
 applies only to the declared claim subject, class, ICSL version, suite version, and
 validator. Passing one of the narrower checks published with the candidate MUST NOT be
 reported as a pass against the future full conformance suite.
+
+A `pass` result is valid only when the named test suite publishes a profile for the
+declared `claim_subject_type`. If no such profile exists, the result MUST be `not_run` or
+`partial`, with the unsupported behaviors identified. Package checks MUST NOT be reported
+as a parser, validator, composer, registry, runtime, or renderer pass. These requirements
+ground `CONFORMANCE_SUBJECT_TYPE_INVALID` and
+`CONFORMANCE_SUBJECT_PROFILE_REQUIRED` (errors, `Core-L1`).
 
 The current machine-readable ICSL version is `0.1-freeze`. The candidate, release-candidate,
 and final labels are described in [Status and Roadmap](../STATUS.md).

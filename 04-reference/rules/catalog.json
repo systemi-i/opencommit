@@ -1,440 +1,1074 @@
 {
-  "catalog_id": "icsl.rules.candidate.2026-07-09",
+  "catalog_id": "icsl.rules.candidate.2026-07-16",
   "icsl_version": "0.1-freeze",
   "severity_convention": "Rules backed by spec MUST are severity error; rules backed by spec SHOULD are severity warning.",
   "scope_convention": "scope is the minimum conformance class at which the rule is evaluated; higher Core classes inherit lower; Extended-L2 = Core-L2 + extension negotiation; Corpus-L3 = Core-L3 + provenance.",
+  "applicability_convention": "A rule is directly applicable only when the claimed class includes rule.scope and claim_subject_type is listed in applicability.direct_claim_subject_types. evaluation_target identifies the artifact or behavior evaluated. Rules may serve as fixture oracles in a subject-specific implementation suite without applying directly to the implementation claim.",
   "rules": [
     {
       "id": "PROTOCOL_COMMITMENT_POINTS_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "A ProtocolVersion must expose commitment_points."
+      "summary": "A ProtocolVersion must expose commitment_points.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "INSTITUTION_IDENTIFICATION_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "A ProtocolVersion must identify its institution (id and name; jurisdiction and reference optional)."
+      "summary": "A ProtocolVersion must identify its institution (id and name; jurisdiction and reference optional).",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "GOVERNED_CONTEXT_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "A ProtocolVersion must declare its governed_context (description object or reference)."
+      "summary": "A ProtocolVersion must declare its governed_context (description object or reference).",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CP_ALL_GATES_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Each CommitmentPoint must include Authority, Evidence, Reasoning, Dependency, Version, and Recourse gates."
+      "summary": "Each CommitmentPoint must include Authority, Evidence, Reasoning, Dependency, Version, and Recourse gates.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CP_BINDING_EFFECT_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Each CommitmentPoint must state the basis for its binding or non-binding effect."
+      "summary": "Each CommitmentPoint must state the basis for its binding or non-binding effect.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CP_ALLOWED_OUTCOMES_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Each CommitmentPoint must declare allowed_outcomes with at least one Outcome object."
+      "summary": "Each CommitmentPoint must declare allowed_outcomes with at least one Outcome object.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "ADVISORY_CP_REQUIRES_SHADOW_BINDING",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Advisory-looking commitment points require analysis showing whether they indirectly bind downstream action."
+      "summary": "Advisory-looking commitment points require analysis showing whether they indirectly bind downstream action.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "ADVERSE_OUTCOME_RECOURSE_STATE_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A commitment point with any Outcome whose effect_class is adverse or mixed must declare a recourse_state."
+      "summary": "A commitment point with any Outcome whose effect_class is adverse or mixed must declare a recourse_state.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "OUTCOME_EFFECT_CLASS_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Every Outcome in allowed_outcomes must carry a token and an effect_class of favorable, adverse, mixed, or procedural."
+      "summary": "Every Outcome in allowed_outcomes must carry a token and an effect_class of favorable, adverse, mixed, or procedural.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "ADVERSE_FLAG_OUTCOME_CONSISTENCY",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "binding_effect_basis.adverse_outcome_possible must be true iff any Outcome has effect_class adverse or mixed."
+      "summary": "binding_effect_basis.adverse_outcome_possible must be true iff any Outcome has effect_class adverse or mixed.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CANONICAL_NO_DEPLOYMENT_BINDINGS",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Canonical protocol data cannot contain runtime connector, credential, worker, endpoint, retry, timeout, or UI bindings."
+      "summary": "Canonical protocol data cannot contain runtime connector, credential, worker, endpoint, retry, timeout, or UI bindings.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "TASK_OWNER_NOT_AUTHORITY",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Task ownership is not legal authority unless delegation or authority holder is declared."
+      "summary": "Task ownership is not legal authority unless delegation or authority holder is declared.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "DURABLE_FACTS_REQUIRED",
       "severity": "warning",
       "scope": "Core-L2",
-      "summary": "Evidence gates must not rely only on derived runtime state."
+      "summary": "Evidence gates must not rely only on derived runtime state.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "AI_NOT_GATE_AUTHORITY",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "An AuthorityGate with actor_type automated_deterministic_system, ai_probabilistic_system, or hybrid_human_ai cannot satisfy the Authority gate except under the delegation rule (spec section 8): documented legal basis, declared actor_type, and available human recourse. Refined by AI_AUTHORITY_DELEGATION_BASIS_REQUIRED."
+      "summary": "An AuthorityGate with actor_type automated_deterministic_system, ai_probabilistic_system, or hybrid_human_ai cannot satisfy the Authority gate except under the delegation rule (spec section 8): documented legal basis, declared actor_type, and available human recourse. Refined by AI_AUTHORITY_DELEGATION_BASIS_REQUIRED.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "AI_AUTHORITY_DELEGATION_BASIS_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Where an AuthorityGate declares actor_type automated_deterministic_system, ai_probabilistic_system, or hybrid_human_ai holding delegated_authority, a versioned Reference documenting the legal basis of the delegation must be declared and recourse to a human forum must be available for adverse outcomes (spec section 8)."
+      "summary": "Where an AuthorityGate declares actor_type automated_deterministic_system, ai_probabilistic_system, or hybrid_human_ai holding delegated_authority, a versioned Reference documenting the legal basis of the delegation must be declared and recourse to a human forum must be available for adverse outcomes (spec section 8).",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "DISCRETION_NOT_FETTERED",
       "severity": "warning",
       "scope": "Core-L2",
-      "summary": "Where the underlying law confers discretion, the Reasoning gate must represent it as guided_discretion or open_discretion (holder and factors) and must not convert it into a deterministic rule."
+      "summary": "Where the underlying law confers discretion, the Reasoning gate must represent it as guided_discretion or open_discretion (holder and factors) and must not convert it into a deterministic rule.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "FACT_ACCEPTANCE_GOVERNED",
       "severity": "warning",
       "scope": "Core-L2",
-      "summary": "Acceptance of an externally derived fact (including AI-extracted) into deterministic gate evaluation is itself an institutional act: it is governed by the Authority and Evidence gates of the consuming CommitmentPoint, or, where facts are accepted in advance or in bulk, it must be its own evidentiary_binding CommitmentPoint."
+      "summary": "Acceptance of an externally derived fact (including AI-extracted) into deterministic gate evaluation is itself an institutional act: it is governed by the Authority and Evidence gates of the consuming CommitmentPoint, or, where facts are accepted in advance or in bulk, it must be its own evidentiary_binding CommitmentPoint.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "AI_ASSISTED_COMMITMENT_PROVENANCE",
       "severity": "warning",
       "scope": "Core-L2",
-      "summary": "Where a runtime declares AI assistance in a governed context, accepted commitments should carry the Receipt ai_assistance object (involved, role, human_review)."
+      "summary": "Where a runtime declares AI assistance in a governed context, accepted commitments should carry the Receipt ai_assistance object (involved, role, human_review).",
+      "applicability": {
+        "evaluation_target": "receipt",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "ENCODING_PROVENANCE_RECOMMENDED",
       "severity": "warning",
       "scope": "Core-L2",
-      "summary": "A ProtocolVersion should declare encoding_provenance (drafting_method, approved_by) at Core-L2."
+      "summary": "A ProtocolVersion should declare encoding_provenance (drafting_method, approved_by) at Core-L2.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "ENCODING_PROVENANCE_REQUIRED",
       "severity": "error",
       "scope": "Core-L3",
-      "summary": "A Core-L3 or Corpus-L3 ProtocolVersion must declare encoding_provenance (drafting_method, approved_by)."
+      "summary": "A Core-L3 or Corpus-L3 ProtocolVersion must declare encoding_provenance (drafting_method, approved_by).",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "PUBLISHER_RELATIONSHIP_DECLARED",
       "severity": "warning",
       "scope": "Core-L2",
-      "summary": "A PackageManifest should declare publisher name and relationship (authoritative_self_published, delegated_publisher, or third_party_unofficial)."
+      "summary": "A PackageManifest should declare publisher name and relationship (authoritative_self_published, delegated_publisher, or third_party_unofficial).",
+      "applicability": {
+        "evaluation_target": "package",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "RECOURSE_EXCLUSION_REQUIRES_BASIS",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A RecourseGate with recourse_state legally_unavailable must declare legal_basis; recourse_state not_applicable on an outcome with effect_class adverse or mixed must declare legal_basis. Recourse-exclusion assertions are encoder claims about law, rebuttable, and do not extinguish recourse that exists in law."
+      "summary": "A RecourseGate with recourse_state legally_unavailable must declare legal_basis; recourse_state not_applicable on an outcome with effect_class adverse or mixed must declare legal_basis. Recourse-exclusion assertions are encoder claims about law, rebuttable, and do not extinguish recourse that exists in law.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "ADVERSE_OUTCOME_NOTICE_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Every Outcome with effect_class adverse or mixed must declare notice_state."
+      "summary": "Every Outcome with effect_class adverse or mixed must declare notice_state.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "ADVERSE_OUTCOME_REASON_GIVING_DECLARED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Every Outcome with effect_class adverse or mixed must declare reason_giving; expectation none_required_by_law requires legal_basis."
+      "summary": "Every Outcome with effect_class adverse or mixed must declare reason_giving; expectation none_required_by_law requires legal_basis.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "PERSONAL_DATA_NOT_IN_CANONICAL_RECEIPT",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Personal data must not be embedded directly in hash-chained canonical receipt content; personal-data payloads belong in detachable content referenced by content_hash using salted or keyed hashing so erasure or rectification can occur without breaking chain verification."
+      "summary": "Personal data must not be embedded directly in hash-chained canonical Receipt content. Generic validation can detect prohibited structures and known fields but cannot prove anonymity or data-protection compliance; v0.1 defines no salted or keyed content-commitment profile.",
+      "applicability": {
+        "evaluation_target": "receipt",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "CURRENT_TIME_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Any evaluation involving deadlines, durations, or lapse requires an explicit current_time in the GovernedContext."
+      "summary": "Any evaluation involving deadlines, durations, or lapse requires an explicit current_time in the GovernedContext.",
+      "applicability": {
+        "evaluation_target": "governed_context",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "ACTS_ON_TARGET_RESOLVABLE",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A receipt acts_on.target_receipt_id must resolve to an earlier receipt in the chain, with an effect allowed by the acting CommitmentPoint's acts_on_allowed."
+      "summary": "A receipt acts_on.target_receipt_id must resolve to an earlier receipt in the chain, with an effect allowed by the acting CommitmentPoint's acts_on_allowed.",
+      "applicability": {
+        "evaluation_target": "multi_artifact",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "TRIGGER_TEMPORAL_REQUIRES_CONDITION",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A CommitmentPoint with trigger temporal_lapse must declare trigger_condition with anchor and ISO-8601 duration."
+      "summary": "A CommitmentPoint with trigger temporal_lapse must declare trigger_condition with anchor and ISO-8601 duration.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "OPERATION_OF_LAW_REQUIRES_LEGAL_SOURCE",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "An AuthorityGate with authority_basis operation_of_law must declare legal_source as a Reference id."
+      "summary": "An AuthorityGate with authority_basis operation_of_law must declare legal_source as a Reference id.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "DEPENDENCY_REFERENCE_UNRESOLVED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Dependency expressions using commitment_point, absent, external, or temporal keys must resolve to known commitment points or declared external references."
+      "summary": "Dependency expressions using commitment_point, absent, external, or temporal keys must resolve to known commitment points or declared external references.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "DEPENDENCY_EXPRESSION_INVALID",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Each DependencyExpression must be exactly one of commitment_point (with optional outcome), absent, external, temporal, any_of, or all_of."
+      "summary": "Each DependencyExpression must be exactly one of commitment_point (with optional outcome), absent, external, temporal, any_of, or all_of.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "VERSION_PIN_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Version gates that require protocol version pinning must declare protocol_version_id."
+      "summary": "Version gates that require protocol version pinning must declare protocol_version_id.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CONFORMANCE_DECLARATION_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Conformance claims must identify subject, class, ICSL version, test-suite version, and result."
+      "summary": "Conformance claims must identify subject identity, subject type, class, ICSL version, test-suite version, and result.",
+      "applicability": {
+        "evaluation_target": "conformance_declaration",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "parser",
+          "validator",
+          "composer",
+          "registry",
+          "runtime_engine",
+          "renderer",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
+    },
+    {
+      "id": "CONFORMANCE_SUBJECT_TYPE_INVALID",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "claim_subject_type is required and must use a registered ICSL claim-subject token.",
+      "applicability": {
+        "evaluation_target": "conformance_declaration",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "parser",
+          "validator",
+          "composer",
+          "registry",
+          "runtime_engine",
+          "renderer",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
+    },
+    {
+      "id": "CONFORMANCE_SUBJECT_PROFILE_REQUIRED",
+      "severity": "error",
+      "scope": "Core-L1",
+      "summary": "A pass result requires the named test suite to publish a profile for the declared claim_subject_type; otherwise result must be not_run or partial.",
+      "applicability": {
+        "evaluation_target": "conformance_declaration",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "parser",
+          "validator",
+          "composer",
+          "registry",
+          "runtime_engine",
+          "renderer",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CONFORMANCE_CLASS_INVALID",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Conformance class must be one of the candidate ICSL conformance classes."
+      "summary": "Conformance class must be one of the candidate ICSL conformance classes.",
+      "applicability": {
+        "evaluation_target": "conformance_declaration",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "parser",
+          "validator",
+          "composer",
+          "registry",
+          "runtime_engine",
+          "renderer",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CONFORMANCE_RESULT_INVALID",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Conformance result must be one of pass, fail, not_run, or partial."
+      "summary": "Conformance result must be one of pass, fail, not_run, or partial.",
+      "applicability": {
+        "evaluation_target": "conformance_declaration",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "parser",
+          "validator",
+          "composer",
+          "registry",
+          "runtime_engine",
+          "renderer",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "RECEIPT_HASH_CHAIN_VALID",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Receipts must form a valid previous_hash chain and any declared content_hash must match canonical content."
+      "summary": "Receipts must form a valid previous_hash chain and any declared content_hash must match canonical content.",
+      "applicability": {
+        "evaluation_target": "receipt",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "RECEIPT_CONTENT_CORE_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Every receipt must carry kind, receipt_id, protocol_version_id, commitment_point_id, governed_context_id, outcome, authority, created_at, receipt_hash, and previous_hash (null only for genesis); content requires content_hash."
+      "summary": "Every receipt must carry kind, receipt_id, protocol_version_id, commitment_point_id, governed_context_id, outcome, authority, created_at, receipt_hash, and previous_hash (null only for genesis); content requires content_hash.",
+      "applicability": {
+        "evaluation_target": "receipt",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "HASH_FORMAT_INVALID",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Every hash-bearing field must be a tagged string matching ^sha256:[0-9a-f]{64}$."
+      "summary": "Every hash-bearing field must be a tagged string matching ^sha256:[0-9a-f]{64}$.",
+      "applicability": {
+        "evaluation_target": "multi_artifact",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "CANONICALIZATION_PROFILE_JCS",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Canonical bytes used for hashing and identity must be RFC 8785 (JCS)-conformant under I-JSON constraints."
+      "summary": "Canonical bytes used for hashing and identity must be RFC 8785 (JCS)-conformant under I-JSON constraints.",
+      "applicability": {
+        "evaluation_target": "multi_artifact",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "UNKNOWN_RECOURSE_BLOCKS_L3_CORPUS",
       "severity": "error",
       "scope": "Corpus-L3",
-      "summary": "A Corpus-L3 package cannot leave recourse as unknown_unpublished where adverse outcomes exist."
+      "summary": "A Corpus-L3 package cannot leave recourse as unknown_unpublished where adverse outcomes exist.",
+      "applicability": {
+        "evaluation_target": "corpus_release",
+        "direct_claim_subject_types": [
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "BINDING_FORCE_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Binding force and procedural outcome semantics must be explicit where a protocol claims execution effect."
+      "summary": "Binding force and procedural outcome semantics must be explicit where a protocol claims execution effect.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "BINDING_FORCE_MIXED_REQUIRES_COMPONENTS",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Mixed binding force must enumerate its binding-force components."
+      "summary": "Mixed binding force must enumerate its binding-force components.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "RECOURSE_STATE_INVALID",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Recourse state must be one of the ICSL candidate recourse-state enum values."
+      "summary": "Recourse state must be one of the ICSL candidate recourse-state enum values.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "GOVERNANCE_ADDENDUM_REQUIRED",
       "severity": "warning",
       "scope": "Core-L3",
-      "summary": "High-fidelity or public-impact adverse commitments must include governance addendum fields."
+      "summary": "High-fidelity or public-impact adverse commitments must include governance addendum fields.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "GOVERNANCE_ADDENDUM_INCOMPLETE",
       "severity": "error",
       "scope": "Core-L3",
-      "summary": "Governance addendum must include notice, participation, discretion, remedy, oversight, and reason-giving fields."
+      "summary": "Governance addendum must include notice, participation, discretion, remedy, oversight, and reason-giving fields.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "NON_EXECUTING_FIELDS_DO_NOT_AFFECT_GATES",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Labels, explanations, and UI text cannot alter gate evaluation unless mapped into canonical semantics."
+      "summary": "Labels, explanations, and UI text cannot alter gate evaluation unless mapped into canonical semantics.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "REFERENCE_VERSION_REQUIRED",
       "severity": "warning",
       "scope": "Core-L2",
-      "summary": "Normative references must declare version, date, or stable retrieval basis."
+      "summary": "Normative references must declare version, date, or stable retrieval basis.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "RENDERING_NO_NEW_SEMANTICS",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Human renderings cannot introduce semantics absent from canonical protocol data."
+      "summary": "Human renderings cannot introduce semantics absent from canonical protocol data.",
+      "applicability": {
+        "evaluation_target": "rendering",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "UNSUPPORTED_EXTENDED_FEATURE_MUST_BLOCK_OR_WARN_BY_CLASS",
       "severity": "error",
       "scope": "Extended-L2",
-      "summary": "Unsupported extended features must be rejected or downgraded according to declared conformance class."
+      "summary": "Unsupported extended features must be rejected or downgraded according to declared conformance class.",
+      "applicability": {
+        "evaluation_target": "consumer_behavior",
+        "direct_claim_subject_types": [
+          "validator",
+          "runtime_engine"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "PACKAGE_MANIFEST_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "An ICSL package must include a package manifest."
+      "summary": "An ICSL package must include a package manifest.",
+      "applicability": {
+        "evaluation_target": "package",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "PACKAGE_MANIFEST_SELF_DECLARED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "The package manifest must declare itself with role manifest."
+      "summary": "The package manifest must declare itself with role manifest.",
+      "applicability": {
+        "evaluation_target": "package",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "PACKAGE_HASH_VECTOR_VALID",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Package hash vectors must match declared package files."
+      "summary": "Package hash vectors must match declared package files.",
+      "applicability": {
+        "evaluation_target": "package",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "PACKAGE_MANIFEST_FILE_EXISTS",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Every file declared in the package manifest must exist in the package."
+      "summary": "Every file declared in the package manifest must exist in the package.",
+      "applicability": {
+        "evaluation_target": "package",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "PACKAGE_HASH_VECTOR_COMPLETE",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Hash vectors must cover every file declared by the package manifest, including the manifest itself; only hashes.json is self-exempt."
+      "summary": "Hash vectors must cover every file declared by the package manifest, including the manifest itself; only hashes.json is self-exempt.",
+      "applicability": {
+        "evaluation_target": "package",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "PACKAGE_DUAL_HASH_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Hash vector entries must carry source-byte hashes for every file and canonical-JSON hashes for JSON artifacts."
+      "summary": "Hash vector entries must carry source-byte hashes for every file and canonical-JSON hashes for JSON artifacts.",
+      "applicability": {
+        "evaluation_target": "package",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CP_COMMITMENT_TYPE_REQUIRED",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "Each CommitmentPoint must declare a commitment_type."
+      "summary": "Each CommitmentPoint must declare a commitment_type.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CP_COMMITMENT_TYPE_INVALID",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "commitment_type must be one of the eight core commitment types (DECIDE, ATTEST, APPEAL, REMEDY, OVERRIDE, EVOLVE, CLOSE, DELEGATE) or, at Extended-L2 only, EXTENSION."
+      "summary": "commitment_type must be one of the eight core commitment types (DECIDE, ATTEST, APPEAL, REMEDY, OVERRIDE, EVOLVE, CLOSE, DELEGATE) or, at Extended-L2 only, EXTENSION.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CP_GENERIC_TYPE_FORBIDDEN",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "The authoring placeholder GENERIC is forbidden as a commitment_type in canonical artifacts."
+      "summary": "The authoring placeholder GENERIC is forbidden as a commitment_type in canonical artifacts.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CP_EXTENSION_TYPE_DECLARATION_REQUIRED",
       "severity": "error",
       "scope": "Extended-L2",
-      "summary": "A CommitmentPoint with commitment_type EXTENSION must carry a commitment_type_extension declaration with id, definition, fallback_semantics (a core commitment type or explicit none), and rationale."
+      "summary": "A CommitmentPoint with commitment_type EXTENSION must carry a commitment_type_extension declaration with id, definition, fallback_semantics (a core commitment type or explicit none), and rationale.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "RECEIPT_COMMITMENT_TYPE_MATCH",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "Where a receipt carries commitment_type, it must equal the commitment_type of the referenced CommitmentPoint."
+      "summary": "Where a receipt carries commitment_type, it must equal the commitment_type of the referenced CommitmentPoint.",
+      "applicability": {
+        "evaluation_target": "receipt",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "APPEAL_TARGET_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A CommitmentPoint of type APPEAL must carry acts_on_allowed with a non-empty targets list (acts_on_allowed.targets) naming the CommitmentPoints whose receipts the appeal may dispose of."
+      "summary": "A CommitmentPoint of type APPEAL must carry acts_on_allowed with a non-empty targets list (acts_on_allowed.targets) naming the CommitmentPoints whose receipts the appeal may dispose of.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "OVERRIDE_TARGET_AND_BASIS_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A CommitmentPoint of type OVERRIDE must carry acts_on_allowed with a non-empty targets list (acts_on_allowed.targets) naming the displaced commitments, and acts_on_allowed.basis_reference declaring the superseding authority basis under which a valid commitment is displaced."
+      "summary": "A CommitmentPoint of type OVERRIDE must carry acts_on_allowed with a non-empty targets list (acts_on_allowed.targets) naming the displaced commitments, and acts_on_allowed.basis_reference declaring the superseding authority basis under which a valid commitment is displaced.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "EVOLVE_TARGET_VERSION_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A CommitmentPoint of type EVOLVE must carry the evolves object (protocol_id, protocol_version_id, or reference) identifying the protocol or protocol version being changed."
+      "summary": "A CommitmentPoint of type EVOLVE must carry the evolves object (protocol_id, protocol_version_id, or reference) identifying the protocol or protocol version being changed.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "DELEGATE_SCOPE_REQUIRED",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A CommitmentPoint of type DELEGATE must carry the delegation object (recipient and scope required, basis_reference optional) identifying the recipient and the scope of the transferred authority, creating the delegated_authority that later Authority gates rely on."
+      "summary": "A CommitmentPoint of type DELEGATE must carry the delegation object (recipient and scope required, basis_reference optional) identifying the recipient and the scope of the transferred authority, creating the delegated_authority that later Authority gates rely on.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "REMEDY_TARGET_IDENTIFIED",
       "severity": "warning",
       "scope": "Core-L2",
-      "summary": "A CommitmentPoint of type REMEDY must carry acts_on_allowed with a non-empty targets list (acts_on_allowed.targets, schema-enforced); this rule additionally checks, at warning level, that the targets identify the defective prior commitment, procurement, or execution being redressed — remedies may cure conditions rather than commitments, so target sufficiency stays advisory."
+      "summary": "A CommitmentPoint of type REMEDY must carry acts_on_allowed with a non-empty targets list (acts_on_allowed.targets, schema-enforced); this rule additionally checks, at warning level, that the targets identify the defective prior commitment, procurement, or execution being redressed — remedies may cure conditions rather than commitments, so target sufficiency stays advisory.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "CLOSE_TERMINAL_TRANSITION",
       "severity": "warning",
       "scope": "Core-L2",
-      "summary": "A CommitmentPoint of type CLOSE should transition its governed context to a terminal state; warning until the GovernedContext state machine is formalized."
+      "summary": "A CommitmentPoint of type CLOSE should transition its governed context to a terminal state; warning until the GovernedContext state machine is formalized.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "RECEIPT_PROTOCOL_VERSION_HASH_MATCH",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A receipt's protocol_version_hash must equal the canonical hash (sha256 over the RFC 8785/JCS canonical bytes) of the ProtocolVersion object named by its protocol_version_id."
+      "summary": "A receipt's protocol_version_hash must equal the canonical hash (sha256 over the RFC 8785/JCS canonical bytes) of the ProtocolVersion object named by its protocol_version_id.",
+      "applicability": {
+        "evaluation_target": "receipt",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "ACTS_ON_TARGET_MEMBERSHIP",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A receipt's acts_on.target_receipt_id must reference a receipt whose commitment_point_id is listed in the acting CommitmentPoint's acts_on_allowed.targets."
+      "summary": "A receipt's acts_on.target_receipt_id must reference a receipt whose commitment_point_id is listed in the acting CommitmentPoint's acts_on_allowed.targets.",
+      "applicability": {
+        "evaluation_target": "multi_artifact",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "CP_EXTENSION_REQUIRES_EXTENDED_CLASS",
       "severity": "error",
       "scope": "Extended-L2",
-      "summary": "EXTENSION-typed CommitmentPoints are permitted only in artifacts declaring Extended-L2; the prohibition applies to core-class artifacts — an artifact declaring Core-L1, Core-L2, Core-L3, or Corpus-L3 must not contain any CommitmentPoint with commitment_type EXTENSION."
+      "summary": "EXTENSION-typed CommitmentPoints are permitted only in artifacts declaring Extended-L2; the prohibition applies to core-class artifacts — an artifact declaring Core-L1, Core-L2, Core-L3, or Corpus-L3 must not contain any CommitmentPoint with commitment_type EXTENSION.",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "EXTENSION_FALLBACK_BEHAVIOR_REQUIRED",
       "severity": "error",
       "scope": "Extended-L2",
-      "summary": "A consumer encountering an EXTENSION-typed CommitmentPoint must apply the fixed per-class fallback behaviors: a consumer supporting only core conformance classes processes the CommitmentPoint as the core type named by fallback_semantics and emits a warning diagnostic, or blocks with an error when fallback_semantics is none; a consumer supporting Extended-L2 processes the extension natively when it recognizes the extension id and otherwise applies the same fallback rule (treat as the named core type with a warning diagnostic; block on none). Silent acceptance is prohibited in all cases."
+      "summary": "A consumer encountering an EXTENSION-typed CommitmentPoint must apply the fixed per-class fallback behaviors: a consumer supporting only core conformance classes processes the CommitmentPoint as the core type named by fallback_semantics and emits a warning diagnostic, or blocks with an error when fallback_semantics is none; a consumer supporting Extended-L2 processes the extension natively when it recognizes the extension id and otherwise applies the same fallback rule (treat as the named core type with a warning diagnostic; block on none). Silent acceptance is prohibited in all cases.",
+      "applicability": {
+        "evaluation_target": "consumer_behavior",
+        "direct_claim_subject_types": [
+          "validator",
+          "runtime_engine"
+        ],
+        "artifact_condition": "required"
+      }
     },
     {
       "id": "GOVERNED_CONTEXT_PROTOCOL_VERSION_HASH_MATCH",
       "severity": "error",
       "scope": "Core-L2",
-      "summary": "A runtime GovernedContext's protocol_version_hash must equal the canonical hash (sha256 over the RFC 8785/JCS canonical bytes) of the ProtocolVersion object named by its protocol_version_id. The embedded governed_context of a ProtocolVersion is a GovernedContextDescriptor and carries no runtime members, so no artifact ever embeds a hash of the object containing it."
+      "summary": "A runtime GovernedContext's protocol_version_hash must equal the canonical hash (sha256 over the RFC 8785/JCS canonical bytes) of the ProtocolVersion object named by its protocol_version_id. The embedded governed_context of a ProtocolVersion is a GovernedContextDescriptor and carries no runtime members, so no artifact ever embeds a hash of the object containing it.",
+      "applicability": {
+        "evaluation_target": "governed_context",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "when_present_or_claimed"
+      }
     },
     {
       "id": "ENCODING_DEPTH_CLASS_CONSISTENT",
       "severity": "error",
       "scope": "Core-L1",
-      "summary": "A declared conformance class with suffix -Ln requires the artifact's encoding_depth to be Ln or greater: Core-L1 admits L1, L2, or L3; Core-L2 and Extended-L2 admit L2 or L3; Core-L3 and Corpus-L3 require L3. When conformance_class is present, encoding_depth is required (also enforced by the ProtocolVersion schema class-depth conditionals)."
+      "summary": "A declared conformance class with suffix -Ln requires the artifact's encoding_depth to be Ln or greater: Core-L1 admits L1, L2, or L3; Core-L2 and Extended-L2 admit L2 or L3; Core-L3 and Corpus-L3 require L3. When conformance_class is present, encoding_depth is required (also enforced by the ProtocolVersion schema class-depth conditionals).",
+      "applicability": {
+        "evaluation_target": "protocol_version",
+        "direct_claim_subject_types": [
+          "protocol_package",
+          "corpus_release"
+        ],
+        "artifact_condition": "required"
+      }
     }
   ]
 }

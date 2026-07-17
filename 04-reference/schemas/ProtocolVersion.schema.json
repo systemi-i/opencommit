@@ -25,7 +25,7 @@
     },
     "governed_context": {
       "$ref": "ICSLCommon.schema.json#/$defs/GovernedContextDescriptor",
-      "description": "Descriptor of what class of matters this protocol governs (shape changed in the 2026-07 repair sprint — see 07-decisions/). Descriptive only: runtime members (protocol_version_id, protocol_version_hash, governed_context_id, current_time) are prohibited by the descriptor's additionalProperties: false, so the ProtocolVersion contains no hash of itself and no zero-hash convention exists. The runtime GovernedContext lives in its own artifact and pins this ProtocolVersion by id and canonical hash (rule GOVERNED_CONTEXT_PROTOCOL_VERSION_HASH_MATCH)."
+      "description": "Descriptor of what class of matters this protocol governs. Descriptive only: runtime members (protocol_version_id, protocol_version_hash, governed_context_id, current_time) are prohibited by the descriptor's additionalProperties: false, so the ProtocolVersion contains no hash of itself and no zero-hash convention exists. The runtime GovernedContext lives in its own artifact and pins this ProtocolVersion by id and canonical hash (rule GOVERNED_CONTEXT_PROTOCOL_VERSION_HASH_MATCH)."
     },
     "commitment_points": {
       "type": "array",
@@ -34,7 +34,7 @@
     },
     "encoding_provenance": {
       "$ref": "ICSLCommon.schema.json#/$defs/EncodingProvenance",
-      "description": "Optional provenance of the encoding itself (added in the 2026-07 repair sprint — see 07-decisions/). SHOULD at Core-L2; MUST at Core-L3/Corpus-L3."
+      "description": "Optional provenance of the encoding itself. SHOULD at Core-L2; MUST at Core-L3/Corpus-L3."
     }
   },
   "required": ["kind", "protocol_version_id", "icsl_version", "institution", "governed_context", "commitment_points"],
@@ -132,6 +132,6 @@
       }
     }
   ],
-  "$comment": "Class coupling (added in the 2026-07 repair sprint — see 07-decisions/): EXTENSION-typed CommitmentPoints are permitted only in artifacts declaring Extended-L2; under any core/corpus conformance class no commitment_point may have commitment_type EXTENSION (also enforced by catalog rule CP_EXTENSION_REQUIRES_EXTENDED_CLASS). The coupling is bidirectional (added in the 2026-07 repair sprint — see 07-decisions/): if any commitment_point has commitment_type EXTENSION, conformance_class is REQUIRED and must be Extended-L2 — omitting conformance_class cannot smuggle EXTENSION past the class gate. Class-depth coupling (added in the 2026-07 repair sprint — see 07-decisions/): when conformance_class is present, encoding_depth is REQUIRED and a class declared at -Ln requires encoding depth Ln or greater — Core-L1 permits L1/L2/L3; Core-L2 and Extended-L2 permit L2/L3; Core-L3 and Corpus-L3 require L3 (also enforced by catalog rule ENCODING_DEPTH_CLASS_CONSISTENT). The canonical protocol_version_hash of this object is sha256 over its RFC 8785 (JCS) canonical bytes; the object contains no hash of itself (governed_context is a hash-free descriptor), so the preimage is non-self-referential.",
+  "$comment": "Class coupling: EXTENSION-typed CommitmentPoints are permitted only in artifacts declaring Extended-L2; under any core/corpus conformance class no commitment_point may have commitment_type EXTENSION (also enforced by catalog rule CP_EXTENSION_REQUIRES_EXTENDED_CLASS). The coupling is bidirectional: if any commitment_point has commitment_type EXTENSION, conformance_class is REQUIRED and must be Extended-L2 — omitting conformance_class cannot smuggle EXTENSION past the class gate. Class-depth coupling: when conformance_class is present, encoding_depth is REQUIRED and a class declared at -Ln requires encoding depth Ln or greater — Core-L1 permits L1/L2/L3; Core-L2 and Extended-L2 permit L2/L3; Core-L3 and Corpus-L3 require L3 (also enforced by catalog rule ENCODING_DEPTH_CLASS_CONSISTENT). The canonical protocol_version_hash of this object is sha256 over its RFC 8785 (JCS) canonical bytes; the object contains no hash of itself (governed_context is a hash-free descriptor), so the preimage is non-self-referential.",
   "additionalProperties": true
 }

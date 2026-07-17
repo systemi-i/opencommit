@@ -10,9 +10,24 @@ A rule grounded in a normative `MUST` has severity `error`. A rule grounded in `
 
 The `scope` field identifies the minimum conformance class at which a rule is evaluated. Higher Core classes inherit lower-class requirements: `Core-L1` is contained by `Core-L2`, which is contained by `Core-L3`. `Extended-L2` adds extension negotiation to `Core-L2`; `Corpus-L3` adds provenance requirements to `Core-L3`.
 
+`scope` is not a complete applicability test. Every rule also carries an
+`applicability` object:
+
+- `evaluation_target` identifies the artifact or behavior evaluated;
+- `direct_claim_subject_types` lists the subject types to which the rule applies directly;
+- `artifact_condition` states whether the target is required or evaluated only when
+  present or claimed.
+
+A validator selects a rule only when the claimed class includes the rule's `scope` and
+the declaration's `claim_subject_type` appears in
+`direct_claim_subject_types`. A package rule therefore does not directly apply to a
+parser or renderer claim. An implementation suite may use an artifact-facing rule as the
+expected result for a fixture, but that is fixture-oracle use rather than direct
+applicability.
+
 ## Coverage
 
-The 72-rule catalog currently covers:
+The 74-rule catalog currently covers:
 
 - required protocol, institution, governed-context, and CommitmentPoint structure;
 - commitment types, extension declarations, and class coupling;

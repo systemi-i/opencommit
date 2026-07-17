@@ -5,7 +5,7 @@ This directory is a complete, verifiable ICSL v0.1 package encoding a **fictiona
 municipal construction-permit protocol for the **Example City Building Authority**
 (Republic of Exampleland, which does not exist). Every statute section, decree,
 officeholder, case number, and locator in this package is invented. The package is
-illustrative only: it demonstrates the patched v0.1 candidate model at conformance
+illustrative only: it demonstrates the current v0.1 candidate model at conformance
 class Core-L2 and is not legal advice, not an encoding of any real jurisdiction, and
 not a template whose legal content should be reused. Per the specification, an ICSL
 encoding is a representation of underlying institutional sources; in any conflict the
@@ -177,14 +177,15 @@ public-notice and `cp-05` objection receipts are elided, so a validator evaluati
 full dependency satisfaction over the context (as opposed to verifying the chain
 itself) would flag their absence. `receipts/deemed-example.json` is a single receipt
 from a second context (`gc-ec-2026-000777`); its `previous_hash` points at that
-context's completeness receipt, which is not shipped, so only its self-hashes are
-verifiable here.
+context's completeness receipt, which is not shipped. The predecessor value is
+illustrative and cannot be independently validated from this package; only the deemed
+receipt's self-hashes are verifiable here.
 
-Receipt `content` carries no personal data: applicant dossiers and decision reasons
-are detachable payloads referenced by **salted** content hashes whose salts are held
-by the (fictional) authority. Those detached hashes are therefore not re-derivable
-from this package — by design, so that erasure or rectification of personal data
-cannot break chain verification.
+Receipt `content` carries no personal data. Applicant dossiers and decision reasons are
+treated as detachable payloads managed by the fictional authority under deployment
+controls outside this package. The example's deployment notes do not define or claim an
+interoperable salting, key-management, rectification, erasure, or verification profile;
+ICSL v0.1 provides none of those properties.
 
 ## How to re-verify
 
