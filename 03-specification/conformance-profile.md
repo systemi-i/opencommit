@@ -45,15 +45,22 @@ composer, registry, runtime, or renderer itself.
 
 ### 2.1 Current Subject-Profile Status
 
+A published suite profile is a versioned, publicly accessible specification that names
+the claim subject type and supported classes, identifies the applicable catalog rules and
+fixture behaviors, defines the test procedure and result criteria, and identifies the
+suite implementation and version. A declaration's `test_suite_version` MUST identify
+that profile; bundled checks or examples do not constitute a profile unless they are
+published as one and cover its declared behavior.
+
 | Claim subject type | Direct catalog coverage | Candidate posture |
 | --- | --- | --- |
-| `protocol_package` | Package, ProtocolVersion, declared conformance, and included or claimed artifacts | Supported for qualified candidate assessment; the full suite remains unpublished |
+| `protocol_package` | Package, ProtocolVersion, declared conformance, and included or claimed artifacts | Profile unpublished; qualified candidate assessment is supported, but result cannot be `pass` |
 | `corpus_release` | Package and artifact rules plus Corpus-L3 provenance rules | Profile incomplete; no passing Corpus-L3 claim is currently supported |
 | `parser` | Conformance-declaration rules only | Subject-specific suite unpublished; result cannot be `pass` |
-| `validator` | Conformance-declaration rules only; artifact rules may be fixture oracles | Subject-specific suite unpublished; result cannot be `pass` |
+| `validator` | Conformance-declaration rules and declared consumer behavior; artifact rules may be fixture oracles | Subject-specific suite unpublished; result cannot be `pass` |
 | `composer` | Conformance-declaration rules only | Subject-specific suite unpublished; result cannot be `pass` |
 | `registry` | Conformance-declaration rules only | Subject-specific suite unpublished; result cannot be `pass` |
-| `runtime_engine` | Conformance-declaration rules only; consumer-behavior rules require a suite profile | Subject-specific suite unpublished; result cannot be `pass` |
+| `runtime_engine` | Conformance-declaration and consumer-behavior rules | Subject-specific suite unpublished; result cannot be `pass` |
 | `renderer` | Conformance-declaration rules only; rendering rules require fixture evaluation | Subject-specific suite unpublished; result cannot be `pass` |
 
 ## 3. Classes

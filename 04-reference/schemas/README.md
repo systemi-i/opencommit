@@ -132,7 +132,7 @@ relationship objects:
 
 - `ActsOnAllowed` (ICSLCommon) is now
   `{ allowed_effects: [ActsOnEffect] (required, minItems 1),
-  targets: [commitment_point id] (required, minItems 1),
+  targets: [commitment_point_id] (required, minItems 1),
   basis_reference?: Reference id }`. `targets` names the CommitmentPoints whose receipts
   this CommitmentPoint may act on. At runtime, a Receipt's `acts_on.target_receipt_id`
   must reference a receipt whose `commitment_point_id` is in the acting CommitmentPoint's

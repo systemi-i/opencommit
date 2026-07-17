@@ -2,7 +2,7 @@
   "kind": "Receipt",
   "receipt_id": "urn:opencommit:mutation-baseline:receipt:0001",
   "protocol_version_id": "urn:opencommit:mutation-baseline:pv:1.0.0",
-  "protocol_version_hash": "sha256:164de5b58140e3df051a94c66fc12660ad54daefa82d07e6277ad62cf597f6d8",
+  "protocol_version_hash": "sha256:133a1a28ded00d53957c03e20931eb77bc674325fce7d84c37178bca8ea775b2",
   "commitment_point_id": "cp-baseline-decide",
   "governed_context_id": "urn:opencommit:mutation-baseline:gc:case-0001",
   "outcome": "granted",
@@ -10,6 +10,6 @@
   "authority": "Baseline Permit Officer",
   "created_at": "2026-07-13T12:00:00Z",
   "effective_at": "2026-07-13T12:00:00Z",
-  "receipt_hash": "sha256:06879ad866d2babc726057d7301dba73103873d2be9e92ce2fbf96435da1d15b",
+  "receipt_hash": "sha256:4024d6b81dccb10cb6dea1449f7ed0ea22b6c000e9ba1b15d1521e3e63180d2f",
   "previous_hash": null
 }

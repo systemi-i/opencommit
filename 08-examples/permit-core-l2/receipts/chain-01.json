@@ -3,7 +3,7 @@
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-001",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
+    "protocol_version_hash": "sha256:41cc5f0a06255e9897499c34f4ac78449b590ea999c51973bc101a16f1512207",
     "commitment_point_id": "cp-01-intake",
     "commitment_type": "ATTEST",
     "governed_context_id": "gc-ec-2026-000123",
@@ -23,18 +23,18 @@
       "applicant_dossier": {
         "detached": true,
         "content_hash": "sha256:4389f7f571ac1f6c17f1f87910e0f14c143bad107020fad22be35b73f139d22c",
-        "hashing": "salted-sha256; salt held by the authority so erasure or rectification of personal data cannot break chain verification"
+        "deployment_note": "Detached-payload storage and content-commitment controls are authority-specific deployment practices outside the ICSL v0.1 profile; this example asserts no interoperable salting, key-management, rectification, or erasure property."
       }
     },
     "previous_hash": null,
-    "content_hash": "sha256:8fe6990a932bf41012601ef3cec67dc698d0e84ff5c1d2730bbf7a939481de17",
-    "receipt_hash": "sha256:7f1162f8640c5392ef803bcbb6cbaa9625ba549195dbe472dd74943ec0e3353f"
+    "content_hash": "sha256:67522191e8d0fcc7dde135da280096fe8d378fe118e6679be3ceb6aed30b6263",
+    "receipt_hash": "sha256:c797716b6c4ef51a9364e4b9f635ebc4cab26d29d6f9b6c778118026bdf4d825"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-002",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
+    "protocol_version_hash": "sha256:41cc5f0a06255e9897499c34f4ac78449b590ea999c51973bc101a16f1512207",
     "commitment_point_id": "cp-03-completeness",
     "commitment_type": "DECIDE",
     "governed_context_id": "gc-ec-2026-000123",
@@ -50,15 +50,15 @@
       "determination_date": "2026-03-06",
       "deemed_approval_anchor": "this receipt anchors the cp-08 clock (P90D)"
     },
-    "previous_hash": "sha256:7f1162f8640c5392ef803bcbb6cbaa9625ba549195dbe472dd74943ec0e3353f",
+    "previous_hash": "sha256:c797716b6c4ef51a9364e4b9f635ebc4cab26d29d6f9b6c778118026bdf4d825",
     "content_hash": "sha256:835aa5b21c57f1cc16ee823678067e7fe6b7b43720346f46e3e577481dba67ab",
-    "receipt_hash": "sha256:bcc3b88cd5a1cdece4a214142357a4a96e03267bfd28d3ba9cd8cd2d6a7ff2f9"
+    "receipt_hash": "sha256:0b6c493b49cc3487e29e4e207719426777aaa8313876fb8de9e0f559799a3cd5"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-003",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
+    "protocol_version_hash": "sha256:41cc5f0a06255e9897499c34f4ac78449b590ea999c51973bc101a16f1512207",
     "commitment_point_id": "cp-06-technical-review",
     "commitment_type": "ATTEST",
     "governed_context_id": "gc-ec-2026-000123",
@@ -76,15 +76,15 @@
       "objections_addressed": "1 registered objection addressed (the cp-05 receipt is elided from this abbreviated chain)",
       "certification": "automated conformity screening reviewed and certified by the reviewing engineer and the chief municipal engineer"
     },
-    "previous_hash": "sha256:bcc3b88cd5a1cdece4a214142357a4a96e03267bfd28d3ba9cd8cd2d6a7ff2f9",
+    "previous_hash": "sha256:0b6c493b49cc3487e29e4e207719426777aaa8313876fb8de9e0f559799a3cd5",
     "content_hash": "sha256:5502c91e8f197364325f68ee6c51ba34ebce0cdaedb56bb41a6e003169ec41d6",
-    "receipt_hash": "sha256:5755128d487650d6194a37c618494c52a2babb95dd6cd21be6e155d09b319a2f"
+    "receipt_hash": "sha256:d1603b33ad225f813123bc0c5a868fc6734992fc9059a90520a63ec1ae676686"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-004",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
+    "protocol_version_hash": "sha256:41cc5f0a06255e9897499c34f4ac78449b590ea999c51973bc101a16f1512207",
     "commitment_point_id": "cp-07-decision",
     "commitment_type": "DECIDE",
     "governed_context_id": "gc-ec-2026-000123",
@@ -104,18 +104,18 @@
       "reasons_dossier": {
         "detached": true,
         "content_hash": "sha256:fa7a088220977d92b9496ddf5fdd4b5a04263476bc18cef3270e74a36f48174c",
-        "hashing": "salted-sha256; salt held by the authority so erasure or rectification of personal data cannot break chain verification"
+        "deployment_note": "Detached-payload storage and content-commitment controls are authority-specific deployment practices outside the ICSL v0.1 profile; this example asserts no interoperable salting, key-management, rectification, or erasure property."
       }
     },
-    "previous_hash": "sha256:5755128d487650d6194a37c618494c52a2babb95dd6cd21be6e155d09b319a2f",
-    "content_hash": "sha256:5f452b3cc1c1dcf01392e9664f6bbae44c1ecc45a98e348f6cd6a8a9edfdcd64",
-    "receipt_hash": "sha256:0897bdae248174c19fb948f1ee37f3b6cbe3f608b814ccc830ffe22c5c6637ec"
+    "previous_hash": "sha256:d1603b33ad225f813123bc0c5a868fc6734992fc9059a90520a63ec1ae676686",
+    "content_hash": "sha256:1b2d7dee14342ac4fa60a4c03cc06b76ada25b9103263a19459ae01d3d22bbf5",
+    "receipt_hash": "sha256:260742739ba3424457b64bd6d78a6b1928d3c6428366c3aa9e7926920ac41f6d"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-005",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
+    "protocol_version_hash": "sha256:41cc5f0a06255e9897499c34f4ac78449b590ea999c51973bc101a16f1512207",
     "commitment_point_id": "cp-09-appeal-admissibility",
     "commitment_type": "DECIDE",
     "governed_context_id": "gc-ec-2026-000123",
@@ -136,15 +136,15 @@
       "admissibility": "standing, timeliness, and form satisfied (Building Act s.47(1))",
       "effect_note": "admission suspends decision BD-2026-0458 under Building Act s.47(2) until disposition (cp-10-appeal-disposition)"
     },
-    "previous_hash": "sha256:0897bdae248174c19fb948f1ee37f3b6cbe3f608b814ccc830ffe22c5c6637ec",
+    "previous_hash": "sha256:260742739ba3424457b64bd6d78a6b1928d3c6428366c3aa9e7926920ac41f6d",
     "content_hash": "sha256:11c988d839443ff967dda1de8951705b1c9f6dc80cf5bf63fb96671d31ce3cf0",
-    "receipt_hash": "sha256:55ca33320148fb78da6cb627b40cfaae3480a71c9e1da9573b6944d070dc6d91"
+    "receipt_hash": "sha256:564d2675978b073fc21d460854a6c316615cbe95bf0ca534ad72d2c1816f5657"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-006",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
+    "protocol_version_hash": "sha256:41cc5f0a06255e9897499c34f4ac78449b590ea999c51973bc101a16f1512207",
     "commitment_point_id": "cp-10-appeal-disposition",
     "commitment_type": "APPEAL",
     "governed_context_id": "gc-ec-2026-000123",
@@ -166,11 +166,11 @@
       "reasons_dossier": {
         "detached": true,
         "content_hash": "sha256:c7c9d38e6f86d1cb7b043d17802bab55a423365e26cc644462b129ac8e628c1b",
-        "hashing": "salted-sha256; salt held by the authority so erasure or rectification of personal data cannot break chain verification"
+        "deployment_note": "Detached-payload storage and content-commitment controls are authority-specific deployment practices outside the ICSL v0.1 profile; this example asserts no interoperable salting, key-management, rectification, or erasure property."
       }
     },
-    "previous_hash": "sha256:55ca33320148fb78da6cb627b40cfaae3480a71c9e1da9573b6944d070dc6d91",
-    "content_hash": "sha256:dbe1170847309fad4d47e1733fd75899047d05747844932d1389cef9a4daf44b",
-    "receipt_hash": "sha256:56807a14908e9f55af873a03f7fa558590fa3def3ede4075fef19889f690f0e1"
+    "previous_hash": "sha256:564d2675978b073fc21d460854a6c316615cbe95bf0ca534ad72d2c1816f5657",
+    "content_hash": "sha256:ee05d17d12e51b6c7fba55aa3585129773db549655b720c75e0c45f39c3cb43b",
+    "receipt_hash": "sha256:0903a9b6701f95c83128555e47afa31c93e337b649a7a66d304c768816a1de5b"
   }
 ]

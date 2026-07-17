@@ -63,6 +63,11 @@ by both class and subject type. The catalog now contains 74 rules and is identif
 [ADR-009](07-decisions/ADR-009-conformance-claim-subject-applicability.md) and does not
 alter the frozen institutional object model.
 
+This pre-publication revision changed canonical bytes in the mutation baseline and worked
+ProtocolVersion to correct claim language and metadata. Their identifiers remain candidate
+identifiers because neither artifact had been published as an immutable release; all pinned
+ProtocolVersion, receipt, and package hashes were regenerated together for this revision.
+
 ## Evidence and Research Corpus
 
 Exploratory encodings across public-service families informed development of the model and commitment taxonomy. They remain research material rather than a public benchmark. They have not yet undergone independent encoding, systematic source review, or inter-encoder reliability measurement.

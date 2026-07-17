@@ -137,6 +137,6 @@
     "drafting_method": "human",
     "drafting_tool": "manual",
     "approved_by": "mutation-suite maintainers",
-    "approval_basis": "Synthetic test fixture for the schema-mutation suite ; not an encoding of a real institution."
+    "approval_basis": "Synthetic test fixture for the schema-mutation suite; not an encoding of a real institution."
   }
 }

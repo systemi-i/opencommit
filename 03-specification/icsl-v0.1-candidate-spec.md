@@ -668,7 +668,7 @@ For `temporal_lapse`, the CommitmentPoint MUST declare `trigger_condition`:
 trigger_condition = {
   anchor: { commitment_point_id, event: "receipt_created" },
   duration: <ISO-8601 duration string>,
-  requires_absence: [commitment_point_id,...]
+  requires_absence: [commitment_point_id, ...]
 }
 ```
 
@@ -711,7 +711,7 @@ A CommitmentPoint MAY declare, at template level (see 3.5a):
 acts_on_allowed = {
   allowed_effects: [suspend | revive | revoke_ex_tunc | revoke_ex_nunc | quash | supersede | vary | expire],
                                           // REQUIRED, at least one
-  targets: [commitment_point id,...],    // REQUIRED, at least one
+  targets: [commitment_point_id, ...],   // REQUIRED, at least one
   basis_reference?: Reference id
 }
 ```
@@ -761,13 +761,15 @@ Receipts are hash-linked into a chain (see 5.3).
 ### 5.1 Acceptance
 
 
-Acceptance is the institutional act by which a runtime records that the conditions
-declared by the pinned ProtocolVersion evaluate as satisfied for a GovernedContext. It is
-an assertion under the encoding, not a validator's determination that the actor possessed
-lawful authority or that all six gates were legally adequate. Runtimes MUST distinguish
-attempted from accepted commitments. An accepted adverse outcome (e.g. a denial) is a
-Commitment producing a Receipt with full recourse machinery. A blocked or rejected attempt
-produces an EvaluationRecord, never a Receipt.
+Acceptance is the institutional act by which the authority identified by the applicable
+Authority gate accepts an act as a Commitment after the conditions declared by the pinned
+ProtocolVersion are recorded as satisfied for a GovernedContext. A runtime records the
+authority's acceptance; it does not perform the institutional act or independently confer
+authority. The record is an assertion under the encoding, not a validator's determination
+that the actor possessed lawful authority or that all six gates were legally adequate.
+Runtimes MUST distinguish attempted from accepted commitments. An accepted adverse outcome
+(e.g. a denial) is a Commitment producing a Receipt with full recourse machinery. A blocked
+or rejected attempt produces an EvaluationRecord, never a Receipt.
 
 ### 5.2 Receipt Content Core
 

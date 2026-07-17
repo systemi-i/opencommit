@@ -74,7 +74,7 @@
             "site plan",
             "fee payment record"
           ],
-          "notes": "AI-extracted document metadata is candidate data only; it becomes durable evidence solely through acceptance at cp-02-fact-acceptance. Personal-data payloads are held as detachable content referenced by salted content hash, not embedded in canonical receipt content."
+          "notes": "AI-extracted document metadata is candidate data only; it becomes durable evidence solely through acceptance at cp-02-fact-acceptance. Personal-data payloads are excluded from canonical receipt content. Any authority-specific mechanism for storing or committing to detached payloads is a deployment practice outside the ICSL v0.1 profile and is not asserted by this package."
         },
         "reasoning": {
           "mode": "deterministic_rule",

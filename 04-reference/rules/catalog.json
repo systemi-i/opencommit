@@ -741,7 +741,10 @@
       "summary": "Unsupported extended features must be rejected or downgraded according to declared conformance class.",
       "applicability": {
         "evaluation_target": "consumer_behavior",
-        "direct_claim_subject_types": [],
+        "direct_claim_subject_types": [
+          "validator",
+          "runtime_engine"
+        ],
         "artifact_condition": "required"
       }
     },
@@ -1032,7 +1035,10 @@
       "summary": "A consumer encountering an EXTENSION-typed CommitmentPoint must apply the fixed per-class fallback behaviors: a consumer supporting only core conformance classes processes the CommitmentPoint as the core type named by fallback_semantics and emits a warning diagnostic, or blocks with an error when fallback_semantics is none; a consumer supporting Extended-L2 processes the extension natively when it recognizes the extension id and otherwise applies the same fallback rule (treat as the named core type with a warning diagnostic; block on none). Silent acceptance is prohibited in all cases.",
       "applicability": {
         "evaluation_target": "consumer_behavior",
-        "direct_claim_subject_types": [],
+        "direct_claim_subject_types": [
+          "validator",
+          "runtime_engine"
+        ],
         "artifact_condition": "required"
       }
     },

@@ -337,13 +337,13 @@
     },
     {
       "id": "M23",
-      "description": "Embedded governed_context descriptor carrying runtime members (protocol_version_hash and current_time).",
+      "description": "Embedded governed_context descriptor carrying runtime members (protocol_version_hash and current_time); the hash is a well-formed synthetic probe value, not an artifact identity.",
       "target": "protocol_version",
       "ops": [
         {
           "op": "add",
           "path": "/governed_context/protocol_version_hash",
-          "value": "sha256:3dea97d9cbad7a8db7d712e44e5514fc69d76771d3a5ded3d658f12d228627ee"
+          "value": "sha256:aaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaaa"
         },
         {
           "op": "add",

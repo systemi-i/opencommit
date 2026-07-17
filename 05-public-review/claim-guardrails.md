@@ -31,7 +31,7 @@ The project and implementers should not claim that:
   privacy, retention, and purpose controls;
 - the current verifier is a complete reference implementation;
 - AI systems acquire authority by implementing ICSL;
-- exploratory corpus results demonstrate empirical validation or universal coverage.
+- exploratory corpus results demonstrate empirical validation or universal coverage;
 - v0.1 already provides cross-protocol composition, an execution-binding standard, or a
   functioning open governance network.
 

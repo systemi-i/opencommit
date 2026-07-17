@@ -190,7 +190,7 @@ State the three results separately:
 | --- | --- |
 | Source fidelity | supported / supported_with_gaps / not_supported / not_assessable |
 | ICSL representability | represented / partially_represented / model_pressure / not_assessable |
-| Candidate conformance | pass / pass_with_warnings / fail / not_run / incomplete |
+| Candidate conformance | pass / fail / not_run / partial |
 
 Identify the claim subject, claim subject type, ICSL version, target class, encoding depth
 where applicable, assessment date, assessor or agent version, and principal limitations.
@@ -263,4 +263,4 @@ Before reporting completion, confirm that:
 - proposed repairs are separate from the assessed artifact;
 - the final result is qualified by version, class, method, and limitations.
 
-If any item is false, the assessment is `incomplete` and must say why.
+If any item is false, the candidate conformance result is `partial` and must say why.

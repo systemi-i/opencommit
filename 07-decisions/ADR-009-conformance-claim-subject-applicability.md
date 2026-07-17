@@ -3,6 +3,9 @@
 - Status: accepted for the v0.1 consultation candidate.
 - Date: 2026-07-16.
 
+This status records acceptance of the candidate design decision. It does not approve the
+separate public consultation disposition, which remains pending steward action.
+
 ## Context
 
 The conformance profile recognized protocol packages, parsers, validators, composers, registries, runtime engines, renderers, and corpus releases as claim subjects. A declaration identified the subject with an unconstrained string, while catalog rules identified only their minimum conformance class.
@@ -28,4 +31,3 @@ Class scope alone is not a complete applicability test. Package-manifest rules a
 ## Evidence
 
 The worked package declares `protocol_package`; the conformance schema enforces the discriminator; mutation M24 rejects its omission; and all catalog entries carry explicit applicability. The mutation suite, worked-package verifier, and package attack runner pass after the change.
-

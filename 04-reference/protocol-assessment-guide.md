@@ -304,11 +304,10 @@ Report each axis independently.
 
 ### Candidate conformance result
 
-- `pass`: every applicable requirement was assessed, no error diagnostic remains, and all package checks in scope passed;
-- `pass_with_warnings`: the conditions for `pass` hold, but one or more warning diagnostics remain;
+- `pass`: every applicable requirement was assessed, no error diagnostic remains, and all package checks in scope passed; warning diagnostics, if any, are reported separately;
 - `fail`: at least one error diagnostic remains;
 - `not_run`: no encoded artifact was supplied or validation was not performed;
-- `incomplete`: required checks could not be completed.
+- `partial`: validation was performed, but one or more required checks could not be completed.
 
 Any result must identify the claim subject identity, claim subject type, ICSL version,
 conformance class, encoding depth where applicable, assessment method or tool version,

@@ -1,8 +1,7 @@
 #!/usr/bin/env python3
 """ICSL schema-mutation regression suite runner.
 
-Added in the 2026-07 repair sprint (see 07-decisions/). Loads the schemas from
-../schemas into an $id-keyed registry, validates the baseline artifacts
+Loads the schemas from ../schemas into an $id-keyed registry, validates the baseline artifacts
 (including the hash bindings between them), then applies each mutation case
 from mutations.json to a deep copy of its baseline and checks the declared
 expectation:

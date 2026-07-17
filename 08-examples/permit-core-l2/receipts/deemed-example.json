@@ -2,7 +2,7 @@
   "kind": "Receipt",
   "receipt_id": "rcpt-ec-000777-003",
   "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-  "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
+  "protocol_version_hash": "sha256:41cc5f0a06255e9897499c34f4ac78449b590ea999c51973bc101a16f1512207",
   "commitment_point_id": "cp-08-deemed-approval",
   "commitment_type": "DECIDE",
   "governed_context_id": "gc-ec-2026-000777",
@@ -23,5 +23,5 @@
   },
   "previous_hash": "sha256:cb7abea619509e9c8ac30bc505d42e3b8169316bd43fa36498192d8865afc572",
   "content_hash": "sha256:bab72996678014deeffd97f493e07c0f8a81ddc492eb1be3c05acbb6b4453d89",
-  "receipt_hash": "sha256:9306b7cf926c00dfc3e0572c1a57de12d357de32613337ce3d1f84215f282ec0"
+  "receipt_hash": "sha256:278c04b7d4411a21fd4b6bbb02b570a76863095f2f2606ed1ff5193aeed628ac"
 }

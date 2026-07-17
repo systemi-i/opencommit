@@ -4,6 +4,6 @@
   "claim_subject_type": "protocol_package",
   "conformance_class": "Core-L2",
   "icsl_version": "0.1-freeze",
-  "test_suite_version": "icsl.mutations/2026-07-16",
+  "test_suite_version": "urn:opencommit:mutation-suite:0.1",
   "result": "not_run"
 }

@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """Persisted attack runner for the ICSL Core-L2 proof exemplar.
 
-(added in the 2026-07 repair sprint -- see 07-decisions/)
-
 Demonstrates that verify.py catches semantic tampering, not just byte
 corruption. For each attack the runner copies the repo subtree into a fresh
 temp tree PRESERVING the repo-relative layout (verify.py resolves the schemas
