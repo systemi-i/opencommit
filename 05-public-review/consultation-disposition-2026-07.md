@@ -1,11 +1,14 @@
 # Consultation Disposition: July 2026 Field Review
 
-Status: proposed public disposition pending steward approval.  
-Date: 2026-07-16.
+Status: approved public disposition.
+
+Review date: 2026-07-16.
+
+Approved by the steward: 2026-07-17.
 
 ## Purpose
 
-This record explains the proposed disposition of an implementation-informed consultation submission on the ICSL v0.1 candidate. It distinguishes corrections to current documentation from release evidence, companion specifications, profiles, and longer-term research. The submission drew on systems that connect institutional protocols to operational capabilities; it was not an independent conformance assessment.
+This record explains the disposition of an implementation-informed consultation submission on the ICSL v0.1 candidate. It distinguishes corrections to current documentation from release evidence, companion specifications, profiles, and longer-term research. The submission drew on systems that connect institutional protocols to operational capabilities; it was not an independent conformance assessment.
 
 ## Governing Disposition
 
@@ -46,4 +49,4 @@ No binding shape should become normative before at least one runtime consumes it
 
 ## What Changed in This Publication Pass
 
-If approved, this disposition accompanies documentation changes to conformance-claim applicability, Core-L1 terminology, validation limits, semantic authoring, receipt privacy, and claims about execution and federation. The remaining proposed work is recorded in the [Companion Specifications and Research Roadmap](companion-roadmap.md).
+This disposition accompanies documentation changes to conformance-claim applicability, Core-L1 terminology, validation limits, semantic authoring, receipt privacy, and claims about execution and federation. The remaining proposed work is recorded in the [Companion Specifications and Research Roadmap](companion-roadmap.md).

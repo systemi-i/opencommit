@@ -23,7 +23,7 @@ The repository currently provides:
 
 The worked package and test tools are evidence that the published artifacts are internally consistent. They are not a substitute for independent implementations or a full conformance suite.
 
-The July 2026 field review has a proposed public [disposition record](05-public-review/consultation-disposition-2026-07.md) pending steward approval. It did not identify a blocking defect in the frozen model. It did sharpen current documentation and establish a [companion roadmap](05-public-review/companion-roadmap.md) for execution bindings, effects and reconciliation, composition, references, privacy, and conformance governance.
+The July 2026 field review has an approved public [disposition record](05-public-review/consultation-disposition-2026-07.md). It did not identify a blocking defect in the frozen model. It did sharpen current documentation and establish a [companion roadmap](05-public-review/companion-roadmap.md) for execution bindings, effects and reconciliation, composition, references, privacy, and conformance governance.
 
 ## Release Milestones
 
