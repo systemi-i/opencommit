@@ -1,6 +1,6 @@
 # Five Practical Applications
 
-> These scenarios explain capabilities the ICSL v0.1 candidate is intended to support. They are not production deployments or claims of demonstrated impact.
+> These scenarios explain capabilities the ICSL v0.1 candidate is intended to support. They are not production deployments or claims of demonstrated impact. Any Receipt exchange is assumed to operate under separate legal authority, access control, minimization, retention, authentication, and trust arrangements; Receipts are not public by default.
 
 The examples below use different domains to show different parts of the model: auditability, protocol adaptation, portable commitments, rights-preserving coordination, and multi-party assurance.
 
@@ -54,14 +54,14 @@ This does not validate the truth of an environmental claim by itself. It makes t
 
 **Distinct capability:** multi-party assurance built around governed commitments rather than opaque reporting chains.
 
-## What the Examples Establish
+## What the Examples Illustrate
 
 The examples do not depend on one sector-specific product. They apply the same architecture to different institutional problems:
 
-- permitting demonstrates traceability and status over time;
-- crisis response demonstrates adaptation and federation;
-- health demonstrates integration with mature domain standards;
-- education demonstrates agency and rights across institutional boundaries;
-- climate and infrastructure finance demonstrates assurance across public, private, and multilateral actors.
+- permitting illustrates traceability and status over time;
+- crisis response illustrates adaptation that could contribute to future federation;
+- health illustrates integration with mature domain standards;
+- education illustrates agency and rights across institutional boundaries;
+- climate and infrastructure finance illustrates assurance across public, private, and multilateral actors.
 
-Together they show the path from local utility to network value. Protocols make governed processes inspectable. CommitmentPoints identify the acts that matter. Gates constrain when those acts may be accepted. Receipts let their meaning travel. At sufficient adoption, those capabilities could support an open governance network without requiring a single platform or uniform substantive policy.
+Together they show a possible path from local utility to network value. Protocols make governed processes inspectable. CommitmentPoints identify the acts that matter. Gates constrain when those acts may be accepted. Authorized exchange of minimized Receipts could let declared institutional meaning travel. At sufficient adoption, those capabilities could contribute to an open governance network without requiring a single platform or uniform substantive policy.

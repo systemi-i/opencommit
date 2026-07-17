@@ -4,9 +4,24 @@ The final ICSL v0.1 conformance suite has not yet been published. The release ta
 
 Three narrower, reviewer-runnable checks are included today.
 
+## Claim-Subject Profiles
+
+Conformance is tested against both a class and a claim-subject type. The current checks
+exercise ProtocolVersion, Receipt, GovernedContext, and package invariants. They do not
+constitute complete parser, validator, composer, registry, runtime, renderer, or corpus
+profiles.
+
+Until a suite publishes requirements and fixtures for one of those implementation
+subjects, it cannot receive a `pass` result. Package rules are `not_applicable` as direct
+requirements of an implementation claim, even when the implementation is tested using
+packages. Artifact rules may still define the expected result of those fixtures.
+
 ## Schema-Mutation Suite
 
-The [mutation suite](mutations/) applies declared changes to known-valid ProtocolVersion, Receipt, and GovernedContext baselines. Its 26 expectations test selected schema protections, rule coverage, canonicalization guards, extension boundaries, version identity, and class-depth consistency.
+The [mutation suite](mutations/) applies declared changes to known-valid ProtocolVersion,
+Receipt, GovernedContext, and ConformanceDeclaration baselines. Its 28 expectations test
+selected schema protections, rule coverage, canonicalization guards, extension boundaries,
+version identity, class-depth consistency, and claim-subject discrimination.
 
 Run it from the repository root:
 
@@ -49,4 +64,5 @@ The public conformance suite is expected to include:
 - runtime-smuggling and semantic-ambiguity attacks;
 - implementation reports showing how independent validators interpret diagnostics.
 
-Passing a future suite will still require a qualified claim naming the tested subject, class, ICSL version, suite version, validator, and result.
+Passing a future suite will still require a qualified claim naming the tested subject,
+subject type, class, ICSL version, suite version, validator, and result.

@@ -40,7 +40,7 @@ The practical distinction between ICSL and adjacent tools is straightforward:
 - a case system manages an individual matter;
 - an ICSL protocol describes the institutional acts for which the institution becomes answerable, and the conditions under which those acts may count.
 
-These tools are complementary. ICSL expresses a process end to end in institutional terms, but it does not have to reproduce every operational step. A workflow may implement part of an ICSL protocol, and an ICSL protocol may refer to evidence held in a registry or rules evaluated elsewhere. ICSL does not replace those systems. It gives them a common institutional object around which to align.
+These tools are complementary. ICSL can express the commitment-bearing structure across a process lifecycle, but it does not reproduce every operational step or provide end-to-end orchestration. A workflow may implement part of an ICSL protocol, and an ICSL protocol may refer to evidence held in a registry or rules evaluated elsewhere. ICSL does not replace those systems. It gives them a common institutional object around which to align.
 
 ## 3. The Core Model
 
@@ -84,7 +84,7 @@ When a CommitmentPoint is validly instantiated in a particular GovernedContext, 
 
 Receipts preserve institutional claims in a form that other systems can inspect and verify. They pin an act to the exact ProtocolVersion under which it was made, so a later change to the protocol cannot silently change the meaning of an earlier act. Later suspension, remedy, override, appeal, or supersession is recorded as further action rather than by erasing history.
 
-A receipt is not proof that the act was lawful or that every evidentiary claim was true. It is a precise, tamper-evident record of what the institution says it accepted under a particular protocol. That makes the claim testable, auditable, and contestable.
+A Receipt records the institution's assertion that an act was accepted under a pinned ProtocolVersion. Its hash chain is tamper-evident only relative to an externally retained chain head; v0.1 does not authenticate the issuer or prove legality, factual truth, or lawful authority. Receipts are also potentially sensitive and linkable. They are not public or safely portable by default.
 
 ## 4. A Permit Example
 
@@ -119,7 +119,7 @@ Second, the protocol can remain stable across technology changes. A new case sys
 
 Third, protocol versions can be compared. Offices and jurisdictions may use different substantive rules while still exposing where their authority, evidence, timing, outcomes, and recourse structures differ. Comparability does not require uniform policy.
 
-Fourth, protocols can be adapted without losing lineage. A common emergency or service-delivery protocol may be localized to different laws and capacities while preserving its relationship to a shared model. This supports federation without requiring one platform or one central authority.
+Fourth, protocols can be adapted without losing lineage. A common emergency or service-delivery protocol may be localized to different laws and capacities while preserving its relationship to a shared model. This could support future federation without requiring one platform or one central authority; v0.1 does not define the composition, trust, or exchange arrangements that federation requires.
 
 ## 6. Why This Is Needed Now
 
@@ -141,7 +141,7 @@ The next value is operational. Software teams can implement against a published 
 
 The larger value is interoperable. A referral can carry whether responsibility was merely requested or formally accepted. A benefit decision can expose the protocol and recourse that govern it. A funding milestone can identify which authority accepted which evidence and what obligation followed. Institutions can understand each other's actions without pretending that their laws or organizations are identical.
 
-At sufficient adoption, versioned protocols and portable receipts could support an open governance network: an environment in which public services and institutional actions can coordinate across systems and jurisdictions while each institution retains control of its law, operations, and authority.
+At sufficient adoption, versioned protocols and appropriately authorized exchange of minimized Receipts could contribute to an open governance network: an environment in which public services and institutional actions coordinate across systems and jurisdictions while each institution retains control of its law, operations, and authority. ICSL v0.1 supplies candidate semantic primitives for that future; it does not yet define federation, composition, trust negotiation, or cross-institution execution.
 
 This is a long-term proposition, not a capability demonstrated by v0.1. The immediate task is to establish whether independent institutions and implementers can use the same specification consistently.
 

@@ -48,10 +48,16 @@ Packaging and conformance:
 
 `ICSLCommon.schema.json` contains shared definitions: conformance classes, binding force,
 recourse states and gates, binding-effect basis, authority gates, diagnostics,
-`TaggedHash`, `CommitmentStatus`, `Outcome`,
+`TaggedHash`, `ClaimSubjectType`, `CommitmentStatus`, `Outcome`,
 `ActsOn`/`ActsOnAllowed`, `Evolves`, `Delegation`, `DependencyExpression`,
 `TriggerCondition`, and `Deadline`. Object schemas should reuse these definitions rather
 than restating enums.
+
+`ConformanceDeclaration.claim_subject` is the identity of the artifact or implementation.
+The separate required `claim_subject_type` selects one of `protocol_package`, `parser`,
+`validator`, `composer`, `registry`, `runtime_engine`, `renderer`, or `corpus_release`.
+This discriminator allows a harness to select subject-specific rule and suite
+applicability without parsing prose in the subject name.
 
 ## AI boundary and legal shell fields
 
@@ -113,9 +119,9 @@ the ICSL draft:
   behavior for unsupported extended features; silent acceptance is prohibited (spec
   text; the schema carries the required `fallback_semantics` field).
 
-`GENERIC` is not in the enum by design: it is an Elinor authoring placeholder, not an
+`GENERIC` is not in the enum by design: it is an authoring placeholder, not an
 institutional act type, and it is forbidden in canonical artifacts (rule
-`CP_GENERIC_TYPE_FORBIDDEN` gives Elinor's exporter a stable diagnostic). The type is
+`CP_GENERIC_TYPE_FORBIDDEN` gives a composer or exporter a stable diagnostic). The type is
 classificatory only — it creates no institutional effect by itself and never substitutes
 for the structural fields the relational consistency rules check it against.
 

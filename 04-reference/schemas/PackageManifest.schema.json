@@ -35,7 +35,7 @@
     },
     "publisher": {
       "type": "object",
-      "description": "Optional declaration of who published this encoding and their relationship to the institution (added in the 2026-07 repair sprint — see 07-decisions/). SHOULD at Core-L2. An encoding confers no independent legal effect; the underlying source prevails.",
+      "description": "Optional declaration of who published this encoding and their relationship to the institution. SHOULD at Core-L2. An encoding confers no independent legal effect; the underlying source prevails.",
       "properties": {
         "name": { "type": "string" },
         "relationship": {

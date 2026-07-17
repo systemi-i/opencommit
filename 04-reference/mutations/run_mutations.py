@@ -266,11 +266,15 @@ def main():
             encoding="utf-8"
         )
     )
+    baseline_conformance = json.loads(
+        safe_manifest_path(manifest["baseline_conformance"]).read_text(encoding="utf-8")
+    )
 
     # Both JCS preconditions hold for the baselines before anything is hashed.
     assert_jcs_preconditions(baseline_pv, "$(baseline)")
     assert_jcs_preconditions(baseline_receipt, "$(baseline_receipt)")
     assert_jcs_preconditions(baseline_gc, "$(baseline_governed_context)")
+    assert_jcs_preconditions(baseline_conformance, "$(baseline_conformance)")
 
     # Version identity (shared design fact A): protocol_version_hash is the
     # canonical hash over the complete ProtocolVersion object. The object
@@ -286,15 +290,20 @@ def main():
     gc_validator = make_validator(
         schemas_by_name, registry, manifest["baseline_governed_context_schema"]
     )
+    conformance_validator = make_validator(
+        schemas_by_name, registry, manifest["baseline_conformance_schema"]
+    )
     validators = {
         "protocol_version": pv_validator,
         "receipt": receipt_validator,
         "governed_context": gc_validator,
+        "conformance_declaration": conformance_validator,
     }
     baselines = {
         "protocol_version": baseline_pv,
         "receipt": baseline_receipt,
         "governed_context": baseline_gc,
+        "conformance_declaration": baseline_conformance,
     }
 
     print("ICSL schema-mutation suite")
@@ -318,6 +327,7 @@ def main():
         ("B00", "protocol_version"),
         ("R00", "receipt"),
         ("C00", "governed_context"),
+        ("D00", "conformance_declaration"),
     ):
         errors = validation_errors(validators[target], baselines[target])
         problems = [_summarize(errors)] if errors else []

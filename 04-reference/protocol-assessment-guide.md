@@ -211,7 +211,10 @@ Check that:
 
 Validate each artifact against the applicable Draft 2020-12 schema. Resolve schema references correctly and use format checking. Schema success is necessary but not sufficient.
 
-Then evaluate every rule in `04-reference/rules/catalog.json` whose `scope` applies to the declared class. Record each diagnostic with:
+Then evaluate every rule in `04-reference/rules/catalog.json` for which both the declared
+class includes `scope` and the declaration's `claim_subject_type` appears in
+`applicability.direct_claim_subject_types`. Check the stated `evaluation_target` and
+`artifact_condition`. Record each diagnostic with:
 
 - rule identifier;
 - severity;
@@ -221,7 +224,10 @@ Then evaluate every rule in `04-reference/rules/catalog.json` whose `scope` appl
 - source citation, where relevant;
 - proposed correction or required decision.
 
-Do not reduce an `error` to a warning. Do not present authoring heuristics as conformance rules. If a requirement cannot be evaluated, mark it `not_assessed` and explain why.
+Do not reduce an `error` to a warning. Do not present authoring heuristics as conformance
+rules. Record a rule as `not_applicable` when the subject-type or artifact condition does
+not select it. Use `not_assessed` only when an applicable requirement could not be
+evaluated, and explain why.
 
 ### Step 9: Validate package and identity, where applicable
 
@@ -304,7 +310,10 @@ Report each axis independently.
 - `not_run`: no encoded artifact was supplied or validation was not performed;
 - `incomplete`: required checks could not be completed.
 
-Any result must identify the claim subject, ICSL version, conformance class, encoding depth, assessment method or tool version, date, and limitations. Do not use an unqualified phrase such as “ICSL compliant.” Candidate assessment is not certification.
+Any result must identify the claim subject identity, claim subject type, ICSL version,
+conformance class, encoding depth where applicable, assessment method or tool version,
+date, and limitations. Do not use an unqualified phrase such as “ICSL compliant.”
+Candidate assessment is not certification.
 
 ## 7. Required Report Structure
 

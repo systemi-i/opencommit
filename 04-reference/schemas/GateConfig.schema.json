@@ -36,7 +36,7 @@
         "reference": { "type": "string" },
         "mode": {
           "type": "string",
-          "description": "Reasoning mode (enum added in the 2026-07 repair sprint — see 07-decisions/). Where the underlying law confers discretion, use guided_discretion or open_discretion; do not convert discretion into a deterministic rule.",
+          "description": "Reasoning mode (enum included in the v0.1 candidate). Where the underlying law confers discretion, use guided_discretion or open_discretion; do not convert discretion into a deterministic rule.",
           "enum": [
             "deterministic_rule",
             "calculation",

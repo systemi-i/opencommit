@@ -9,7 +9,7 @@
     },
     "GovernedContextDescriptor": {
       "type": "object",
-      "description": "Descriptor of the class of matters a ProtocolVersion governs (added in the 2026-07 repair sprint — see 07-decisions/). This is NOT the runtime GovernedContext: it is purely descriptive and MUST NOT carry runtime members — protocol_version_id, protocol_version_hash, governed_context_id, and current_time are all excluded by additionalProperties: false. Because the embedded descriptor carries no hash, a ProtocolVersion never contains a hash of itself and no zero-hash placeholder convention exists anywhere. The runtime GovernedContext is a separate top-level artifact (GovernedContext.schema.json) that pins protocol_version_id AND protocol_version_hash.",
+      "description": "Descriptor of the class of matters a ProtocolVersion governs. This is NOT the runtime GovernedContext: it is purely descriptive and MUST NOT carry runtime members — protocol_version_id, protocol_version_hash, governed_context_id, and current_time are all excluded by additionalProperties: false. Because the embedded descriptor carries no hash, a ProtocolVersion never contains a hash of itself and no zero-hash placeholder convention exists anywhere. The runtime GovernedContext is a separate top-level artifact (GovernedContext.schema.json) that pins protocol_version_id AND protocol_version_hash.",
       "properties": {
         "description": {
           "type": "string",
@@ -33,7 +33,7 @@
     },
     "CoreCommitmentType": {
       "type": "string",
-      "description": "The eight core commitment act types (restored from IGSL v1/v1.1 in the 2026-07 repair sprint — see 07-decisions/ADR-008). Classificatory only: the type creates no institutional effect by itself and never substitutes for the structural fields it is checked against. GENERIC is deliberately absent — it is an Elinor authoring placeholder and is forbidden in canonical artifacts (rule CP_GENERIC_TYPE_FORBIDDEN).",
+      "description": "The eight core commitment act types (defined in ADR-008). Classificatory only: the type creates no institutional effect by itself and never substitutes for the structural fields it is checked against. GENERIC is deliberately absent — it is an authoring placeholder and is forbidden in canonical artifacts (rule CP_GENERIC_TYPE_FORBIDDEN).",
       "enum": [
         "DECIDE",
         "ATTEST",
@@ -47,7 +47,7 @@
     },
     "CommitmentTypeExtension": {
       "type": "object",
-      "description": "Declaration object for an EXTENSION commitment type (added in the 2026-07 repair sprint — see 07-decisions/ADR-008). Valid only at Extended-L2. fallback_semantics is required: either a core type consumers may treat the act as, or the explicit string \"none\" (consumers treat the CommitmentPoint as opaque and class-aware unsupported-extension behavior applies).",
+      "description": "Declaration object for an EXTENSION commitment type. Valid only at Extended-L2. fallback_semantics is required: either a core type consumers may treat the act as, or the explicit string \"none\" (consumers treat the CommitmentPoint as opaque and class-aware unsupported-extension behavior applies).",
       "properties": {
         "id": {
           "type": "string",
@@ -106,7 +106,7 @@
     },
     "ActsOnAllowed": {
       "type": "object",
-      "description": "Typed act relationship at the template level (restructured in the 2026-07 repair sprint — see 07-decisions/). targets names the CommitmentPoints whose receipts this CommitmentPoint may act on; at runtime a Receipt's acts_on.target_receipt_id MUST reference a receipt whose commitment_point_id is in targets (rule ACTS_ON_TARGET_MEMBERSHIP).",
+      "description": "Typed act relationship at the template level. targets names the CommitmentPoints whose receipts this CommitmentPoint may act on; at runtime a Receipt's acts_on.target_receipt_id MUST reference a receipt whose commitment_point_id is in targets (rule ACTS_ON_TARGET_MEMBERSHIP).",
       "properties": {
         "allowed_effects": {
           "type": "array",
@@ -131,7 +131,7 @@
     },
     "Evolves": {
       "type": "object",
-      "description": "Target of an EVOLVE commitment: the protocol or version being changed prospectively (added in the 2026-07 repair sprint — see 07-decisions/). At least one of protocol_id, protocol_version_id, or reference is required.",
+      "description": "Target of an EVOLVE commitment: the protocol or version being changed prospectively. At least one of protocol_id, protocol_version_id, or reference is required.",
       "properties": {
         "protocol_id": { "type": "string" },
         "protocol_version_id": { "type": "string" },
@@ -149,7 +149,7 @@
     },
     "Delegation": {
       "type": "object",
-      "description": "Bounded authority transfer declared by a DELEGATE commitment (added in the 2026-07 repair sprint — see 07-decisions/): identified recipient plus defined scope — the delegated_authority later Authority gates rely on.",
+      "description": "Bounded authority transfer declared by a DELEGATE commitment: identified recipient plus defined scope — the delegated_authority later Authority gates rely on.",
       "properties": {
         "recipient": { "type": "string" },
         "scope": { "type": "string" },
@@ -173,7 +173,7 @@
         "notice_state": { "type": "string" },
         "reason_giving": {
           "type": "object",
-          "description": "Reason-giving expectation for this outcome (added in the 2026-07 repair sprint — see 07-decisions/). none_required_by_law requires legal_basis.",
+          "description": "Reason-giving expectation for this outcome. none_required_by_law requires legal_basis.",
           "properties": {
             "expectation": {
               "type": "string",
@@ -194,7 +194,7 @@
     },
     "AiAssistance": {
       "type": "object",
-      "description": "AI-assistance provenance for an accepted commitment (added in the 2026-07 repair sprint — see 07-decisions/).",
+      "description": "AI-assistance provenance for an accepted commitment.",
       "properties": {
         "involved": { "type": "boolean" },
         "role": {
@@ -211,7 +211,7 @@
     },
     "EncodingProvenance": {
       "type": "object",
-      "description": "Provenance of the encoding itself: how the ICSL artifact was drafted and who approved it (added in the 2026-07 repair sprint — see 07-decisions/).",
+      "description": "Provenance of the encoding itself: how the ICSL artifact was drafted and who approved it.",
       "properties": {
         "drafting_method": {
           "type": "string",
@@ -422,7 +422,7 @@
         "legal_source": { "type": "string" },
         "actor_type": {
           "type": "string",
-          "description": "Type of actor holding or exercising the authority (added in the 2026-07 repair sprint — see 07-decisions/). AI/probabilistic and automated actors are subject to the delegation rule in spec section 8.",
+          "description": "Type of actor holding or exercising the authority. AI/probabilistic and automated actors are subject to the delegation rule in spec section 8.",
           "enum": [
             "human_officeholder",
             "institutional_role",
@@ -468,11 +468,24 @@
         "accessibility_note": { "type": "string" },
         "legal_basis": {
           "type": "string",
-          "description": "Citation or Reference id for a recourse-exclusion assertion (added in the 2026-07 repair sprint — see 07-decisions/). Required where recourse_state is legally_unavailable, and where recourse_state is not_applicable on an adverse or mixed outcome."
+          "description": "Citation or Reference id for a recourse-exclusion assertion. Required where recourse_state is legally_unavailable, and where recourse_state is not_applicable on an adverse or mixed outcome."
         }
       },
       "required": ["recourse_state"],
       "additionalProperties": true
+    },
+    "ClaimSubjectType": {
+      "type": "string",
+      "enum": [
+        "protocol_package",
+        "parser",
+        "validator",
+        "composer",
+        "registry",
+        "runtime_engine",
+        "renderer",
+        "corpus_release"
+      ]
     },
     "Diagnostic": {
       "type": "object",

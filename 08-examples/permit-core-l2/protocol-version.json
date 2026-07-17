@@ -18,7 +18,7 @@
   },
   "encoding_provenance": {
     "drafting_method": "ai_assisted",
-    "drafting_tool": "ICSL encoding assistant (large language model), 2026-07 repair sprint",
+    "drafting_tool": "ICSL encoding assistant (large language model)",
     "approved_by": "Rita Kalvane, Director, Example City Building Authority (fictional officeholder)",
     "approval_basis": "Director approval minute 2026/11 (fictional)",
     "sources_consulted": ["ref-building-act", "ref-zoning-plan"]
@@ -702,7 +702,7 @@
       "id": "cp-09-appeal-admissibility",
       "name": "Administrative appeal: admissibility determination",
       "commitment_type": "DECIDE",
-      "description": "The Municipal Appeals Board determines whether an appeal by the applicant or a registered objector against the decision (cp-07-decision) or the deemed approval (cp-08-deemed-approval) is admissible on standing, timeliness, and form (Building Act s.47(1)). Admission suspends the appealed commitment (a receipt with acts_on effect suspend targeting the appealed receipt, per spec 3.11): suspensive effect attaches at admission, not at disposition, and admission and disposition are each separately challengeable, so each is independently reliance-worthy and encoded as its own CommitmentPoint (atomicity rule; the merits disposition is cp-10-appeal-disposition). Its commitment_type is DECIDE, not APPEAL: it is a procedural determination within the recourse process, not the disposition of the challenge (APPEAL-vs-DECIDE boundary test). The finality assertion on the inadmissibility outcome is an encoder claim about the law, is rebuttable, and does not extinguish recourse that exists in law. The appellant's petition is a private act; the commitment arises from the Board's act of admission or rejection, so the trigger is institutional_act. (Split from the former combined cp-09-appeal in the 2026-07 repair sprint — see 07-decisions/.)",
+      "description": "The Municipal Appeals Board determines whether an appeal by the applicant or a registered objector against the decision (cp-07-decision) or the deemed approval (cp-08-deemed-approval) is admissible on standing, timeliness, and form (Building Act s.47(1)). Admission suspends the appealed commitment (a receipt with acts_on effect suspend targeting the appealed receipt, per spec 3.11): suspensive effect attaches at admission, not at disposition, and admission and disposition are each separately challengeable, so each is independently reliance-worthy and encoded as its own CommitmentPoint (atomicity rule; the merits disposition is cp-10-appeal-disposition). Its commitment_type is DECIDE, not APPEAL: it is a procedural determination within the recourse process, not the disposition of the challenge (APPEAL-vs-DECIDE boundary test). The finality assertion on the inadmissibility outcome is an encoder claim about the law, is rebuttable, and does not extinguish recourse that exists in law. The appellant's petition is a private act; the commitment arises from the Board's act of admission or rejection, so the trigger is institutional_act.",
       "trigger": "institutional_act",
       "binding_force": "procedural_binding",
       "acts_on_allowed": {
@@ -797,7 +797,7 @@
       "id": "cp-10-appeal-disposition",
       "name": "Administrative appeal: disposition on the merits",
       "commitment_type": "APPEAL",
-      "description": "The Municipal Appeals Board disposes of an admitted appeal on the merits (Building Act s.48). Dismissal revives the appealed commitment (a receipt with acts_on effect revive targeting the appealed receipt, per spec 3.11); upholding the appeal quashes it (acts_on effect quash). Its commitment_type is APPEAL: the disposition of the challenge is the APPEAL act — the relation to the challenged commitment dominates — while the procedural admissibility determination within the recourse process is DECIDE (cp-09-appeal-admissibility; APPEAL-vs-DECIDE boundary test). (Split from the former combined cp-09-appeal in the 2026-07 repair sprint — see 07-decisions/.)",
+      "description": "The Municipal Appeals Board disposes of an admitted appeal on the merits (Building Act s.48). Dismissal revives the appealed commitment (a receipt with acts_on effect revive targeting the appealed receipt, per spec 3.11); upholding the appeal quashes it (acts_on effect quash). Its commitment_type is APPEAL: the disposition of the challenge is the APPEAL act — the relation to the challenged commitment dominates — while the procedural admissibility determination within the recourse process is DECIDE (cp-09-appeal-admissibility; APPEAL-vs-DECIDE boundary test).",
       "trigger": "institutional_act",
       "binding_force": "procedural_binding",
       "acts_on_allowed": {

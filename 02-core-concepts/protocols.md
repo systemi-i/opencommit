@@ -22,4 +22,4 @@ Implementations may bind a ProtocolVersion to BPMN, CMMN, case-management config
 
 Protocols do not require all institutions to use the same platform or substantive policy. Each institution may publish and maintain its own versions, cite its own legal sources, and adapt shared patterns to its jurisdiction.
 
-Common structure makes those protocols easier to compare and their receipts easier to interpret. It supports federation through shared semantics while leaving authority with the institution that is legally responsible for the act.
+Common structure makes those protocols easier to compare and their Receipts easier to interpret. It can provide semantic inputs to future federation arrangements while leaving authority with the institution legally responsible for the act. ICSL v0.1 does not itself define those arrangements or authorize Receipt exchange.

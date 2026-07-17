@@ -42,6 +42,8 @@
 * [Public Review Guide](05-public-review/README.md)
 * [Reviewer Quickstart](05-public-review/reviewer-quickstart.md)
 * [What v0.1 Claims and Does Not Claim](05-public-review/v0.1-scope-contract.md)
+* [July 2026 Consultation Disposition](05-public-review/consultation-disposition-2026-07.md)
+* [Companion Specifications and Research Roadmap](05-public-review/companion-roadmap.md)
 * [Open Issues](05-public-review/open-issues.md)
 * [Feedback Intake Guide](05-public-review/feedback-intake-guide.md)
 

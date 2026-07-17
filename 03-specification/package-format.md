@@ -87,6 +87,7 @@ file and canonical-JSON hashes for JSON artifacts (the dual-hash decision).
 `conformance.json` MUST identify:
 
 - claim subject
+- claim subject type
 - conformance class
 - ICSL version
 - test-suite version
@@ -94,6 +95,11 @@ file and canonical-JSON hashes for JSON artifacts (the dual-hash decision).
 
 An implementation, protocol package, registry, corpus, or renderer MUST NOT claim unqualified
 ICSL compliance.
+
+The subject type uses the closed tokens in the conformance profile. Package rules apply
+directly to `protocol_package` and `corpus_release` claims; they do not become direct
+requirements of an implementation merely because that implementation processes a
+package.
 
 ## 7. References
 

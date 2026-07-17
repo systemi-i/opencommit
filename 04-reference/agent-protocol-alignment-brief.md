@@ -21,10 +21,14 @@ You must receive or identify:
 - authoritative source files or stable source locations;
 - existing ICSL artifacts, if any;
 - target ICSL version;
+- claim subject identity and claim subject type;
 - target conformance class and encoding depth;
 - output location or delivery format.
 
-Default to `Core-L2` and encoding depth `L2` when a substantive semantic review is requested but no target is stated. State that this is an assessment assumption.
+Default to claim subject type `protocol_package`, `Core-L2`, and encoding depth `L2`
+when a substantive assessment of an encoding is requested but no target is stated. State
+that this is an assessment assumption. Encoding depth applies to encoded ProtocolVersions,
+not to implementation subjects.
 
 If authoritative sources are unavailable, do not infer the missing procedure from general knowledge. Return `not_assessable` for source fidelity and list the material needed to continue.
 
@@ -131,10 +135,13 @@ Check canonical/runtime separation, ProtocolVersion and GovernedContext separati
 If an encoding exists:
 
 1. validate each artifact against its applicable Draft 2020-12 schema with reference resolution and format checking;
-2. evaluate every catalog rule applicable to the declared class;
+2. evaluate catalog rules only when the declared class includes the rule's `scope` and
+   the declared `claim_subject_type` is listed in
+   `applicability.direct_claim_subject_types`;
 3. validate all references and dependencies;
 4. for packages, validate manifest safety and completeness, conformance declaration, RFC 8785 canonicalization, dual hashes, hash vector, ProtocolVersion identity, receipts, chains, version matches, and target membership;
-5. record unperformed checks as `NOT_ASSESSED`.
+5. record rules outside the selected subject or artifact condition as `NOT_APPLICABLE`,
+   and applicable checks that could not be performed as `NOT_ASSESSED`.
 
 Schema success alone must never produce a passing overall result.
 
@@ -185,7 +192,8 @@ State the three results separately:
 | ICSL representability | represented / partially_represented / model_pressure / not_assessable |
 | Candidate conformance | pass / pass_with_warnings / fail / not_run / incomplete |
 
-Identify the claim subject, ICSL version, target class, encoding depth, assessment date, assessor or agent version, and principal limitations.
+Identify the claim subject, claim subject type, ICSL version, target class, encoding depth
+where applicable, assessment date, assessor or agent version, and principal limitations.
 
 ### 2. Findings
 
@@ -222,6 +230,7 @@ End with:
 ```json
 {
   "assessment_subject": "",
+  "claim_subject_type": "protocol_package",
   "institution": "",
   "jurisdiction": "",
   "icsl_version": "0.1",

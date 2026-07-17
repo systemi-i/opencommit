@@ -6,6 +6,7 @@
   "properties": {
     "kind": { "const": "ConformanceDeclaration" },
     "claim_subject": { "type": "string" },
+    "claim_subject_type": { "$ref": "ICSLCommon.schema.json#/$defs/ClaimSubjectType" },
     "conformance_class": { "$ref": "ICSLCommon.schema.json#/$defs/ConformanceClass" },
     "icsl_version": { "type": "string" },
     "test_suite_version": { "type": "string" },
@@ -14,6 +15,6 @@
       "enum": ["pass", "fail", "not_run", "partial"]
     }
   },
-  "required": ["kind", "claim_subject", "conformance_class", "icsl_version", "test_suite_version", "result"],
+  "required": ["kind", "claim_subject", "claim_subject_type", "conformance_class", "icsl_version", "test_suite_version", "result"],
   "additionalProperties": true
 }

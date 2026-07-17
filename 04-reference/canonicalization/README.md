@@ -14,6 +14,12 @@ ICSL uses established canonicalization standards rather than defining a bespoke 
 
 The ASCII member-name rule removes a cross-language ordering hazard. RFC 8785 sorts member names by UTF-16 code units, while some common runtimes sort Unicode strings by code point. Restricting keys to ASCII makes those orderings identical without limiting Unicode values.
 
+## Authoring Boundary
+
+Canonicalization begins only after semantic authoring is complete. Human or agent-assisted tools may draft, classify, compare sources, and surface uncertainty in a richer working representation. A deterministic publisher must then resolve that representation into schema-valid ICSL JSON, validate it, and apply JCS and hashing without probabilistic transformation. The same resolved input must produce the same canonical bytes in every conforming implementation.
+
+JCS establishes the identity of the published object; it does not collapse domain-specific lexical equivalence. For example, `"1000"` and `"1000.00"` produce different canonical artifacts even if a domain profile treats them as the same monetary quantity. Profiles that require semantic equivalence must define accepted lexical forms before canonicalization.
+
 ## Verifier Requirements
 
 Implementations should use a conforming RFC 8785 library. A verifier that uses compact, key-sorted JSON serialization as a fallback must first establish both of the following conditions and fail closed otherwise:

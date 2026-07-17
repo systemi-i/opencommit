@@ -14,13 +14,15 @@ The consultation should determine whether the candidate:
 - prevents deployment systems and AI tools from silently redefining authority or evidence;
 - gives independent implementers enough precision to reproduce validation and hashing behavior;
 - can complement established domain standards instead of duplicating them;
-- supports federation without imposing one platform, policy, or legal tradition.
+- provides a candidate semantic foundation for federation without imposing one platform,
+  policy, or legal tradition; cross-protocol composition remains companion work rather
+  than a demonstrated v0.1 capability.
 
 Particular attention is requested on the commitment taxonomy. Reviewers working in civil-law, common-law, customary, Indigenous, federal, and multilateral settings should identify acts that do not fit the eight core types or that produce materially different classifications under the published boundary tests.
 
 ## Current Evidence and Limits
 
-The conceptual model is frozen for consultation. Twelve reference schemas, 72 diagnostics, a 26-expectation mutation suite, a worked Core-L2 package, and five package-level attacks are available for inspection.
+The conceptual model is frozen for consultation. Twelve reference schemas, 74 diagnostics, a 28-expectation mutation suite, a worked Core-L2 package, and five package-level attacks are available for inspection.
 
 ICSL is not a final standard. The fixture set is incomplete, production interoperability has not been demonstrated, the worked package is synthetic, and v0.1 receipts are unsigned. An ICSL encoding may also misrepresent its source; the authoritative legal or institutional source always prevails.
 

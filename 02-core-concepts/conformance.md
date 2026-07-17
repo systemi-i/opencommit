@@ -14,7 +14,7 @@ Encoding depth and conformance class are related but distinct. Depth describes h
 
 ## Claim Discipline
 
-A conformance statement must name the claim subject, ICSL version, conformance class, test-suite version, and result. It should also identify the validator or report that produced the result.
+A conformance statement must name the claim subject identity, claim subject type, ICSL version, conformance class, test-suite version, and result. It should also identify the validator or report that produced the result. A rule applies directly only when both its class scope and subject-type applicability select it.
 
 Passing the currently published checks demonstrates only what those checks cover. The schema-mutation suite tests selected structural protections; the worked-package verifier tests one synthetic package; the attack runner tests five specified adversarial changes. None constitutes final certification or proof of production interoperability.
 

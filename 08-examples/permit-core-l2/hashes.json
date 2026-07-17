@@ -9,8 +9,8 @@
     },
     {
       "path": "protocol-version.json",
-      "source_hash": "sha256:85ecbbfbc2f3c9554fa2f81b67563397b3700a7a0b1a202aa5897b03e2286180",
-      "canonical_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726"
+      "source_hash": "sha256:4f1c29bdd6b734b3584a9e0cff2660fa6a3c41df38e78bffb37ca882481cc0bc",
+      "canonical_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306"
     },
     {
       "path": "references/building-act.json",
@@ -19,18 +19,18 @@
     },
     {
       "path": "receipts/chain-01.json",
-      "source_hash": "sha256:88c97469d3d185c8bf10b6c90cc636d0e6aaba1d5f77c658a178423c51659b09",
-      "canonical_hash": "sha256:5cc77467fdfc11095ec91d0a151214bcb6cabf65b71997dee8cb52527eab7d8e"
+      "source_hash": "sha256:6d6d03b71c7a79a55b64de4a502ff88e0154cb1606b15618d5cbd4739be2e768",
+      "canonical_hash": "sha256:fad5e5fbe9d041e173fa4d290a6349ad860999c470ce9d8d67f610b801bc4d49"
     },
     {
       "path": "receipts/deemed-example.json",
-      "source_hash": "sha256:479d894481b9ddf51bd54f2948442187493966848d0a295a2c7b5b773df3bb18",
-      "canonical_hash": "sha256:275e1558719c503fbafa4bd4cb5f0a3987200bdc2ba234c46f9ce715c896885e"
+      "source_hash": "sha256:38bf9d01e38844fa4d059356964bfc79aee862e9ebbbe874c7cdf0097e385443",
+      "canonical_hash": "sha256:ac7807071aff7b682722f7f19b1521a4634202714fae366047291607f03cbbde"
     },
     {
       "path": "conformance.json",
-      "source_hash": "sha256:2afd6a14df0c45429d289b9aba158183e073185699aa9fd95445393db3bff126",
-      "canonical_hash": "sha256:dbc67248bd5ecec65f65d7bfd9d5ac819c9c4cd8ff74afe51fc5d876cd44edfb"
+      "source_hash": "sha256:fad7268b6bcb22bad628924eafa8cafcb2c200ae0c632dbd104748ad256b70e3",
+      "canonical_hash": "sha256:94e90d596918c00a30e78fe22768e58b07f0e4f9fb08d4c0b1595732a86febc2"
     },
     {
       "path": "README.md",

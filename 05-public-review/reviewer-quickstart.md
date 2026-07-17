@@ -20,14 +20,18 @@ python3 08-examples/permit-core-l2/verify.py
 python3 08-examples/permit-core-l2/attacks.py
 ```
 
-The mutation runner evaluates 26 declared expectations against known-valid protocol, receipt, and governed-context baselines. The package verifier checks the synthetic Core-L2 example's schemas, identities, relationships, receipt chain, and hash vector. The attack runner confirms that the control package passes and five specified adversarial changes fail for their intended reasons.
+The mutation runner evaluates 28 declared expectations against known-valid protocol,
+receipt, governed-context, and conformance-declaration baselines. The package verifier
+checks the synthetic Core-L2 example's schemas, identities, relationships, receipt chain,
+and hash vector. The attack runner confirms that the control package passes and five
+specified adversarial changes fail for their intended reasons.
 
 These checks are deliberately narrower than the planned conformance suite. A green run establishes only the behavior stated by each harness.
 
 ## Reference Surface
 
 - `04-reference/schemas/` contains twelve Draft 2020-12 schemas.
-- `04-reference/rules/catalog.json` contains 72 diagnostic definitions.
+- `04-reference/rules/catalog.json` contains 74 diagnostic definitions.
 - `04-reference/mutations/` contains mutation baselines, expectations, and runner.
 - `08-examples/permit-core-l2/` contains the synthetic package, verifier, and attacks.
 - `conformance.json` in the worked package declares `not_run` because the full suite is not yet published.

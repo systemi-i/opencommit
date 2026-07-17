@@ -3,7 +3,7 @@
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-001",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
     "commitment_point_id": "cp-01-intake",
     "commitment_type": "ATTEST",
     "governed_context_id": "gc-ec-2026-000123",
@@ -28,13 +28,13 @@
     },
     "previous_hash": null,
     "content_hash": "sha256:8fe6990a932bf41012601ef3cec67dc698d0e84ff5c1d2730bbf7a939481de17",
-    "receipt_hash": "sha256:a5fa6828085ad38e81019e504141b7ae09b855e2d243bd6fda23a89020afef77"
+    "receipt_hash": "sha256:7f1162f8640c5392ef803bcbb6cbaa9625ba549195dbe472dd74943ec0e3353f"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-002",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
     "commitment_point_id": "cp-03-completeness",
     "commitment_type": "DECIDE",
     "governed_context_id": "gc-ec-2026-000123",
@@ -50,15 +50,15 @@
       "determination_date": "2026-03-06",
       "deemed_approval_anchor": "this receipt anchors the cp-08 clock (P90D)"
     },
-    "previous_hash": "sha256:a5fa6828085ad38e81019e504141b7ae09b855e2d243bd6fda23a89020afef77",
+    "previous_hash": "sha256:7f1162f8640c5392ef803bcbb6cbaa9625ba549195dbe472dd74943ec0e3353f",
     "content_hash": "sha256:835aa5b21c57f1cc16ee823678067e7fe6b7b43720346f46e3e577481dba67ab",
-    "receipt_hash": "sha256:0d35f36f42c6b7cc9e53eaef4f5f4e67708d172edd1d81577f632b7331b69d30"
+    "receipt_hash": "sha256:bcc3b88cd5a1cdece4a214142357a4a96e03267bfd28d3ba9cd8cd2d6a7ff2f9"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-003",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
     "commitment_point_id": "cp-06-technical-review",
     "commitment_type": "ATTEST",
     "governed_context_id": "gc-ec-2026-000123",
@@ -76,15 +76,15 @@
       "objections_addressed": "1 registered objection addressed (the cp-05 receipt is elided from this abbreviated chain)",
       "certification": "automated conformity screening reviewed and certified by the reviewing engineer and the chief municipal engineer"
     },
-    "previous_hash": "sha256:0d35f36f42c6b7cc9e53eaef4f5f4e67708d172edd1d81577f632b7331b69d30",
+    "previous_hash": "sha256:bcc3b88cd5a1cdece4a214142357a4a96e03267bfd28d3ba9cd8cd2d6a7ff2f9",
     "content_hash": "sha256:5502c91e8f197364325f68ee6c51ba34ebce0cdaedb56bb41a6e003169ec41d6",
-    "receipt_hash": "sha256:ca3dd6b8c0b1290084b4f4eb4ea8bdfd413e5c4845316cd5f907d280fc76e22d"
+    "receipt_hash": "sha256:5755128d487650d6194a37c618494c52a2babb95dd6cd21be6e155d09b319a2f"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-004",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
     "commitment_point_id": "cp-07-decision",
     "commitment_type": "DECIDE",
     "governed_context_id": "gc-ec-2026-000123",
@@ -107,15 +107,15 @@
         "hashing": "salted-sha256; salt held by the authority so erasure or rectification of personal data cannot break chain verification"
       }
     },
-    "previous_hash": "sha256:ca3dd6b8c0b1290084b4f4eb4ea8bdfd413e5c4845316cd5f907d280fc76e22d",
+    "previous_hash": "sha256:5755128d487650d6194a37c618494c52a2babb95dd6cd21be6e155d09b319a2f",
     "content_hash": "sha256:5f452b3cc1c1dcf01392e9664f6bbae44c1ecc45a98e348f6cd6a8a9edfdcd64",
-    "receipt_hash": "sha256:53c2373b463ad27b14f8c0590878c7df1a7136016f9d1e216b3ed949ecfc58c5"
+    "receipt_hash": "sha256:0897bdae248174c19fb948f1ee37f3b6cbe3f608b814ccc830ffe22c5c6637ec"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-005",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
     "commitment_point_id": "cp-09-appeal-admissibility",
     "commitment_type": "DECIDE",
     "governed_context_id": "gc-ec-2026-000123",
@@ -136,15 +136,15 @@
       "admissibility": "standing, timeliness, and form satisfied (Building Act s.47(1))",
       "effect_note": "admission suspends decision BD-2026-0458 under Building Act s.47(2) until disposition (cp-10-appeal-disposition)"
     },
-    "previous_hash": "sha256:53c2373b463ad27b14f8c0590878c7df1a7136016f9d1e216b3ed949ecfc58c5",
+    "previous_hash": "sha256:0897bdae248174c19fb948f1ee37f3b6cbe3f608b814ccc830ffe22c5c6637ec",
     "content_hash": "sha256:11c988d839443ff967dda1de8951705b1c9f6dc80cf5bf63fb96671d31ce3cf0",
-    "receipt_hash": "sha256:4d7545cad27faa33706b1b0318aa4c19fc14f6429733035ffd8e2963fb1b4006"
+    "receipt_hash": "sha256:55ca33320148fb78da6cb627b40cfaae3480a71c9e1da9573b6944d070dc6d91"
   },
   {
     "kind": "Receipt",
     "receipt_id": "rcpt-ec-000123-006",
     "protocol_version_id": "org.example-city.building.construction-permit@2.0.0",
-    "protocol_version_hash": "sha256:4306943d09481effa9b502232a741720cc408272da119be42d2498e9ef466726",
+    "protocol_version_hash": "sha256:b9a904fba11e48e6a58af9dae480e8a82b2dd7d07b1f84723b29aeef7b918306",
     "commitment_point_id": "cp-10-appeal-disposition",
     "commitment_type": "APPEAL",
     "governed_context_id": "gc-ec-2026-000123",
@@ -169,8 +169,8 @@
         "hashing": "salted-sha256; salt held by the authority so erasure or rectification of personal data cannot break chain verification"
       }
     },
-    "previous_hash": "sha256:4d7545cad27faa33706b1b0318aa4c19fc14f6429733035ffd8e2963fb1b4006",
+    "previous_hash": "sha256:55ca33320148fb78da6cb627b40cfaae3480a71c9e1da9573b6944d070dc6d91",
     "content_hash": "sha256:dbe1170847309fad4d47e1733fd75899047d05747844932d1389cef9a4daf44b",
-    "receipt_hash": "sha256:773cedcad8d2061256a077c4a04350c7c4774b3c8e9efd2a8638fcc0b4c891d2"
+    "receipt_hash": "sha256:56807a14908e9f55af873a03f7fa558590fa3def3ede4075fef19889f690f0e1"
   }
 ]

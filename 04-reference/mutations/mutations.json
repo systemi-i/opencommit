@@ -1,13 +1,15 @@
 {
   "suite_id": "urn:opencommit:mutation-suite:0.1",
   "icsl_version": "0.1",
-  "description": "Persisted schema-mutation regression suite (added in the 2026-07 repair sprint — see 07-decisions/). Each case applies JSON-pointer operations to a deep copy of the baseline artifact and states the expected schema verdict. expected = schema_reject means JSON Schema validation alone MUST reject the mutant; expected = schema_accept_rule_covers means the schema accepts the mutant and the named catalog rule is the normative protection; expected = guard_trip means the runner's own JCS guard MUST reject the case's probe object (runner self-test, no schema involved).",
+  "description": "Persisted schema-mutation regression suite. Each case applies JSON-pointer operations to a deep copy of the baseline artifact and states the expected schema verdict. expected = schema_reject means JSON Schema validation alone MUST reject the mutant; expected = schema_accept_rule_covers means the schema accepts the mutant and the named catalog rule is the normative protection; expected = guard_trip means the runner's own JCS guard MUST reject the case's probe object (runner self-test, no schema involved).",
   "baseline": "baseline.json",
   "baseline_schema": "ProtocolVersion.schema.json",
   "baseline_receipt": "baseline_receipt.json",
   "baseline_receipt_schema": "Receipt.schema.json",
   "baseline_governed_context": "baseline_governed_context.json",
   "baseline_governed_context_schema": "GovernedContext.schema.json",
+  "baseline_conformance": "baseline_conformance.json",
+  "baseline_conformance_schema": "ConformanceDeclaration.schema.json",
   "cases": [
     {
       "id": "M01",
@@ -187,7 +189,7 @@
     },
     {
       "id": "M14",
-      "description": "GENERIC used as a commitment_type (Elinor authoring placeholder leaking into a canonical artifact).",
+      "description": "GENERIC used as a commitment_type (authoring placeholder leaking into a canonical artifact).",
       "target": "protocol_version",
       "ops": [
         {
@@ -352,6 +354,17 @@
       "expected": "schema_reject",
       "expected_reason": "ProtocolVersion.governed_context is a GovernedContextDescriptor (description, subject_class, scope, jurisdiction_note; additionalProperties false): it must not carry runtime members, so no artifact ever embeds a hash of the object containing it and no placeholder-hash convention exists.",
       "related_rules": ["GOVERNED_CONTEXT_PROTOCOL_VERSION_HASH_MATCH"]
+    },
+    {
+      "id": "M24",
+      "description": "Conformance declaration missing the claim-subject type discriminator.",
+      "target": "conformance_declaration",
+      "ops": [
+        { "op": "remove", "path": "/claim_subject_type" }
+      ],
+      "expected": "schema_reject",
+      "expected_reason": "ConformanceDeclaration requires claim_subject_type so a harness can select subject-specific applicability without parsing the subject name.",
+      "related_rules": ["CONFORMANCE_SUBJECT_TYPE_INVALID"]
     }
   ]
 }
